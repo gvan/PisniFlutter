@@ -5,7 +5,9 @@ import 'package:pisni/ui/songs/songs_screen.dart';
 import 'package:provider/provider.dart';
 
 class HomeNavigation extends StatefulWidget {
-  const HomeNavigation({super.key});
+  final Key navigatorKey;
+
+  const HomeNavigation({super.key, required this.navigatorKey});
 
   @override
   State<StatefulWidget> createState() {
@@ -15,8 +17,15 @@ class HomeNavigation extends StatefulWidget {
 
 class _HomeNavigationState extends State<HomeNavigation> {
   @override
+  void initState() {
+    super.initState();
+    print('APPLOG home initState');
+  }
+
+  @override
   Widget build(Object context) {
     return Navigator(
+      key: widget.navigatorKey,
       onGenerateRoute: (settings) {
         return MaterialPageRoute(builder: (context) {
           switch (settings.name) {

@@ -18,6 +18,8 @@ class _BottomNavigationState extends State<BottomNavigation> {
     NavigationDestination(icon: Icon(Icons.face), label: 'Author'),
     NavigationDestination(icon: Icon(Icons.favorite), label: 'Favorite')
   ];
+  late final List<GlobalKey<NavigatorState>> navigatorKeys;
+  late final List<Widget> destinationWidgets;
 
   void onItemTapped(int index) {
     setState(() {
@@ -26,19 +28,53 @@ class _BottomNavigationState extends State<BottomNavigation> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      bottomNavigationBar: NavigationBar(
-        onDestinationSelected: onItemTapped,
-        selectedIndex: selectedIndex,
-        destinations: bottomDestinations,
-        indicatorColor: Colors.blue,
+  void initState() {
+    super.initState();
+    navigatorKeys = List<GlobalKey<NavigatorState>>.generate(
+        bottomDestinations.length, (int index) => GlobalKey()).toList();
+    destinationWidgets = [
+      HomeNavigation(
+        navigatorKey: navigatorKeys[0],
       ),
-      body: [
-        HomeNavigation(),
-        AuthorsNavigation(),
-        Text('Screen 3')
-      ][selectedIndex],
-    );
+      AuthorsNavigation(
+        navigatorKey: navigatorKeys[1],
+      ),
+      SizedBox.shrink()
+    ];
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return NavigatorPopHandler(
+        onPopWithResult: (_) {
+          final navigator = navigatorKeys[selectedIndex].currentState!;
+          navigator.pop();
+        },
+        child: Scaffold(
+          bottomNavigationBar: NavigationBar(
+            onDestinationSelected: onItemTapped,
+            selectedIndex: selectedIndex,
+            destinations: bottomDestinations,
+            indicatorColor: Colors.blue,
+          ),
+          body: SafeArea(
+            top: false,
+            child: Stack(
+              fit: StackFit.expand,
+              children: destinationWidgets
+                  .asMap()
+                  .map((index, view) {
+                    if (index == selectedIndex) {
+                      return MapEntry(
+                          index, Offstage(offstage: false, child: view));
+                    } else {
+                      return MapEntry(index, Offstage(child: view));
+                    }
+                  })
+                  .values
+                  .toList(),
+            ),
+          ),
+        ));
   }
 }

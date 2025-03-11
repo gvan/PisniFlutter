@@ -17,9 +17,14 @@ class HomeWidget extends StatelessWidget {
                 return ListView.builder(
                     itemCount: categories.length,
                     itemBuilder: (context, index) {
-                      return Padding(
-                        padding: EdgeInsets.all(8),
-                        child: Text(categories[index].title),
+                      return InkWell(
+                        onTap: () {
+                          Navigator.pushNamed(context, '/songs');
+                        },
+                        child: Padding(
+                          padding: EdgeInsets.all(8),
+                          child: Text(categories[index].title),
+                        ),
                       );
                     });
               })),

@@ -5,6 +5,9 @@ import 'package:pisni/ui/songs/songs_screen.dart';
 import 'package:provider/provider.dart';
 
 class AuthorsNavigation extends StatefulWidget {
+  final Key navigatorKey;
+  const AuthorsNavigation({super.key, required this.navigatorKey});
+
   @override
   State<StatefulWidget> createState() => _AuthorsNavigationState();
 }
@@ -12,7 +15,9 @@ class AuthorsNavigation extends StatefulWidget {
 class _AuthorsNavigationState extends State<AuthorsNavigation> {
   @override
   Widget build(BuildContext context) {
-    return Navigator(onGenerateRoute: (settings) {
+    return Navigator(
+      key: widget.navigatorKey,
+      onGenerateRoute: (settings) {
       return MaterialPageRoute(builder: (context) {
         switch (settings.name) {
           case '/':
