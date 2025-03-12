@@ -9,6 +9,9 @@ class HomeWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Пісні'),
+      ),
       body: SafeArea(
           child: ListenableBuilder(
               listenable: viewModel,
@@ -21,7 +24,7 @@ class HomeWidget extends StatelessWidget {
                       return InkWell(
                         onTap: () {
                           Navigator.pushNamed(context, '/songs',
-                              arguments: category.id);
+                              arguments: category);
                         },
                         child: Padding(
                           padding: EdgeInsets.all(8),
