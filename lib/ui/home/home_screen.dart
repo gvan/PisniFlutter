@@ -17,13 +17,15 @@ class HomeWidget extends StatelessWidget {
                 return ListView.builder(
                     itemCount: categories.length,
                     itemBuilder: (context, index) {
+                      final category = categories[index];
                       return InkWell(
                         onTap: () {
-                          Navigator.pushNamed(context, '/songs');
+                          Navigator.pushNamed(context, '/songs',
+                              arguments: category.id);
                         },
                         child: Padding(
                           padding: EdgeInsets.all(8),
-                          child: Text(categories[index].title),
+                          child: Text(category.title),
                         ),
                       );
                     });

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pisni/ui/home/home_view_model.dart';
 import 'package:pisni/ui/home/home_screen.dart';
 import 'package:pisni/ui/songs/songs_screen.dart';
+import 'package:pisni/ui/songs/songs_view_model.dart';
 import 'package:provider/provider.dart';
 
 class HomeNavigation extends StatefulWidget {
@@ -33,7 +34,12 @@ class _HomeNavigationState extends State<HomeNavigation> {
               return HomeWidget(
                   viewModel: HomeViewModel(songsRepository: context.read()));
             case '/songs':
-              return SongsScreen();
+              final category = settings.arguments as String;
+              return ChangeNotifierProvider(
+                create: (context) =>
+                    SongsViewModel(songsRepository: context.read()),
+                child: SongsScreen(category: category),
+              );
           }
           return const SizedBox.shrink();
         });
