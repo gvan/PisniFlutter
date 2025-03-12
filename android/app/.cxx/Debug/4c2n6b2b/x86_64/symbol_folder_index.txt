@@ -1,0 +1,1 @@
+/Users/ivan.ganzha/flutter/pisni/build/app/intermediates/cxx/Debug/4c2n6b2b/obj/x86_64

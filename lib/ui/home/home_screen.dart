@@ -27,7 +27,7 @@ class HomeWidget extends StatelessWidget {
                               arguments: category);
                         },
                         child: Padding(
-                          padding: EdgeInsets.all(8),
+                          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                           child: Text(category.title),
                         ),
                       );

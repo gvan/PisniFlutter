@@ -9,6 +9,9 @@ class AuthorsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Пісні'),
+      ),
       body: SafeArea(
           child: ListenableBuilder(
               listenable: viewModel,
@@ -17,9 +20,17 @@ class AuthorsScreen extends StatelessWidget {
                 return ListView.builder(
                     itemCount: authors.length,
                     itemBuilder: (context, index) {
-                      return Padding(
-                        padding: EdgeInsets.all(8),
-                        child: Text(authors[index].title),
+                      final author = authors[index];
+                      return InkWell(
+                        onTap: () {
+                          Navigator.of(context)
+                              .pushNamed('/songs', arguments: author);
+                        },
+                        child: Padding(
+                          padding:
+                              EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                          child: Text(author.title),
+                        ),
                       );
                     });
               })),

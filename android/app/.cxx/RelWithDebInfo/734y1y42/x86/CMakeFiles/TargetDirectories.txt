@@ -1,0 +1,2 @@
+/Users/ivan.ganzha/flutter/pisni/android/app/.cxx/RelWithDebInfo/734y1y42/x86/CMakeFiles/edit_cache.dir
+/Users/ivan.ganzha/flutter/pisni/android/app/.cxx/RelWithDebInfo/734y1y42/x86/CMakeFiles/rebuild_cache.dir
