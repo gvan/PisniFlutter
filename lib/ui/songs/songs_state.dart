@@ -7,6 +7,8 @@ part 'songs_state.freezed.dart';
 class SongsState with _$SongsState {
   @override
   final List<Song> songs;
+  @override
+  final bool isLoading;
 
-  SongsState({required this.songs});
+  SongsState({required this.songs, required this.isLoading});
 }

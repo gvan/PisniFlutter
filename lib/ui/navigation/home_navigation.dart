@@ -40,8 +40,8 @@ class _HomeNavigationState extends State<HomeNavigation> {
             case '/songs':
               final category = settings.arguments as Category;
               return ChangeNotifierProvider(
-                create: (context) =>
-                    SongsViewModel(songsRepository: context.read()),
+                create: (context) => SongsViewModel(
+                    songsRepository: context.read(), category: category),
                 child: SongsScreen(category: category),
               );
             case '/song':

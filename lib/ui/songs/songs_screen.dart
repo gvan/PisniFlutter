@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pisni/data/entity/category.dart';
+import 'package:pisni/data/entity/song.dart';
 import 'package:pisni/ui/songs/songs_view_model.dart';
 import 'package:provider/provider.dart';
 
@@ -14,23 +15,25 @@ class SongsScreen extends StatefulWidget {
 
 class _SongsScreenState extends State<SongsScreen> {
   @override
-  void initState() {
-    super.initState();
-    final viewModel = context.read<SongsViewModel>();
-    viewModel.loadSongs(widget.category.id);
-  }
-
-  @override
   Widget build(BuildContext context) {
-    final songs =
-        context.select((SongsViewModel viewModel) => viewModel.state.songs);
+    final (List<Song> songs, bool isLoaidng) =
+        context.select((SongsViewModel viewModel) {
+      return (viewModel.state.songs, viewModel.state.isLoading);
+    });
 
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.category.title),
       ),
       body: SafeArea(
-          child: ListView.builder(
+          child: Stack(
+        children: [
+          if (isLoaidng)
+            Align(
+              alignment: Alignment.center,
+              child: CircularProgressIndicator(),
+            ),
+          ListView.builder(
               itemCount: songs.length,
               itemBuilder: (context, index) {
                 final song = songs[index];
@@ -42,7 +45,9 @@ class _SongsScreenState extends State<SongsScreen> {
                       padding: EdgeInsets.all(10),
                       child: Text(song.title),
                     ));
-              })),
+              })
+        ],
+      )),
     );
   }
 }

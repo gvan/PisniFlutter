@@ -16,6 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$SongsState {
   List<Song> get songs;
+  bool get isLoading;
 
   /// Create a copy of SongsState
   /// with the given fields replaced by the non-null parameter values.
@@ -29,16 +30,18 @@ mixin _$SongsState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is SongsState &&
-            const DeepCollectionEquality().equals(other.songs, songs));
+            const DeepCollectionEquality().equals(other.songs, songs) &&
+            (identical(other.isLoading, isLoading) ||
+                other.isLoading == isLoading));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(songs));
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(songs), isLoading);
 
   @override
   String toString() {
-    return 'SongsState(songs: $songs)';
+    return 'SongsState(songs: $songs, isLoading: $isLoading)';
   }
 }
 
@@ -48,7 +51,7 @@ abstract mixin class $SongsStateCopyWith<$Res> {
           SongsState value, $Res Function(SongsState) _then) =
       _$SongsStateCopyWithImpl;
   @useResult
-  $Res call({List<Song> songs});
+  $Res call({List<Song> songs, bool isLoading});
 }
 
 /// @nodoc
@@ -64,12 +67,17 @@ class _$SongsStateCopyWithImpl<$Res> implements $SongsStateCopyWith<$Res> {
   @override
   $Res call({
     Object? songs = null,
+    Object? isLoading = null,
   }) {
     return _then(SongsState(
       songs: null == songs
           ? _self.songs
           : songs // ignore: cast_nullable_to_non_nullable
               as List<Song>,
+      isLoading: null == isLoading
+          ? _self.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
