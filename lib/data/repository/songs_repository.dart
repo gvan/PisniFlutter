@@ -11,7 +11,12 @@ class SongsRepository implements ISongsRepository {
 
   @override
   Future<List<Category>> getCategories() async {
-    return _songsService.getCategories();
+    final categories = await _songsService.getCategories();
+    for (final (index, category) in categories.indexed) {
+      final songs = await _songsService.getSongs(category.id);
+      categories[index] = category.copyWith(songs: songs);
+    }
+    return categories;
   }
 
   @override
