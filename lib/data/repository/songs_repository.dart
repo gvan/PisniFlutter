@@ -20,8 +20,13 @@ class SongsRepository implements ISongsRepository {
   }
 
   @override
-  Future<List<Category>> getAuthors() {
-    return _songsService.getAuthors();
+  Future<List<Category>> getAuthors() async {
+    final authors = await _songsService.getAuthors();
+    for (final (index, category) in authors.indexed) {
+      final songs = await _songsService.getSongs(category.id);
+      authors[index] = category.copyWith(songs: songs);
+    }
+    return authors;
   }
 
   @override

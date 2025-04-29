@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:pisni/data/entity/song.dart';
 import 'package:pisni/ui/song/song_view_model.dart';
@@ -27,14 +29,22 @@ class _SongScreenState extends State<SongScreen> {
 
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.white,
         title: Text(song.title),
       ),
+      backgroundColor: Colors.white,
       body: SafeArea(
           child: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.all(16),
-          child: Column(
-            children: [Text(song.text)],
+          child: SizedBox(
+            width: MediaQuery.sizeOf(context).width,
+            child: Column(
+              crossAxisAlignment: Platform.isAndroid || Platform.isIOS
+                  ? CrossAxisAlignment.start
+                  : CrossAxisAlignment.center,
+              children: [Text(song.text)],
+            ),
           ),
         ),
       )),

@@ -23,8 +23,10 @@ class _SongsScreenState extends State<SongsScreen> {
 
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.white,
         title: Text(widget.category.title),
       ),
+      backgroundColor: Colors.white,
       body: SafeArea(
           child: Stack(
         children: [
