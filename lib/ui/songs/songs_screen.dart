@@ -44,8 +44,19 @@ class _SongsScreenState extends State<SongsScreen> {
                       Navigator.of(context).pushNamed('/song', arguments: song);
                     },
                     child: Padding(
-                      padding: EdgeInsets.all(10),
-                      child: Text(song.title),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(song.title),
+                          Text(song.text,
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                              style:
+                                  TextStyle(fontSize: 12, color: Colors.grey))
+                        ],
+                      ),
                     ));
               })
         ],
