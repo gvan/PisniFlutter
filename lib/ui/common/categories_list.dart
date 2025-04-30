@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:pisni/data/entity/category.dart';
 import 'package:pisni/data/entity/song.dart';
+import 'package:vector_graphics/vector_graphics.dart';
 
 class CategoriesList extends StatelessWidget {
   final List<Category> categories;
@@ -23,10 +25,19 @@ class CategoriesList extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  Row(children: [
+                    Text(
                     category.title,
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
+                  Spacer(),
+                  SizedBox(
+                    width: 24,
+                    height: 24,
+                    child: SvgPicture(AssetBytesLoader('assets/icons/chevron_right.svg.vec')),
+                  )
+                  ,
+                  ],),
                   SizedBox(
                     height: 100,
                     child: HorizontalSongsList(songs: category.songs),

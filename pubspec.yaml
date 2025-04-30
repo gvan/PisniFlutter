@@ -9,9 +9,11 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_svg: ^2.1.0
   freezed_annotation: ^3.0.0
   json_annotation: 4.9.0
   provider: ^6.1.2
+  vector_graphics_compiler: ^1.1.16
 
 dev_dependencies:
   json_serializable: 6.9.4
@@ -27,3 +29,4 @@ flutter:
     - assets/
     - assets/categories/
     - assets/authors/
+    - assets/icons/
