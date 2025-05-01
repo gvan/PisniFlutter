@@ -16,6 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$SongState {
   Song get song;
+  bool get isFavorite;
 
   /// Create a copy of SongState
   /// with the given fields replaced by the non-null parameter values.
@@ -29,15 +30,17 @@ mixin _$SongState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is SongState &&
-            (identical(other.song, song) || other.song == song));
+            (identical(other.song, song) || other.song == song) &&
+            (identical(other.isFavorite, isFavorite) ||
+                other.isFavorite == isFavorite));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, song);
+  int get hashCode => Object.hash(runtimeType, song, isFavorite);
 
   @override
   String toString() {
-    return 'SongState(song: $song)';
+    return 'SongState(song: $song, isFavorite: $isFavorite)';
   }
 }
 
@@ -46,7 +49,7 @@ abstract mixin class $SongStateCopyWith<$Res> {
   factory $SongStateCopyWith(SongState value, $Res Function(SongState) _then) =
       _$SongStateCopyWithImpl;
   @useResult
-  $Res call({Song song});
+  $Res call({Song song, bool isFavorite});
 }
 
 /// @nodoc
@@ -62,12 +65,17 @@ class _$SongStateCopyWithImpl<$Res> implements $SongStateCopyWith<$Res> {
   @override
   $Res call({
     Object? song = null,
+    Object? isFavorite = null,
   }) {
     return _then(SongState(
       song: null == song
           ? _self.song
           : song // ignore: cast_nullable_to_non_nullable
               as Song,
+      isFavorite: null == isFavorite
+          ? _self.isFavorite
+          : isFavorite // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }

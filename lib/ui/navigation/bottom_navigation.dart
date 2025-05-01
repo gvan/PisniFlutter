@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pisni/ui/favorite/favorite_screen.dart';
 import 'package:pisni/ui/navigation/authors_navigation.dart';
 import 'package:pisni/ui/navigation/favorite_navigation.dart';
 import 'package:pisni/ui/navigation/home_navigation.dart';
@@ -19,7 +20,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
     NavigationDestination(icon: Icon(Icons.home), label: 'Home'),
     NavigationDestination(icon: Icon(Icons.face), label: 'Author'),
     NavigationDestination(icon: Icon(Icons.search), label: 'Search'),
-    NavigationDestination(icon: Icon(Icons.favorite), label: 'Favorite')
+    NavigationDestination(icon: Icon(Icons.star), label: 'Favorite')
   ];
   late final List<GlobalKey<NavigatorState>> navigatorKeys;
   late final List<Widget> destinationWidgets;

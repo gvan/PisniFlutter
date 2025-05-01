@@ -21,7 +21,6 @@ class HomeNavigation extends StatefulWidget {
 }
 
 class _HomeNavigationState extends State<HomeNavigation> {
-
   @override
   Widget build(Object context) {
     return Navigator(
@@ -42,7 +41,8 @@ class _HomeNavigationState extends State<HomeNavigation> {
             case '/song':
               final song = settings.arguments as Song;
               return ChangeNotifierProvider(
-                create: (context) => SongViewModel(),
+                create: (context) =>
+                    SongViewModel(songsRepository: context.read()),
                 child: SongScreen(song: song),
               );
           }

@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:pisni/data/entity/category.dart';
 import 'package:pisni/data/entity/song.dart';
-import 'package:pisni/data/service/i_songs_service.dart';
+import 'package:pisni/data/service/songs/i_songs_service.dart';
 
 class SongsService implements ISongsService {
   @override

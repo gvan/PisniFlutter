@@ -39,7 +39,8 @@ class _AuthorsNavigationState extends State<AuthorsNavigation> {
               case '/song':
                 final song = settings.arguments as Song;
                 return ChangeNotifierProvider(
-                  create: (context) => SongViewModel(),
+                  create: (context) =>
+                      SongViewModel(songsRepository: context.read()),
                   child: SongScreen(song: song),
                 );
             }

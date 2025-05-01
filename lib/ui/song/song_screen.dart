@@ -24,13 +24,23 @@ class _SongScreenState extends State<SongScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final song =
-        context.select((SongViewModel viewModel) => viewModel.state.song);
+    final viewModel = context.read<SongViewModel>();
+    final (Song song, bool isFavorite) = context.select(
+        (SongViewModel viewModel) =>
+            (viewModel.state.song, viewModel.state.isFavorite));
 
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
         title: Text(song.title),
+        actions: [
+          IconButton(
+              onPressed: () {
+                viewModel.addToFavorite(song);
+              },
+              icon: Icon(isFavorite ? Icons.star : Icons.star_border)),
+          IconButton(onPressed: () {}, icon: Icon(Icons.share))
+        ],
       ),
       backgroundColor: Colors.white,
       body: SafeArea(
