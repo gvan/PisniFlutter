@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:pisni/data/entity/song.dart';
+import 'package:pisni/ui/favorite/favorite_view_model.dart';
 import 'package:pisni/ui/song/song_view_model.dart';
 import 'package:provider/provider.dart';
 
@@ -25,6 +26,7 @@ class _SongScreenState extends State<SongScreen> {
   @override
   Widget build(BuildContext context) {
     final viewModel = context.read<SongViewModel>();
+    final favoriteViewModel = context.read<FavoriteViewModel>();
     final (Song song, bool isFavorite) = context.select(
         (SongViewModel viewModel) =>
             (viewModel.state.song, viewModel.state.isFavorite));
@@ -35,8 +37,9 @@ class _SongScreenState extends State<SongScreen> {
         title: Text(song.title),
         actions: [
           IconButton(
-              onPressed: () {
-                viewModel.addToFavorite(song);
+              onPressed: () async {
+                await viewModel.addToFavorite(song);
+                favoriteViewModel.reloadFavoriteSongs();
               },
               icon: Icon(isFavorite ? Icons.star : Icons.star_border)),
           IconButton(onPressed: () {}, icon: Icon(Icons.share))

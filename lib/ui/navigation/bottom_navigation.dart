@@ -64,21 +64,23 @@ class _BottomNavigationState extends State<BottomNavigation> {
           ),
           body: SafeArea(
             top: false,
-            child: Stack(
-              fit: StackFit.expand,
-              children: destinationWidgets
-                  .asMap()
-                  .map((index, view) {
-                    if (index == selectedIndex) {
-                      return MapEntry(
-                          index, Offstage(offstage: false, child: view));
-                    } else {
-                      return MapEntry(index, Offstage(child: view));
-                    }
-                  })
-                  .values
-                  .toList(),
-            ),
+            child: Builder(builder: (context) {
+              return Stack(
+                fit: StackFit.expand,
+                children: destinationWidgets
+                    .asMap()
+                    .map((index, view) {
+                      if (index == selectedIndex) {
+                        return MapEntry(
+                            index, Offstage(offstage: false, child: view));
+                      } else {
+                        return MapEntry(index, Offstage(child: view));
+                      }
+                    })
+                    .values
+                    .toList(),
+              );
+            }),
           ),
         ));
   }

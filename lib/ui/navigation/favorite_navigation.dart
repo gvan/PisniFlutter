@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pisni/data/entity/song.dart';
 import 'package:pisni/ui/favorite/favorite_screen.dart';
-import 'package:pisni/ui/favorite/favorite_view_model.dart';
 import 'package:pisni/ui/song/song_screen.dart';
 import 'package:pisni/ui/song/song_view_model.dart';
 import 'package:provider/provider.dart';
@@ -26,11 +25,7 @@ class _FavoriteNavigationState extends State<FavoriteNavigation> {
         return MaterialPageRoute(builder: (context) {
           switch (settings.name) {
             case '/':
-              return ChangeNotifierProvider(
-                create: (context) =>
-                    FavoriteViewModel(songsRepository: context.read()),
-                child: FavoriteScreen(),
-              );
+              return FavoriteScreen();
             case '/song':
               final song = settings.arguments as Song;
               return ChangeNotifierProvider(

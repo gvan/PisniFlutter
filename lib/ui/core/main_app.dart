@@ -5,6 +5,7 @@ import 'package:pisni/data/service/favorite/favorite_service.dart';
 import 'package:pisni/data/service/favorite/i_favorite_service.dart';
 import 'package:pisni/data/service/songs/i_songs_service.dart';
 import 'package:pisni/data/service/songs/songs_service.dart';
+import 'package:pisni/ui/favorite/favorite_view_model.dart';
 import 'package:pisni/ui/navigation/bottom_navigation.dart';
 import 'package:provider/provider.dart';
 
@@ -21,6 +22,9 @@ class MainApp extends StatelessWidget {
               create: (context) => SongsRepository(
                   songsService: context.read(),
                   favoriteService: context.read()) as ISongsRepository),
+          ChangeNotifierProvider(
+              create: (context) =>
+                  FavoriteViewModel(songsRepository: context.read()))
         ],
         child: MaterialApp(
           theme: ThemeData(useMaterial3: true),

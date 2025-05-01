@@ -14,6 +14,10 @@ class FavoriteViewModel extends ChangeNotifier {
   }
 
   void _init() async {
+    reloadFavoriteSongs();
+  }
+
+  void reloadFavoriteSongs() async {
     final songs = await _songsRepository.getFavorites();
     _state = _state.copyWith(songs: songs);
     notifyListeners();

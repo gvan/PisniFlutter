@@ -20,7 +20,7 @@ class SongViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void addToFavorite(Song song) async {
+  Future<void> addToFavorite(Song song) async {
     await songsRepository.toggleFavorite(song.id);
     final isFavorite = await songsRepository.isFavoriteSong(song.id);
     _state = _state.copyWith(isFavorite: isFavorite);
