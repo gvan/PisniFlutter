@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pisni/data/entity/category.dart';
 import 'package:pisni/data/entity/song.dart';
+import 'package:pisni/ui/common/songs_list.dart';
 import 'package:pisni/ui/songs/songs_view_model.dart';
 import 'package:provider/provider.dart';
 
@@ -35,30 +36,7 @@ class _SongsScreenState extends State<SongsScreen> {
               alignment: Alignment.center,
               child: CircularProgressIndicator(),
             ),
-          ListView.builder(
-              itemCount: songs.length,
-              itemBuilder: (context, index) {
-                final song = songs[index];
-                return InkWell(
-                    onTap: () {
-                      Navigator.of(context).pushNamed('/song', arguments: song);
-                    },
-                    child: Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(song.title),
-                          Text(song.text,
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                              style:
-                                  TextStyle(fontSize: 12, color: Colors.grey))
-                        ],
-                      ),
-                    ));
-              })
+          SongsList(songs: songs)
         ],
       )),
     );

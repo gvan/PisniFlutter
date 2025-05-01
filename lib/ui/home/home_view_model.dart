@@ -16,9 +16,6 @@ class HomeViewModel extends ChangeNotifier {
 
   void _init() async {
     final categories = await _songsRepository.getCategories();
-    for (final category in categories) {
-      print('APPLOG songs size ${category.songs.length}');
-    }
     _state = _state.copyWith(categories: categories);
     notifyListeners();
   }

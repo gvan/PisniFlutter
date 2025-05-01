@@ -9,12 +9,17 @@ class SongsRepository implements ISongsRepository {
 
   final ISongsService _songsService;
 
+  final Map<String, Category> categoriesCache = {};
+
   @override
   Future<List<Category>> getCategories() async {
     final categories = await _songsService.getCategories();
     for (final (index, category) in categories.indexed) {
-      final songs = await _songsService.getSongs(category.id);
-      categories[index] = category.copyWith(songs: songs);
+      if (categoriesCache[category.id] == null) {
+        final songs = await _songsService.getSongs(category.id);
+        categoriesCache[category.id] = category.copyWith(songs: songs);
+      }
+      categories[index] = categoriesCache[category.id]!;
     }
     return categories;
   }
@@ -23,8 +28,11 @@ class SongsRepository implements ISongsRepository {
   Future<List<Category>> getAuthors() async {
     final authors = await _songsService.getAuthors();
     for (final (index, category) in authors.indexed) {
-      final songs = await _songsService.getSongs(category.id);
-      authors[index] = category.copyWith(songs: songs);
+      if (categoriesCache[category.id] == null) {
+        final songs = await _songsService.getSongs(category.id);
+        categoriesCache[category.id] = category.copyWith(songs: songs);
+      }
+      authors[index] = categoriesCache[category.id]!;
     }
     return authors;
   }
@@ -32,5 +40,32 @@ class SongsRepository implements ISongsRepository {
   @override
   Future<List<Song>> getSongs(String category) {
     return _songsService.getSongs(category);
+  }
+
+  @override
+  Future<List<Song>> search(String text) async {
+    if (text.length < 3) {
+      return [];
+    }
+    final categories = await getCategories();
+    final authors = await getAuthors();
+    final List<Song> songs = [];
+    for (final category in categories) {
+      for (final song in category.songs) {
+        if (song.title.toLowerCase().contains(text.toLowerCase()) ||
+            song.text.toLowerCase().contains(text.toLowerCase())) {
+          songs.add(song);
+        }
+      }
+    }
+    for (final author in authors) {
+      for (final song in author.songs) {
+        if (song.title.toLowerCase().contains(text.toLowerCase()) ||
+            song.text.toLowerCase().contains(text.toLowerCase())) {
+          songs.add(song);
+        }
+      }
+    }
+    return songs;
   }
 }

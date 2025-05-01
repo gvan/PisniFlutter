@@ -3,7 +3,7 @@ import 'package:pisni/data/repository/i_songs_repository.dart';
 import 'package:pisni/data/repository/songs_repository.dart';
 import 'package:pisni/data/service/i_songs_service.dart';
 import 'package:pisni/data/service/songs_service.dart';
-import 'package:pisni/ui/core/bottom_navigation.dart';
+import 'package:pisni/ui/navigation/bottom_navigation.dart';
 import 'package:provider/provider.dart';
 
 class MainApp extends StatelessWidget {
