@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:pisni/ui/favorite/favorite_screen.dart';
 import 'package:pisni/ui/navigation/authors_navigation.dart';
 import 'package:pisni/ui/navigation/favorite_navigation.dart';
 import 'package:pisni/ui/navigation/home_navigation.dart';
