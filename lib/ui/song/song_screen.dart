@@ -56,7 +56,17 @@ class _SongScreenState extends State<SongScreen> {
               crossAxisAlignment: Platform.isAndroid || Platform.isIOS
                   ? CrossAxisAlignment.start
                   : CrossAxisAlignment.center,
-              children: [Text(song.text)],
+              children: [
+                if (song.author != null && song.author?.isNotEmpty == true)
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 8),
+                    child: Text(
+                      'Автор: ${song.author}',
+                      style: TextStyle(color: Colors.grey),
+                    ),
+                  ),
+                Text(song.text)
+              ],
             ),
           ),
         ),
