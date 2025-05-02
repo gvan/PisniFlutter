@@ -20,27 +20,34 @@ class CategoriesList extends StatelessWidget {
               Navigator.pushNamed(context, '/songs', arguments: category);
             },
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              padding: EdgeInsets.fromLTRB(16, 8, 16, 0),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(children: [
-                    Text(
-                    category.title,
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                  Row(
+                    children: [
+                      Text(
+                        category.title,
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      Spacer(),
+                      SizedBox(
+                        width: 24,
+                        height: 24,
+                        child: SvgPicture(AssetBytesLoader(
+                            'assets/icons/chevron_right.svg.vec')),
+                      ),
+                    ],
                   ),
-                  Spacer(),
-                  SizedBox(
-                    width: 24,
-                    height: 24,
-                    child: SvgPicture(AssetBytesLoader('assets/icons/chevron_right.svg.vec')),
-                  )
-                  ,
-                  ],),
                   SizedBox(
                     height: 100,
                     child: HorizontalSongsList(songs: category.songs),
+                  ),
+                  SizedBox(height: 8),
+                  Divider(
+                    thickness: 1,
+                    color: Colors.grey,
                   )
                 ],
               ),
