@@ -4,5 +4,7 @@
     "search": "Пошук",
     "favorite": "Улюблені",
     "songs": "Пісні",
-    "songTitleOrLyrics": "Назва або слова пісні"
+    "songTitleOrLyrics": "Назва або слова пісні",
+    "other": "Інше",
+    "settings": "Налаштування"
 }

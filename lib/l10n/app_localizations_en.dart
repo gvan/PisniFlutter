@@ -25,4 +25,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get songTitleOrLyrics => 'Song title or lyrics';
+
+  @override
+  String get other => 'Other';
+
+  @override
+  String get settings => 'Settings';
 }

@@ -4,5 +4,7 @@
     "search": "Search",
     "favorite": "Favorite",
     "songs": "Songs",
-    "songTitleOrLyrics": "Song title or lyrics"
+    "songTitleOrLyrics": "Song title or lyrics",
+    "other": "Other",
+    "settings": "Settings"
 }

@@ -130,6 +130,18 @@ abstract class AppLocalizations {
   /// In uk, this message translates to:
   /// **'Назва або слова пісні'**
   String get songTitleOrLyrics;
+
+  /// No description provided for @other.
+  ///
+  /// In uk, this message translates to:
+  /// **'Інше'**
+  String get other;
+
+  /// No description provided for @settings.
+  ///
+  /// In uk, this message translates to:
+  /// **'Налаштування'**
+  String get settings;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

@@ -25,4 +25,10 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get songTitleOrLyrics => 'Назва або слова пісні';
+
+  @override
+  String get other => 'Інше';
+
+  @override
+  String get settings => 'Налаштування';
 }
