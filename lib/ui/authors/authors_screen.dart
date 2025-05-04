@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pisni/l10n/app_localizations.dart';
 import 'package:pisni/ui/authors/authors_view_model.dart';
 import 'package:pisni/ui/common/categories_list.dart';
 
@@ -12,7 +13,7 @@ class AuthorsScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: Text('Пісні'),
+        title: Text(AppLocalizations.of(context).authors),
       ),
       backgroundColor: Colors.white,
       body: SafeArea(

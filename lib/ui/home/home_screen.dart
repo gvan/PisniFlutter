@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pisni/ui/common/categories_list.dart';
+import 'package:pisni/ui/extensions/localization.dart';
 import 'package:pisni/ui/home/home_view_model.dart';
 
 class HomeWidget extends StatelessWidget {
@@ -12,7 +13,7 @@ class HomeWidget extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: Text('Пісні'),
+        title: Text(context.loc.songs),
       ),
       backgroundColor: Colors.white,
       body: SafeArea(

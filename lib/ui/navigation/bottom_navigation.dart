@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pisni/ui/extensions/localization.dart';
 import 'package:pisni/ui/navigation/authors_navigation.dart';
 import 'package:pisni/ui/navigation/favorite_navigation.dart';
 import 'package:pisni/ui/navigation/home_navigation.dart';
@@ -15,12 +16,6 @@ class BottomNavigation extends StatefulWidget {
 
 class _BottomNavigationState extends State<BottomNavigation> {
   int selectedIndex = 0;
-  static const bottomDestinations = [
-    NavigationDestination(icon: Icon(Icons.home), label: 'Home'),
-    NavigationDestination(icon: Icon(Icons.face), label: 'Author'),
-    NavigationDestination(icon: Icon(Icons.search), label: 'Search'),
-    NavigationDestination(icon: Icon(Icons.star), label: 'Favorite')
-  ];
   late final List<GlobalKey<NavigatorState>> navigatorKeys;
   late final List<Widget> destinationWidgets;
 
@@ -33,8 +28,9 @@ class _BottomNavigationState extends State<BottomNavigation> {
   @override
   void initState() {
     super.initState();
-    navigatorKeys = List<GlobalKey<NavigatorState>>.generate(
-        bottomDestinations.length, (int index) => GlobalKey()).toList();
+    navigatorKeys =
+        List<GlobalKey<NavigatorState>>.generate(4, (int index) => GlobalKey())
+            .toList();
     destinationWidgets = [
       HomeNavigation(
         navigatorKey: navigatorKeys[0],
@@ -58,7 +54,16 @@ class _BottomNavigationState extends State<BottomNavigation> {
           bottomNavigationBar: NavigationBar(
             onDestinationSelected: onItemTapped,
             selectedIndex: selectedIndex,
-            destinations: bottomDestinations,
+            destinations: [
+              NavigationDestination(
+                  icon: Icon(Icons.home), label: context.loc.home),
+              NavigationDestination(
+                  icon: Icon(Icons.face), label: context.loc.authors),
+              NavigationDestination(
+                  icon: Icon(Icons.search), label: context.loc.search),
+              NavigationDestination(
+                  icon: Icon(Icons.star), label: context.loc.favorite)
+            ],
             indicatorColor: Colors.blue,
             backgroundColor: Colors.white,
           ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pisni/ui/common/songs_list.dart';
+import 'package:pisni/ui/extensions/localization.dart';
 import 'package:pisni/ui/search/search_view_model.dart';
 import 'package:provider/provider.dart';
 
@@ -19,7 +20,7 @@ class _SearchScreenState extends State<SearchScreen> {
     });
     return Scaffold(
       appBar: AppBar(
-        title: Text('Пошук'),
+        title: Text(context.loc.search),
         backgroundColor: Colors.white,
       ),
       backgroundColor: Colors.white,
@@ -31,7 +32,7 @@ class _SearchScreenState extends State<SearchScreen> {
             TextField(
               decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  hintText: 'Назва або слова пісні'),
+                  hintText: context.loc.songTitleOrLyrics),
               onChanged: (text) {
                 viewModel.search(text);
               },

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pisni/ui/common/songs_list.dart';
+import 'package:pisni/ui/extensions/localization.dart';
 import 'package:pisni/ui/favorite/favorite_view_model.dart';
 import 'package:provider/provider.dart';
 
@@ -23,7 +24,7 @@ class FavoriteScreenState extends State<FavoriteScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: Text('Улюблені'),
+        title: Text(context.loc.favorite),
       ),
       backgroundColor: Colors.white,
       body: SongsList(songs: songs),
