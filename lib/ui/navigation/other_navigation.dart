@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:pisni/data/entity/song.dart';
-import 'package:pisni/ui/favorite/favorite_screen.dart';
-import 'package:pisni/ui/other/other_screen.dart';
-import 'package:pisni/ui/settings/settings_screen.dart';
-import 'package:pisni/ui/settings/settings_view_model.dart';
-import 'package:pisni/ui/song/song_screen.dart';
-import 'package:pisni/ui/song/song_view_model.dart';
+import 'package:pisni/ui/screens/favorite/favorite_screen.dart';
+import 'package:pisni/ui/screens/other/other_screen.dart';
+import 'package:pisni/ui/screens/settings/settings_screen.dart';
+import 'package:pisni/ui/screens/settings/settings_view_model.dart';
+import 'package:pisni/ui/screens/song/song_screen.dart';
+import 'package:pisni/ui/screens/song/song_view_model.dart';
 import 'package:provider/provider.dart';
 
 class OtherNavigation extends StatefulWidget {

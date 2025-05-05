@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pisni/data/entity/song.dart';
 import 'package:pisni/data/repository/songs/i_songs_repository.dart';
-import 'package:pisni/ui/song/song_state.dart';
+import 'package:pisni/ui/screens/song/song_state.dart';
 
 class SongViewModel extends ChangeNotifier {
   final ISongsRepository songsRepository;

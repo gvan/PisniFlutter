@@ -8,7 +8,7 @@ import 'package:pisni/data/service/preferences/i_preferences_service.dart';
 import 'package:pisni/data/service/songs/i_songs_service.dart';
 import 'package:pisni/data/service/songs/songs_service.dart';
 import 'package:pisni/l10n/app_localizations.dart';
-import 'package:pisni/ui/favorite/favorite_view_model.dart';
+import 'package:pisni/ui/screens/favorite/favorite_view_model.dart';
 import 'package:pisni/ui/navigation/bottom_navigation.dart';
 import 'package:provider/provider.dart';
 

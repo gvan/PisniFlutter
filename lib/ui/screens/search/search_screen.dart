@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pisni/ui/common/songs_list.dart';
 import 'package:pisni/ui/extensions/localization.dart';
-import 'package:pisni/ui/search/search_view_model.dart';
+import 'package:pisni/ui/screens/search/search_view_model.dart';
 import 'package:provider/provider.dart';
 
 class SearchScreen extends StatefulWidget {

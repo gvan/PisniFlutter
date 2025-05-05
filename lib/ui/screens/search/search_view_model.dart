@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pisni/data/repository/songs/i_songs_repository.dart';
-import 'package:pisni/ui/search/search_state.dart';
+import 'package:pisni/ui/screens/search/search_state.dart';
 
 class SearchViewModel extends ChangeNotifier {
   final ISongsRepository _songsRepository;

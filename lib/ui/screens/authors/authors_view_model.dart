@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pisni/data/repository/songs/i_songs_repository.dart';
-import 'package:pisni/ui/authors/authors_state.dart';
+import 'package:pisni/ui/screens/authors/authors_state.dart';
 
 class AuthorsViewModel extends ChangeNotifier {
   final ISongsRepository _songsRepository;

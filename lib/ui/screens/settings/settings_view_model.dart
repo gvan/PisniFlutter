@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pisni/data/entity/settings.dart';
 import 'package:pisni/data/repository/settings/i_settings_repository.dart';
-import 'package:pisni/ui/settings/settings_state.dart';
+import 'package:pisni/ui/screens/settings/settings_state.dart';
 
 class SettingsViewModel extends ChangeNotifier {
   final ISettingsRepository _settingsRepository;

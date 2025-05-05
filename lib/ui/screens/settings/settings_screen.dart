@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pisni/data/entity/settings.dart';
 import 'package:pisni/ui/extensions/localization.dart';
-import 'package:pisni/ui/settings/settings_view_model.dart';
+import 'package:pisni/ui/screens/settings/settings_view_model.dart';
 import 'package:provider/provider.dart';
 
 class SettingsScreen extends StatelessWidget {

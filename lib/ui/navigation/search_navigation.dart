@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:pisni/data/entity/song.dart';
-import 'package:pisni/ui/search/search_screen.dart';
-import 'package:pisni/ui/search/search_view_model.dart';
-import 'package:pisni/ui/song/song_screen.dart';
-import 'package:pisni/ui/song/song_view_model.dart';
+import 'package:pisni/ui/screens/search/search_screen.dart';
+import 'package:pisni/ui/screens/search/search_view_model.dart';
+import 'package:pisni/ui/screens/song/song_screen.dart';
+import 'package:pisni/ui/screens/song/song_view_model.dart';
 import 'package:provider/provider.dart';
 
 class SearchNavigation extends StatefulWidget {

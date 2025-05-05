@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:pisni/data/entity/category.dart';
 import 'package:pisni/data/entity/song.dart';
-import 'package:pisni/ui/authors/authors_view_model.dart';
-import 'package:pisni/ui/authors/authors_screen.dart';
-import 'package:pisni/ui/song/song_screen.dart';
-import 'package:pisni/ui/song/song_view_model.dart';
-import 'package:pisni/ui/songs/songs_screen.dart';
-import 'package:pisni/ui/songs/songs_view_model.dart';
+import 'package:pisni/ui/screens/authors/authors_view_model.dart';
+import 'package:pisni/ui/screens/authors/authors_screen.dart';
+import 'package:pisni/ui/screens/song/song_screen.dart';
+import 'package:pisni/ui/screens/song/song_view_model.dart';
+import 'package:pisni/ui/screens/songs/songs_screen.dart';
+import 'package:pisni/ui/screens/songs/songs_view_model.dart';
 import 'package:provider/provider.dart';
 
 class AuthorsNavigation extends StatefulWidget {

@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:pisni/data/entity/song.dart';
-import 'package:pisni/ui/favorite/favorite_view_model.dart';
-import 'package:pisni/ui/song/song_view_model.dart';
+import 'package:pisni/ui/screens/favorite/favorite_view_model.dart';
+import 'package:pisni/ui/screens/song/song_view_model.dart';
 import 'package:provider/provider.dart';
 
 class SongScreen extends StatefulWidget {
