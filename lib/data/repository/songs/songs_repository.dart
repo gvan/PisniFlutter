@@ -1,18 +1,18 @@
 import 'package:pisni/data/entity/category.dart';
 import 'package:pisni/data/entity/song.dart';
-import 'package:pisni/data/repository/i_songs_repository.dart';
-import 'package:pisni/data/service/favorite/i_favorite_service.dart';
+import 'package:pisni/data/repository/songs/i_songs_repository.dart';
+import 'package:pisni/data/service/preferences/i_preferences_service.dart';
 import 'package:pisni/data/service/songs/i_songs_service.dart';
 
 class SongsRepository implements ISongsRepository {
   SongsRepository(
       {required ISongsService songsService,
-      required IFavoriteService favoriteService})
+      required IPreferencesService preferencesService})
       : _songsService = songsService,
-        _favoriteService = favoriteService;
+        _preferencesService = preferencesService;
 
   final ISongsService _songsService;
-  final IFavoriteService _favoriteService;
+  final IPreferencesService _preferencesService;
 
   final Map<String, Category> categoriesCache = {};
 
@@ -76,7 +76,7 @@ class SongsRepository implements ISongsRepository {
 
   @override
   Future<List<Song>> getFavorites() async {
-    final favoriteIds = await _favoriteService.getFavorites();
+    final favoriteIds = await _preferencesService.getFavorites();
     if (favoriteIds.isEmpty) {
       return [];
     }
@@ -103,17 +103,17 @@ class SongsRepository implements ISongsRepository {
   @override
   Future<void> toggleFavorite(int id) async {
     final songId = id.toString();
-    final favoriteSongs = await _favoriteService.getFavorites();
+    final favoriteSongs = await _preferencesService.getFavorites();
     if (favoriteSongs.contains(songId)) {
-      await _favoriteService.removeFromFavorite(songId);
+      await _preferencesService.removeFromFavorite(songId);
     } else {
-      await _favoriteService.addToFavorite(songId);
+      await _preferencesService.addToFavorite(songId);
     }
   }
 
   @override
   Future<bool> isFavoriteSong(int songId) async {
-    final favoriteSongs = await _favoriteService.getFavorites();
+    final favoriteSongs = await _preferencesService.getFavorites();
     return favoriteSongs.contains(songId.toString());
   }
 }

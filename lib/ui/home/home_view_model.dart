@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:pisni/data/repository/i_songs_repository.dart';
+import 'package:pisni/data/repository/songs/i_songs_repository.dart';
 import 'package:pisni/ui/home/home_state.dart';
 
 class HomeViewModel extends ChangeNotifier {

@@ -142,6 +142,18 @@ abstract class AppLocalizations {
   /// In uk, this message translates to:
   /// **'Налаштування'**
   String get settings;
+
+  /// No description provided for @theme.
+  ///
+  /// In uk, this message translates to:
+  /// **'Тема'**
+  String get theme;
+
+  /// No description provided for @themeMode.
+  ///
+  /// In uk, this message translates to:
+  /// **'{mode, select, light{Світла} dark{Темна} system{Системна} other{}}'**
+  String themeMode(String mode);
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

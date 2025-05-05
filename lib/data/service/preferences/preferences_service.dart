@@ -1,8 +1,11 @@
-import 'package:pisni/data/service/favorite/i_favorite_service.dart';
+import 'package:pisni/data/entity/settings.dart';
+import 'package:pisni/data/service/preferences/i_preferences_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class FavoriteService implements IFavoriteService {
+class PreferencesService implements IPreferencesService {
   static const _favoriteSongsKey = 'favorite_songs';
+
+  static const _themeModeKey = 'theme_mode';
 
   @override
   Future<void> addToFavorite(String songId) async {
@@ -25,5 +28,19 @@ class FavoriteService implements IFavoriteService {
     final prefs = SharedPreferencesAsync();
     final favoriteSongs = await prefs.getStringList(_favoriteSongsKey) ?? [];
     return favoriteSongs;
+  }
+
+  @override
+  Future<Settings> getSettings() async {
+    final prefs = SharedPreferencesAsync();
+    final themeMode = await prefs.getString(_themeModeKey) ?? '';
+    final settings = Settings(themeMode: AppThemeMode.fromValue(themeMode));
+    return settings;
+  }
+
+  @override
+  Future<void> saveSettings(Settings settings) async {
+    final prefs = SharedPreferencesAsync();
+    await prefs.setString(_themeModeKey, settings.themeMode.mode);
   }
 }

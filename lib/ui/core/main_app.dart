@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:pisni/data/repository/i_songs_repository.dart';
-import 'package:pisni/data/repository/songs_repository.dart';
-import 'package:pisni/data/service/favorite/favorite_service.dart';
-import 'package:pisni/data/service/favorite/i_favorite_service.dart';
+import 'package:pisni/data/repository/settings/i_settings_repository.dart';
+import 'package:pisni/data/repository/settings/settings_repository.dart';
+import 'package:pisni/data/repository/songs/i_songs_repository.dart';
+import 'package:pisni/data/repository/songs/songs_repository.dart';
+import 'package:pisni/data/service/preferences/preferences_service.dart';
+import 'package:pisni/data/service/preferences/i_preferences_service.dart';
 import 'package:pisni/data/service/songs/i_songs_service.dart';
 import 'package:pisni/data/service/songs/songs_service.dart';
 import 'package:pisni/l10n/app_localizations.dart';
@@ -18,11 +20,16 @@ class MainApp extends StatelessWidget {
     return MultiProvider(
         providers: [
           Provider(create: (context) => SongsService() as ISongsService),
-          Provider(create: (context) => FavoriteService() as IFavoriteService),
+          Provider(
+              create: (context) => PreferencesService() as IPreferencesService),
           Provider(
               create: (context) => SongsRepository(
                   songsService: context.read(),
-                  favoriteService: context.read()) as ISongsRepository),
+                  preferencesService: context.read()) as ISongsRepository),
+          Provider(
+              create: (context) =>
+                  SettignsRepository(preferencesService: context.read())
+                      as ISettingsRepository),
           ChangeNotifierProvider(
               create: (context) =>
                   FavoriteViewModel(songsRepository: context.read()))

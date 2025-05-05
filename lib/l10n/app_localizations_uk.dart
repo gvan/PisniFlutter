@@ -31,4 +31,21 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get settings => 'Налаштування';
+
+  @override
+  String get theme => 'Тема';
+
+  @override
+  String themeMode(String mode) {
+    String _temp0 = intl.Intl.selectLogic(
+      mode,
+      {
+        'light': 'Світла',
+        'dark': 'Темна',
+        'system': 'Системна',
+        'other': '',
+      },
+    );
+    return '$_temp0';
+  }
 }
