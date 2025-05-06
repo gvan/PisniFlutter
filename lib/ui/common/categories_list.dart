@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:pisni/data/entity/category.dart';
 import 'package:pisni/data/entity/song.dart';
+import 'package:pisni/ui/extensions/styles.dart';
 import 'package:vector_graphics/vector_graphics.dart';
 
 class CategoriesList extends StatelessWidget {
@@ -29,7 +30,8 @@ class CategoriesList extends StatelessWidget {
                     children: [
                       Text(
                         category.title,
-                        style: TextStyle(fontWeight: FontWeight.bold),
+                        style: context.textStyles.bodyLarge
+                            ?.copyWith(fontWeight: FontWeight.bold),
                       ),
                       Spacer(),
                       SizedBox(
@@ -91,12 +93,12 @@ class HorizontalSongsList extends StatelessWidget {
                       song.title,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: TextStyle(fontSize: 14),
+                      style: context.textStyles.bodyLarge,
                     ),
                     Text(song.text,
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
-                        style: TextStyle(fontSize: 12, color: Colors.grey))
+                        style: context.textStyles.bodySmall)
                   ],
                 ),
               ),

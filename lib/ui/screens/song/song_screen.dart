@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:pisni/data/entity/song.dart';
+import 'package:pisni/ui/extensions/localization.dart';
+import 'package:pisni/ui/extensions/styles.dart';
 import 'package:pisni/ui/screens/favorite/favorite_view_model.dart';
 import 'package:pisni/ui/screens/song/song_view_model.dart';
 import 'package:provider/provider.dart';
@@ -59,11 +61,14 @@ class _SongScreenState extends State<SongScreen> {
                   Padding(
                     padding: const EdgeInsets.only(bottom: 8),
                     child: Text(
-                      'Автор: ${song.author}',
-                      style: TextStyle(color: Colors.grey),
+                      '${context.loc.author}: ${song.author}',
+                      style: context.textStyles.bodySmall,
                     ),
                   ),
-                Text(song.text)
+                Text(
+                  song.text,
+                  style: context.textStyles.bodyMedium,
+                )
               ],
             ),
           ),

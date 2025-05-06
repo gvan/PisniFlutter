@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pisni/ui/extensions/localization.dart';
+import 'package:pisni/ui/extensions/styles.dart';
 
 class OtherScreen extends StatelessWidget {
   const OtherScreen({super.key});
@@ -63,7 +64,10 @@ class _MenuItem extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Text(title),
+              child: Text(
+                title,
+                style: context.textStyles.bodyLarge,
+              ),
             )
           ],
         ),

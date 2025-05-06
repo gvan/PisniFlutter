@@ -154,6 +154,12 @@ abstract class AppLocalizations {
   /// In uk, this message translates to:
   /// **'{mode, select, light{Світла} dark{Темна} system{Системна} other{}}'**
   String themeMode(String mode);
+
+  /// No description provided for @author.
+  ///
+  /// In uk, this message translates to:
+  /// **'Автор'**
+  String get author;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

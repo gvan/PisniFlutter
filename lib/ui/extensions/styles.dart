@@ -13,3 +13,9 @@ extension FlutterThemeMode on AppThemeMode {
     }
   }
 }
+
+extension ThemeStylesBuildContext on BuildContext {
+
+  TextTheme get textStyles => TextTheme.of(this);
+
+}

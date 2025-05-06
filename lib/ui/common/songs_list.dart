@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pisni/data/entity/song.dart';
+import 'package:pisni/ui/extensions/styles.dart';
 
 class SongsList extends StatelessWidget {
   final List<Song> songs;
@@ -22,11 +23,16 @@ class SongsList extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(song.title),
-                    Text(song.text,
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(fontSize: 12, color: Colors.grey))
+                    Text(
+                      song.title,
+                      style: context.textStyles.bodyLarge,
+                    ),
+                    Text(
+                      song.text,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: context.textStyles.bodySmall,
+                    )
                   ],
                 ),
               ));

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pisni/data/entity/settings.dart';
 import 'package:pisni/ui/core/theme_view_model.dart';
 import 'package:pisni/ui/extensions/localization.dart';
+import 'package:pisni/ui/extensions/styles.dart';
 import 'package:pisni/ui/screens/settings/settings_view_model.dart';
 import 'package:provider/provider.dart';
 
@@ -42,7 +43,10 @@ class _SettingsContent extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text(context.loc.theme),
+                child: Text(
+                  context.loc.theme,
+                  style: context.textStyles.bodyLarge,
+                ),
               ),
               Spacer(),
               Padding(
