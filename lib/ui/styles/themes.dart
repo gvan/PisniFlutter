@@ -47,14 +47,6 @@ class AppTheme {
     ),
     navigationBarTheme: NavigationBarThemeData(
       backgroundColor: Colors.white,
-      labelTextStyle: WidgetStateProperty.fromMap({
-        WidgetState.selected: TextStyle(color: mainTextLigth),
-        ~WidgetState.selected: TextStyle(color: mainTextLigth),
-      }),
-      iconTheme: WidgetStateProperty.fromMap({
-        WidgetState.selected: IconThemeData(color: mainTextLigth),
-        ~WidgetState.selected: IconThemeData(color: mainTextLigth),
-      }),
     ),
   );
 
@@ -97,14 +89,6 @@ class AppTheme {
     ),
     navigationBarTheme: NavigationBarThemeData(
       backgroundColor: Colors.black,
-      labelTextStyle: WidgetStateProperty.fromMap({
-        WidgetState.selected: TextStyle(color: mainTextDark),
-        ~WidgetState.selected: TextStyle(color: mainTextDark),
-      }),
-      iconTheme: WidgetStateProperty.fromMap({
-        WidgetState.selected: IconThemeData(color: mainTextDark),
-        ~WidgetState.selected: IconThemeData(color: mainTextDark),
-      }),
     ),
   );
 }
