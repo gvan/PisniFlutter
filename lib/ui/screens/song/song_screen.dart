@@ -43,7 +43,11 @@ class _SongScreenState extends State<SongScreen> {
                 favoriteViewModel.reloadFavoriteSongs();
               },
               icon: Icon(isFavorite ? Icons.star : Icons.star_border)),
-          IconButton(onPressed: () {}, icon: Icon(Icons.share))
+          IconButton(
+              onPressed: () {
+                viewModel.shareSong(song);
+              },
+              icon: Icon(Icons.share))
         ],
       ),
       body: SafeArea(
