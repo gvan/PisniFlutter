@@ -39,9 +39,10 @@ class AppTheme {
         color: mainTextLigth,
       ),
       systemOverlayStyle: SystemUiOverlayStyle(
-        statusBarColor: Colors.white,
-        systemNavigationBarColor: Colors.white,
+        statusBarColor: Colors.transparent,
+        statusBarIconBrightness: Brightness.dark,
         statusBarBrightness: Brightness.light,
+        systemNavigationBarColor: Colors.white,
         systemNavigationBarIconBrightness: Brightness.dark,
       ),
     ),
@@ -78,12 +79,13 @@ class AppTheme {
     appBarTheme: AppBarTheme(
       backgroundColor: Colors.black,
       iconTheme: IconThemeData(
-        color: Colors.white,
+        color: mainTextDark,
       ),
       systemOverlayStyle: SystemUiOverlayStyle(
-        statusBarColor: Colors.black,
-        systemNavigationBarColor: Colors.black,
+        statusBarColor: Colors.transparent,
+        statusBarIconBrightness: Brightness.light,
         statusBarBrightness: Brightness.dark,
+        systemNavigationBarColor: Colors.black,
         systemNavigationBarIconBrightness: Brightness.light,
       ),
     ),
