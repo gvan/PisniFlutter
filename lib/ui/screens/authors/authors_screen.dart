@@ -12,10 +12,8 @@ class AuthorsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
         title: Text(AppLocalizations.of(context).authors),
       ),
-      backgroundColor: Colors.white,
       body: SafeArea(
           child: ListenableBuilder(
               listenable: viewModel,

@@ -15,9 +15,7 @@ class OtherScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.white,
         title: Text(context.loc.other),
       ),
       body: Column(
@@ -58,7 +56,10 @@ class _MenuItem extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Icon(icon),
+              child: Icon(
+                icon,
+                color: Theme.of(context).textTheme.bodyMedium!.color,
+              ),
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),

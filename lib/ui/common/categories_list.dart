@@ -35,8 +35,13 @@ class CategoriesList extends StatelessWidget {
                       SizedBox(
                         width: 24,
                         height: 24,
-                        child: SvgPicture(AssetBytesLoader(
-                            'assets/icons/chevron_right.svg.vec')),
+                        child: SvgPicture(
+                          colorFilter: ColorFilter.mode(
+                              Theme.of(context).textTheme.bodyMedium!.color!,
+                              BlendMode.srcIn),
+                          AssetBytesLoader(
+                              'assets/icons/chevron_right.svg.vec'),
+                        ),
                       ),
                     ],
                   ),

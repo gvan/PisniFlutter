@@ -23,10 +23,8 @@ class FavoriteScreenState extends State<FavoriteScreen> {
     );
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
         title: Text(context.loc.favorite),
       ),
-      backgroundColor: Colors.white,
       body: SongsList(songs: songs),
     );
   }

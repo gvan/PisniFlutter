@@ -33,7 +33,6 @@ class _SongScreenState extends State<SongScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
         title: Text(song.title),
         actions: [
           IconButton(
@@ -45,7 +44,6 @@ class _SongScreenState extends State<SongScreen> {
           IconButton(onPressed: () {}, icon: Icon(Icons.share))
         ],
       ),
-      backgroundColor: Colors.white,
       body: SafeArea(
           child: SingleChildScrollView(
         child: Padding(

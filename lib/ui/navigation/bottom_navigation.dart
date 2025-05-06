@@ -32,12 +32,8 @@ class _BottomNavigationState extends State<BottomNavigation> {
         List<GlobalKey<NavigatorState>>.generate(4, (int index) => GlobalKey())
             .toList();
     destinationWidgets = [
-      HomeNavigation(
-        navigatorKey: navigatorKeys[0],
-      ),
-      AuthorsNavigation(
-        navigatorKey: navigatorKeys[1],
-      ),
+      HomeNavigation(navigatorKey: navigatorKeys[0]),
+      AuthorsNavigation(navigatorKey: navigatorKeys[1]),
       SearchNavigation(navigatorKey: navigatorKeys[2]),
       OtherNavigation(navigatorKey: navigatorKeys[3]),
     ];
@@ -64,8 +60,6 @@ class _BottomNavigationState extends State<BottomNavigation> {
               NavigationDestination(
                   icon: Icon(Icons.menu), label: context.loc.other)
             ],
-            indicatorColor: Colors.blue,
-            backgroundColor: Colors.white,
           ),
           body: SafeArea(
             top: false,
