@@ -6,7 +6,8 @@ part 'search_state.freezed.dart';
 
 @freezed
 class SearchState with _$SearchState {
-final List<Song> songs;
+@override
+  final List<Song> songs;
 
   SearchState({required this.songs});
 }

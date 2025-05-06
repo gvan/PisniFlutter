@@ -13,7 +13,6 @@ class SearchViewModel extends ChangeNotifier {
 
   void search(String input) async {
     final songs = await _songsRepository.search(input);
-    print('APPLOG ${songs.length}');
     _state = _state.copyWith(songs: songs);
     notifyListeners();
   }
