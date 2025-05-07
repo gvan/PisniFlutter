@@ -13,10 +13,17 @@ Category _$CategoryFromJson(Map<String, dynamic> json) => Category(
               ?.map((e) => Song.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],
+      type: $enumDecodeNullable(_$CategoryTypeEnumMap, json['type']),
     );
 
 Map<String, dynamic> _$CategoryToJson(Category instance) => <String, dynamic>{
       'id': instance.id,
       'title': instance.title,
       'songs': instance.songs,
+      'type': _$CategoryTypeEnumMap[instance.type],
     };
+
+const _$CategoryTypeEnumMap = {
+  CategoryType.category: 'category',
+  CategoryType.author: 'author',
+};

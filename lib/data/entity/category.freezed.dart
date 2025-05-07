@@ -18,6 +18,7 @@ mixin _$Category {
   String get id;
   String get title;
   List<Song> get songs;
+  CategoryType? get type;
 
   /// Create a copy of Category
   /// with the given fields replaced by the non-null parameter values.
@@ -33,17 +34,18 @@ mixin _$Category {
             other is Category &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.title, title) || other.title == title) &&
-            const DeepCollectionEquality().equals(other.songs, songs));
+            const DeepCollectionEquality().equals(other.songs, songs) &&
+            (identical(other.type, type) || other.type == type));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-      runtimeType, id, title, const DeepCollectionEquality().hash(songs));
+      runtimeType, id, title, const DeepCollectionEquality().hash(songs), type);
 
   @override
   String toString() {
-    return 'Category(id: $id, title: $title, songs: $songs)';
+    return 'Category(id: $id, title: $title, songs: $songs, type: $type)';
   }
 }
 
@@ -52,7 +54,7 @@ abstract mixin class $CategoryCopyWith<$Res> {
   factory $CategoryCopyWith(Category value, $Res Function(Category) _then) =
       _$CategoryCopyWithImpl;
   @useResult
-  $Res call({String id, String title, List<Song> songs});
+  $Res call({String id, String title, List<Song> songs, CategoryType? type});
 }
 
 /// @nodoc
@@ -70,6 +72,7 @@ class _$CategoryCopyWithImpl<$Res> implements $CategoryCopyWith<$Res> {
     Object? id = null,
     Object? title = null,
     Object? songs = null,
+    Object? type = freezed,
   }) {
     return _then(Category(
       id: null == id
@@ -84,6 +87,10 @@ class _$CategoryCopyWithImpl<$Res> implements $CategoryCopyWith<$Res> {
           ? _self.songs
           : songs // ignore: cast_nullable_to_non_nullable
               as List<Song>,
+      type: freezed == type
+          ? _self.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as CategoryType?,
     ));
   }
 }

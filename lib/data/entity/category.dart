@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:pisni/data/entity/category_type.dart';
 import 'package:pisni/data/entity/song.dart';
 
 part 'category.g.dart';
@@ -13,8 +14,13 @@ class Category with _$Category {
   final String title;
   @override
   final List<Song> songs;
+  final CategoryType? type;
 
-  Category({required this.id, required this.title, this.songs = const []});
+  Category(
+      {required this.id,
+      required this.title,
+      this.songs = const [],
+      this.type});
 
   factory Category.fromJson(Map<String, dynamic> json) =>
       _$CategoryFromJson(json);

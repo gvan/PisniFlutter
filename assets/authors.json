@@ -1,26 +1,26 @@
 [
   {
-    "id": "authors/malyshko",
+    "id": "malyshko",
     "title": "Андрій Малишко"
   },
   {
-    "id": "authors/ivasiuk",
+    "id": "ivasiuk",
     "title": "Володимир Івасюк"
   },
   {
-    "id": "authors/kuzmenko",
+    "id": "kuzmenko",
     "title": "Андрій Кузьменко"
   },
   {
-    "id": "authors/lysenko",
+    "id": "lysenko",
     "title": "Микола Лисенко"
   },
   {
-    "id": "authors/symonenko",
+    "id": "symonenko",
     "title": "Василь Симоненко"
   },
   {
-    "id": "authors/pavlychko",
+    "id": "pavlychko",
     "title": "Дмитро Павличко"
   }
 ]

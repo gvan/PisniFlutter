@@ -1,26 +1,26 @@
 [
   {
-    "id": "categories/patriotychni",
+    "id": "patriotychni",
     "title": "Патріотичні"
   },
   {
-    "id": "categories/narodni",
+    "id": "narodni",
     "title": "Народні"
   },
   {
-    "id": "categories/kozatski",
+    "id": "kozatski",
     "title": "Козацькі"
   },
   {
-    "id": "categories/striletski",
+    "id": "striletski",
     "title": "Січових стрільців"
   },
   {
-    "id": "categories/povstanski",
+    "id": "povstanski",
     "title": "Повстанські"
   },
   {
-    "id": "categories/plastovi",
+    "id": "plastovi",
     "title": "Пластові"
   }
 ]

@@ -1,4 +1,5 @@
 import 'package:pisni/data/entity/category.dart';
+import 'package:pisni/data/entity/category_type.dart';
 import 'package:pisni/data/entity/song.dart';
 import 'package:pisni/data/repository/songs/i_songs_repository.dart';
 import 'package:pisni/data/service/preferences/i_preferences_service.dart';
@@ -9,16 +10,43 @@ class SongsRepository implements ISongsRepository {
       {required ISongsService songsService,
       required IPreferencesService preferencesService})
       : _songsService = songsService,
-        _preferencesService = preferencesService;
+        _preferencesService = preferencesService {
+    initDatabase();
+  }
 
   final ISongsService _songsService;
   final IPreferencesService _preferencesService;
 
   final Map<String, Category> categoriesCache = {};
 
+  void initDatabase() async {
+    var categories = await _songsService.getCategories(CategoryType.category);
+    if (categories.isEmpty) {
+      final categoriesAssets =
+          await _songsService.getCategoriesAssets(CategoryType.category);
+      await _songsService.saveCategories(categoriesAssets);
+    }
+    var authors = await _songsService.getCategories(CategoryType.author);
+    if (authors.isEmpty) {
+      final authorsAssets =
+          await _songsService.getCategoriesAssets(CategoryType.author);
+      await _songsService.saveCategories(authorsAssets);
+    }
+
+    categories = await _songsService.getCategories(CategoryType.category);
+    authors = await _songsService.getCategories(CategoryType.author);
+    for (final category in [...categories, ...authors]) {
+      final songs = await _songsService.getSongs(category.id);
+      if (songs.isEmpty) {
+        final songsAssets = await _songsService.getSongsAssets(category.id);
+        await _songsService.saveSongs(songsAssets);
+      }
+    }
+  }
+
   @override
   Future<List<Category>> getCategories() async {
-    final categories = await _songsService.getCategories();
+    final categories = await _songsService.getCategories(CategoryType.category);
     for (final (index, category) in categories.indexed) {
       if (categoriesCache[category.id] == null) {
         final songs = await _songsService.getSongs(category.id);
@@ -31,7 +59,7 @@ class SongsRepository implements ISongsRepository {
 
   @override
   Future<List<Category>> getAuthors() async {
-    final authors = await _songsService.getAuthors();
+    final authors = await _songsService.getCategories(CategoryType.author);
     for (final (index, category) in authors.indexed) {
       if (categoriesCache[category.id] == null) {
         final songs = await _songsService.getSongs(category.id);
