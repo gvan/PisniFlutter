@@ -17,8 +17,6 @@ class SongsRepository implements ISongsRepository {
   final ISongsService _songsService;
   final IPreferencesService _preferencesService;
 
-  final Map<String, Category> categoriesCache = {};
-
   void initDatabase() async {
     var categories = await _songsService.getCategories(CategoryType.category);
     if (categories.isEmpty) {
@@ -48,11 +46,8 @@ class SongsRepository implements ISongsRepository {
   Future<List<Category>> getCategories() async {
     final categories = await _songsService.getCategories(CategoryType.category);
     for (final (index, category) in categories.indexed) {
-      if (categoriesCache[category.id] == null) {
-        final songs = await _songsService.getSongs(category.id);
-        categoriesCache[category.id] = category.copyWith(songs: songs);
-      }
-      categories[index] = categoriesCache[category.id]!;
+      final songs = await _songsService.getSongs(category.id);
+      categories[index] = category.copyWith(songs: songs);
     }
     return categories;
   }
@@ -61,11 +56,8 @@ class SongsRepository implements ISongsRepository {
   Future<List<Category>> getAuthors() async {
     final authors = await _songsService.getCategories(CategoryType.author);
     for (final (index, category) in authors.indexed) {
-      if (categoriesCache[category.id] == null) {
-        final songs = await _songsService.getSongs(category.id);
-        categoriesCache[category.id] = category.copyWith(songs: songs);
-      }
-      authors[index] = categoriesCache[category.id]!;
+      final songs = await _songsService.getSongs(category.id);
+      authors[index] = category.copyWith(songs: songs);
     }
     return authors;
   }
@@ -80,26 +72,7 @@ class SongsRepository implements ISongsRepository {
     if (text.length < 3) {
       return [];
     }
-    final categories = await getCategories();
-    final authors = await getAuthors();
-    final List<Song> songs = [];
-    for (final category in categories) {
-      for (final song in category.songs) {
-        if (song.title.toLowerCase().contains(text.toLowerCase()) ||
-            song.text.toLowerCase().contains(text.toLowerCase())) {
-          songs.add(song);
-        }
-      }
-    }
-    for (final author in authors) {
-      for (final song in author.songs) {
-        if (song.title.toLowerCase().contains(text.toLowerCase()) ||
-            song.text.toLowerCase().contains(text.toLowerCase())) {
-          songs.add(song);
-        }
-      }
-    }
-    return songs;
+    return await _songsService.searchSongs(text);
   }
 
   @override

@@ -73,6 +73,21 @@ class SongsService implements ISongsService {
   }
 
   @override
+  Future<List<Song>> searchSongs(String query) async {
+    final songs = await (database.select(database.songTable)
+          ..where((e) => e.titleLower.contains(query.toLowerCase())))
+        .get();
+    return songs
+        .map((e) => Song(
+            id: e.id,
+            title: e.title,
+            text: e.songText,
+            author: e.author,
+            audio_file_name: e.audioFileName))
+        .toList();
+  }
+
+  @override
   Future<List<Song>> getSongsAssets(String category) async {
     final data = await rootBundle.loadString('assets/songs/$category.json');
     final json = jsonDecode(data);
@@ -93,7 +108,9 @@ class SongsService implements ISongsService {
             id: e.id,
             category: e.category ?? '',
             title: e.title,
+            titleLower: e.title.toLowerCase(),
             songText: e.text,
+            songTextLower: e.text.toLowerCase(),
             author: Value.absentIfNull(e.author),
             audioFileName: Value.absentIfNull(e.audio_file_name),
           ),

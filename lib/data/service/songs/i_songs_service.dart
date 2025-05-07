@@ -7,6 +7,7 @@ abstract class ISongsService {
   Future<List<Category>> getCategoriesAssets(CategoryType type);
   Future<void> saveCategories(List<Category> categories);
   Future<List<Song>> getSongs(String category);
+  Future<List<Song>> searchSongs(String query);
   Future<List<Song>> getSongsAssets(String category);
   Future<void> saveSongs(List<Song> songs);
 }

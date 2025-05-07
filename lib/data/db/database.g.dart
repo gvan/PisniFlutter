@@ -262,11 +262,23 @@ class $SongTableTable extends SongTable
   late final GeneratedColumn<String> title = GeneratedColumn<String>(
       'title', aliasedName, false,
       type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _titleLowerMeta =
+      const VerificationMeta('titleLower');
+  @override
+  late final GeneratedColumn<String> titleLower = GeneratedColumn<String>(
+      'title_lower', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
   static const VerificationMeta _songTextMeta =
       const VerificationMeta('songText');
   @override
   late final GeneratedColumn<String> songText = GeneratedColumn<String>(
       'text', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _songTextLowerMeta =
+      const VerificationMeta('songTextLower');
+  @override
+  late final GeneratedColumn<String> songTextLower = GeneratedColumn<String>(
+      'text_lower', aliasedName, false,
       type: DriftSqlType.string, requiredDuringInsert: true);
   static const VerificationMeta _authorMeta = const VerificationMeta('author');
   @override
@@ -280,8 +292,16 @@ class $SongTableTable extends SongTable
       'audio_file_name', aliasedName, true,
       type: DriftSqlType.string, requiredDuringInsert: false);
   @override
-  List<GeneratedColumn> get $columns =>
-      [id, category, title, songText, author, audioFileName];
+  List<GeneratedColumn> get $columns => [
+        id,
+        category,
+        title,
+        titleLower,
+        songText,
+        songTextLower,
+        author,
+        audioFileName
+      ];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -309,11 +329,27 @@ class $SongTableTable extends SongTable
     } else if (isInserting) {
       context.missing(_titleMeta);
     }
+    if (data.containsKey('title_lower')) {
+      context.handle(
+          _titleLowerMeta,
+          titleLower.isAcceptableOrUnknown(
+              data['title_lower']!, _titleLowerMeta));
+    } else if (isInserting) {
+      context.missing(_titleLowerMeta);
+    }
     if (data.containsKey('text')) {
       context.handle(_songTextMeta,
           songText.isAcceptableOrUnknown(data['text']!, _songTextMeta));
     } else if (isInserting) {
       context.missing(_songTextMeta);
+    }
+    if (data.containsKey('text_lower')) {
+      context.handle(
+          _songTextLowerMeta,
+          songTextLower.isAcceptableOrUnknown(
+              data['text_lower']!, _songTextLowerMeta));
+    } else if (isInserting) {
+      context.missing(_songTextLowerMeta);
     }
     if (data.containsKey('author')) {
       context.handle(_authorMeta,
@@ -340,8 +376,12 @@ class $SongTableTable extends SongTable
           .read(DriftSqlType.string, data['${effectivePrefix}category'])!,
       title: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}title'])!,
+      titleLower: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}title_lower'])!,
       songText: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}text'])!,
+      songTextLower: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}text_lower'])!,
       author: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}author']),
       audioFileName: attachedDatabase.typeMapping
@@ -359,14 +399,18 @@ class SongTableData extends DataClass implements Insertable<SongTableData> {
   final int id;
   final String category;
   final String title;
+  final String titleLower;
   final String songText;
+  final String songTextLower;
   final String? author;
   final String? audioFileName;
   const SongTableData(
       {required this.id,
       required this.category,
       required this.title,
+      required this.titleLower,
       required this.songText,
+      required this.songTextLower,
       this.author,
       this.audioFileName});
   @override
@@ -375,7 +419,9 @@ class SongTableData extends DataClass implements Insertable<SongTableData> {
     map['id'] = Variable<int>(id);
     map['category'] = Variable<String>(category);
     map['title'] = Variable<String>(title);
+    map['title_lower'] = Variable<String>(titleLower);
     map['text'] = Variable<String>(songText);
+    map['text_lower'] = Variable<String>(songTextLower);
     if (!nullToAbsent || author != null) {
       map['author'] = Variable<String>(author);
     }
@@ -390,7 +436,9 @@ class SongTableData extends DataClass implements Insertable<SongTableData> {
       id: Value(id),
       category: Value(category),
       title: Value(title),
+      titleLower: Value(titleLower),
       songText: Value(songText),
+      songTextLower: Value(songTextLower),
       author:
           author == null && nullToAbsent ? const Value.absent() : Value(author),
       audioFileName: audioFileName == null && nullToAbsent
@@ -406,7 +454,9 @@ class SongTableData extends DataClass implements Insertable<SongTableData> {
       id: serializer.fromJson<int>(json['id']),
       category: serializer.fromJson<String>(json['category']),
       title: serializer.fromJson<String>(json['title']),
+      titleLower: serializer.fromJson<String>(json['titleLower']),
       songText: serializer.fromJson<String>(json['songText']),
+      songTextLower: serializer.fromJson<String>(json['songTextLower']),
       author: serializer.fromJson<String?>(json['author']),
       audioFileName: serializer.fromJson<String?>(json['audioFileName']),
     );
@@ -418,7 +468,9 @@ class SongTableData extends DataClass implements Insertable<SongTableData> {
       'id': serializer.toJson<int>(id),
       'category': serializer.toJson<String>(category),
       'title': serializer.toJson<String>(title),
+      'titleLower': serializer.toJson<String>(titleLower),
       'songText': serializer.toJson<String>(songText),
+      'songTextLower': serializer.toJson<String>(songTextLower),
       'author': serializer.toJson<String?>(author),
       'audioFileName': serializer.toJson<String?>(audioFileName),
     };
@@ -428,14 +480,18 @@ class SongTableData extends DataClass implements Insertable<SongTableData> {
           {int? id,
           String? category,
           String? title,
+          String? titleLower,
           String? songText,
+          String? songTextLower,
           Value<String?> author = const Value.absent(),
           Value<String?> audioFileName = const Value.absent()}) =>
       SongTableData(
         id: id ?? this.id,
         category: category ?? this.category,
         title: title ?? this.title,
+        titleLower: titleLower ?? this.titleLower,
         songText: songText ?? this.songText,
+        songTextLower: songTextLower ?? this.songTextLower,
         author: author.present ? author.value : this.author,
         audioFileName:
             audioFileName.present ? audioFileName.value : this.audioFileName,
@@ -445,7 +501,12 @@ class SongTableData extends DataClass implements Insertable<SongTableData> {
       id: data.id.present ? data.id.value : this.id,
       category: data.category.present ? data.category.value : this.category,
       title: data.title.present ? data.title.value : this.title,
+      titleLower:
+          data.titleLower.present ? data.titleLower.value : this.titleLower,
       songText: data.songText.present ? data.songText.value : this.songText,
+      songTextLower: data.songTextLower.present
+          ? data.songTextLower.value
+          : this.songTextLower,
       author: data.author.present ? data.author.value : this.author,
       audioFileName: data.audioFileName.present
           ? data.audioFileName.value
@@ -459,7 +520,9 @@ class SongTableData extends DataClass implements Insertable<SongTableData> {
           ..write('id: $id, ')
           ..write('category: $category, ')
           ..write('title: $title, ')
+          ..write('titleLower: $titleLower, ')
           ..write('songText: $songText, ')
+          ..write('songTextLower: $songTextLower, ')
           ..write('author: $author, ')
           ..write('audioFileName: $audioFileName')
           ..write(')'))
@@ -467,8 +530,8 @@ class SongTableData extends DataClass implements Insertable<SongTableData> {
   }
 
   @override
-  int get hashCode =>
-      Object.hash(id, category, title, songText, author, audioFileName);
+  int get hashCode => Object.hash(id, category, title, titleLower, songText,
+      songTextLower, author, audioFileName);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -476,7 +539,9 @@ class SongTableData extends DataClass implements Insertable<SongTableData> {
           other.id == this.id &&
           other.category == this.category &&
           other.title == this.title &&
+          other.titleLower == this.titleLower &&
           other.songText == this.songText &&
+          other.songTextLower == this.songTextLower &&
           other.author == this.author &&
           other.audioFileName == this.audioFileName);
 }
@@ -485,7 +550,9 @@ class SongTableCompanion extends UpdateCompanion<SongTableData> {
   final Value<int> id;
   final Value<String> category;
   final Value<String> title;
+  final Value<String> titleLower;
   final Value<String> songText;
+  final Value<String> songTextLower;
   final Value<String?> author;
   final Value<String?> audioFileName;
   final Value<int> rowid;
@@ -493,7 +560,9 @@ class SongTableCompanion extends UpdateCompanion<SongTableData> {
     this.id = const Value.absent(),
     this.category = const Value.absent(),
     this.title = const Value.absent(),
+    this.titleLower = const Value.absent(),
     this.songText = const Value.absent(),
+    this.songTextLower = const Value.absent(),
     this.author = const Value.absent(),
     this.audioFileName = const Value.absent(),
     this.rowid = const Value.absent(),
@@ -502,19 +571,25 @@ class SongTableCompanion extends UpdateCompanion<SongTableData> {
     required int id,
     required String category,
     required String title,
+    required String titleLower,
     required String songText,
+    required String songTextLower,
     this.author = const Value.absent(),
     this.audioFileName = const Value.absent(),
     this.rowid = const Value.absent(),
   })  : id = Value(id),
         category = Value(category),
         title = Value(title),
-        songText = Value(songText);
+        titleLower = Value(titleLower),
+        songText = Value(songText),
+        songTextLower = Value(songTextLower);
   static Insertable<SongTableData> custom({
     Expression<int>? id,
     Expression<String>? category,
     Expression<String>? title,
+    Expression<String>? titleLower,
     Expression<String>? songText,
+    Expression<String>? songTextLower,
     Expression<String>? author,
     Expression<String>? audioFileName,
     Expression<int>? rowid,
@@ -523,7 +598,9 @@ class SongTableCompanion extends UpdateCompanion<SongTableData> {
       if (id != null) 'id': id,
       if (category != null) 'category': category,
       if (title != null) 'title': title,
+      if (titleLower != null) 'title_lower': titleLower,
       if (songText != null) 'text': songText,
+      if (songTextLower != null) 'text_lower': songTextLower,
       if (author != null) 'author': author,
       if (audioFileName != null) 'audio_file_name': audioFileName,
       if (rowid != null) 'rowid': rowid,
@@ -534,7 +611,9 @@ class SongTableCompanion extends UpdateCompanion<SongTableData> {
       {Value<int>? id,
       Value<String>? category,
       Value<String>? title,
+      Value<String>? titleLower,
       Value<String>? songText,
+      Value<String>? songTextLower,
       Value<String?>? author,
       Value<String?>? audioFileName,
       Value<int>? rowid}) {
@@ -542,7 +621,9 @@ class SongTableCompanion extends UpdateCompanion<SongTableData> {
       id: id ?? this.id,
       category: category ?? this.category,
       title: title ?? this.title,
+      titleLower: titleLower ?? this.titleLower,
       songText: songText ?? this.songText,
+      songTextLower: songTextLower ?? this.songTextLower,
       author: author ?? this.author,
       audioFileName: audioFileName ?? this.audioFileName,
       rowid: rowid ?? this.rowid,
@@ -561,8 +642,14 @@ class SongTableCompanion extends UpdateCompanion<SongTableData> {
     if (title.present) {
       map['title'] = Variable<String>(title.value);
     }
+    if (titleLower.present) {
+      map['title_lower'] = Variable<String>(titleLower.value);
+    }
     if (songText.present) {
       map['text'] = Variable<String>(songText.value);
+    }
+    if (songTextLower.present) {
+      map['text_lower'] = Variable<String>(songTextLower.value);
     }
     if (author.present) {
       map['author'] = Variable<String>(author.value);
@@ -582,7 +669,9 @@ class SongTableCompanion extends UpdateCompanion<SongTableData> {
           ..write('id: $id, ')
           ..write('category: $category, ')
           ..write('title: $title, ')
+          ..write('titleLower: $titleLower, ')
           ..write('songText: $songText, ')
+          ..write('songTextLower: $songTextLower, ')
           ..write('author: $author, ')
           ..write('audioFileName: $audioFileName, ')
           ..write('rowid: $rowid')
@@ -751,7 +840,9 @@ typedef $$SongTableTableCreateCompanionBuilder = SongTableCompanion Function({
   required int id,
   required String category,
   required String title,
+  required String titleLower,
   required String songText,
+  required String songTextLower,
   Value<String?> author,
   Value<String?> audioFileName,
   Value<int> rowid,
@@ -760,7 +851,9 @@ typedef $$SongTableTableUpdateCompanionBuilder = SongTableCompanion Function({
   Value<int> id,
   Value<String> category,
   Value<String> title,
+  Value<String> titleLower,
   Value<String> songText,
+  Value<String> songTextLower,
   Value<String?> author,
   Value<String?> audioFileName,
   Value<int> rowid,
@@ -784,8 +877,14 @@ class $$SongTableTableFilterComposer
   ColumnFilters<String> get title => $composableBuilder(
       column: $table.title, builder: (column) => ColumnFilters(column));
 
+  ColumnFilters<String> get titleLower => $composableBuilder(
+      column: $table.titleLower, builder: (column) => ColumnFilters(column));
+
   ColumnFilters<String> get songText => $composableBuilder(
       column: $table.songText, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get songTextLower => $composableBuilder(
+      column: $table.songTextLower, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<String> get author => $composableBuilder(
       column: $table.author, builder: (column) => ColumnFilters(column));
@@ -812,8 +911,15 @@ class $$SongTableTableOrderingComposer
   ColumnOrderings<String> get title => $composableBuilder(
       column: $table.title, builder: (column) => ColumnOrderings(column));
 
+  ColumnOrderings<String> get titleLower => $composableBuilder(
+      column: $table.titleLower, builder: (column) => ColumnOrderings(column));
+
   ColumnOrderings<String> get songText => $composableBuilder(
       column: $table.songText, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get songTextLower => $composableBuilder(
+      column: $table.songTextLower,
+      builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<String> get author => $composableBuilder(
       column: $table.author, builder: (column) => ColumnOrderings(column));
@@ -841,8 +947,14 @@ class $$SongTableTableAnnotationComposer
   GeneratedColumn<String> get title =>
       $composableBuilder(column: $table.title, builder: (column) => column);
 
+  GeneratedColumn<String> get titleLower => $composableBuilder(
+      column: $table.titleLower, builder: (column) => column);
+
   GeneratedColumn<String> get songText =>
       $composableBuilder(column: $table.songText, builder: (column) => column);
+
+  GeneratedColumn<String> get songTextLower => $composableBuilder(
+      column: $table.songTextLower, builder: (column) => column);
 
   GeneratedColumn<String> get author =>
       $composableBuilder(column: $table.author, builder: (column) => column);
@@ -880,7 +992,9 @@ class $$SongTableTableTableManager extends RootTableManager<
             Value<int> id = const Value.absent(),
             Value<String> category = const Value.absent(),
             Value<String> title = const Value.absent(),
+            Value<String> titleLower = const Value.absent(),
             Value<String> songText = const Value.absent(),
+            Value<String> songTextLower = const Value.absent(),
             Value<String?> author = const Value.absent(),
             Value<String?> audioFileName = const Value.absent(),
             Value<int> rowid = const Value.absent(),
@@ -889,7 +1003,9 @@ class $$SongTableTableTableManager extends RootTableManager<
             id: id,
             category: category,
             title: title,
+            titleLower: titleLower,
             songText: songText,
+            songTextLower: songTextLower,
             author: author,
             audioFileName: audioFileName,
             rowid: rowid,
@@ -898,7 +1014,9 @@ class $$SongTableTableTableManager extends RootTableManager<
             required int id,
             required String category,
             required String title,
+            required String titleLower,
             required String songText,
+            required String songTextLower,
             Value<String?> author = const Value.absent(),
             Value<String?> audioFileName = const Value.absent(),
             Value<int> rowid = const Value.absent(),
@@ -907,7 +1025,9 @@ class $$SongTableTableTableManager extends RootTableManager<
             id: id,
             category: category,
             title: title,
+            titleLower: titleLower,
             songText: songText,
+            songTextLower: songTextLower,
             author: author,
             audioFileName: audioFileName,
             rowid: rowid,
