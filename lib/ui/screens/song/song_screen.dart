@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:pisni/data/entity/song.dart';
+import 'package:pisni/ui/common/copyright_reference.dart';
 import 'package:pisni/ui/extensions/localization.dart';
 import 'package:pisni/ui/extensions/styles.dart';
 import 'package:pisni/ui/screens/favorite/favorite_view_model.dart';
@@ -50,34 +51,35 @@ class _SongScreenState extends State<SongScreen> {
               icon: Icon(Icons.share))
         ],
       ),
-      body: SafeArea(
-          child: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.all(16),
-          child: SizedBox(
-            width: MediaQuery.sizeOf(context).width,
-            child: Column(
-              crossAxisAlignment: Platform.isAndroid || Platform.isIOS
-                  ? CrossAxisAlignment.start
-                  : CrossAxisAlignment.center,
-              children: [
-                if (song.author != null && song.author?.isNotEmpty == true)
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 8),
-                    child: Text(
-                      '${context.loc.author}: ${song.author}',
-                      style: context.textStyles.bodySmall,
+      body: CopyrightReference(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.all(16),
+            child: SizedBox(
+              width: MediaQuery.sizeOf(context).width,
+              child: Column(
+                crossAxisAlignment: Platform.isAndroid || Platform.isIOS
+                    ? CrossAxisAlignment.start
+                    : CrossAxisAlignment.center,
+                children: [
+                  if (song.author != null && song.author?.isNotEmpty == true)
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 8),
+                      child: Text(
+                        '${context.loc.author}: ${song.author}',
+                        style: context.textStyles.bodySmall,
+                      ),
                     ),
-                  ),
-                Text(
-                  song.text,
-                  style: context.textStyles.bodyMedium,
-                )
-              ],
+                  Text(
+                    song.text,
+                    style: context.textStyles.bodyMedium,
+                  )
+                ],
+              ),
             ),
           ),
         ),
-      )),
+      ),
     );
   }
 }

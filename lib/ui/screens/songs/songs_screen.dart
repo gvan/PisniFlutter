@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pisni/data/entity/category.dart';
 import 'package:pisni/data/entity/song.dart';
+import 'package:pisni/ui/common/copyright_reference.dart';
 import 'package:pisni/ui/common/songs_list.dart';
 import 'package:pisni/ui/screens/songs/songs_view_model.dart';
 import 'package:provider/provider.dart';
@@ -26,7 +27,7 @@ class _SongsScreenState extends State<SongsScreen> {
       appBar: AppBar(
         title: Text(widget.category.title),
       ),
-      body: SafeArea(
+      body: CopyrightReference(
           child: Stack(
         children: [
           if (isLoaidng)

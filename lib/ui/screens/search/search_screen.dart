@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pisni/ui/common/copyright_reference.dart';
 import 'package:pisni/ui/common/songs_list.dart';
 import 'package:pisni/ui/extensions/localization.dart';
 import 'package:pisni/ui/screens/search/search_view_model.dart';
@@ -22,23 +23,25 @@ class _SearchScreenState extends State<SearchScreen> {
       appBar: AppBar(
         title: Text(context.loc.search),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            TextField(
-              decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  hintText: context.loc.songTitleOrLyrics),
-              onChanged: (text) {
-                viewModel.search(text);
-              },
-            ),
-            Expanded(
-              child: SongsList(songs: songs),
-            )
-          ],
+      body: CopyrightReference(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              TextField(
+                decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    hintText: context.loc.songTitleOrLyrics),
+                onChanged: (text) {
+                  viewModel.search(text);
+                },
+              ),
+              Expanded(
+                child: SongsList(songs: songs),
+              )
+            ],
+          ),
         ),
       ),
     );

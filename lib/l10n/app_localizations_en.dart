@@ -51,4 +51,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get author => 'Author';
+
+  @override
+  String get source => 'Source';
 }

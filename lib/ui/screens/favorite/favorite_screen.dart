@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pisni/ui/common/copyright_reference.dart';
 import 'package:pisni/ui/common/songs_list.dart';
 import 'package:pisni/ui/extensions/localization.dart';
 import 'package:pisni/ui/screens/favorite/favorite_view_model.dart';
@@ -25,7 +26,7 @@ class FavoriteScreenState extends State<FavoriteScreen> {
       appBar: AppBar(
         title: Text(context.loc.favorite),
       ),
-      body: SongsList(songs: songs),
+      body: CopyrightReference(child: SongsList(songs: songs)),
     );
   }
 }

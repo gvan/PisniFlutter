@@ -16,5 +16,6 @@
             }
         }
     },
-    "author": "Author"
+    "author": "Author",
+    "source": "Source"
 }

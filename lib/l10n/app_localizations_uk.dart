@@ -51,4 +51,7 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get author => 'Автор';
+
+  @override
+  String get source => 'Джерело';
 }

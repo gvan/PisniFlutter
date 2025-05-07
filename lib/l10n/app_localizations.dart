@@ -160,6 +160,12 @@ abstract class AppLocalizations {
   /// In uk, this message translates to:
   /// **'Автор'**
   String get author;
+
+  /// No description provided for @source.
+  ///
+  /// In uk, this message translates to:
+  /// **'Джерело'**
+  String get source;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

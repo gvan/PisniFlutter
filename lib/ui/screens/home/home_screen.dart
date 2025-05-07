@@ -1,7 +1,12 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:pisni/ui/common/categories_list.dart';
+import 'package:pisni/ui/common/copyright_reference.dart';
 import 'package:pisni/ui/extensions/localization.dart';
+import 'package:pisni/ui/extensions/styles.dart';
 import 'package:pisni/ui/screens/home/home_view_model.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class HomeWidget extends StatelessWidget {
   final HomeViewModel viewModel;
@@ -19,10 +24,10 @@ class HomeWidget extends StatelessWidget {
               listenable: viewModel,
               builder: (context, _) {
                 final categories = viewModel.state.categories;
-                return CategoriesList(categories: categories);
+                return CopyrightReference(
+                  child: CategoriesList(categories: categories),
+                );
               })),
     );
   }
 }
-
-
