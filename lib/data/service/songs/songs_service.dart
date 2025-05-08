@@ -13,9 +13,8 @@ class SongsService implements ISongsService {
 
   @override
   Future<List<Category>> getCategories(CategoryType type) async {
-    return (await (database.select(database.categoryTable)
-              ..where((table) => table.type.equals(type.type)))
-            .get())
+    return await (database.select(database.categoryTable)
+          ..where((table) => table.type.equals(type.type)))
         .map(
           (e) => Category(
             id: e.id,
@@ -23,7 +22,20 @@ class SongsService implements ISongsService {
             type: CategoryType.fromValue(e.type),
           ),
         )
-        .toList();
+        .get();
+  }
+
+  @override
+  Stream<List<Category>> listenCategories(CategoryType type) {
+    return (database.select(database.categoryTable)
+          ..where((table) => table.type.equals(type.type)))
+        .map((e) {
+      return Category(
+        id: e.id,
+        title: e.title,
+        type: CategoryType.fromValue(e.type),
+      );
+    }).watch();
   }
 
   @override
@@ -57,10 +69,22 @@ class SongsService implements ISongsService {
   }
 
   @override
-  Future<List<Song>> getSongs(String category) async {
-    final songs = await (database.select(database.songTable)
-          ..where((table) => table.category.equals(category)))
-        .get();
+  Future<List<Song>> getSongs({
+    String? category,
+    List<int>? filterIds,
+    int? limit,
+  }) async {
+    final songsQuery = database.select(database.songTable);
+    if (category != null) {
+      songsQuery.where((e) => e.category.equals(category));
+    }
+    if (filterIds != null) {
+      songsQuery.where((e) => e.id.isIn(filterIds));
+    }
+    if (limit != null) {
+      songsQuery.limit(limit);
+    }
+    final songs = await songsQuery.get();
     return songs
         .map((e) => Song(
               id: e.id,

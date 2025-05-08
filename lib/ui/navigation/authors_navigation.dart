@@ -26,9 +26,11 @@ class _AuthorsNavigationState extends State<AuthorsNavigation> {
           return MaterialPageRoute(builder: (context) {
             switch (settings.name) {
               case '/':
-                return AuthorsScreen(
-                    viewModel:
-                        AuthorsViewModel(songsRepository: context.read()));
+                return ChangeNotifierProvider(
+                  create: (context) =>
+                      AuthorsViewModel(songsRepository: context.read()),
+                  child: AuthorsScreen(),
+                );
               case '/songs':
                 final category = settings.arguments as Category;
                 return ChangeNotifierProvider(

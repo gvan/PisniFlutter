@@ -1,8 +1,10 @@
 import 'package:drift/drift.dart';
+import 'package:pisni/data/db/tables/category_table.dart';
 
 class SongTable extends Table {
   IntColumn get id => integer()();
-  TextColumn get category => text().withLength(min: 2, max: 64)();
+  TextColumn get category =>
+      text().withLength(min: 2, max: 64).references(CategoryTable, #id)();
   TextColumn get title => text()();
   TextColumn get titleLower => text()();
   TextColumn get songText => text().named('text')();

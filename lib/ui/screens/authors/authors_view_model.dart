@@ -1,10 +1,14 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:pisni/data/entity/category.dart';
 import 'package:pisni/data/repository/songs/i_songs_repository.dart';
 import 'package:pisni/ui/screens/authors/authors_state.dart';
 
 class AuthorsViewModel extends ChangeNotifier {
   final ISongsRepository _songsRepository;
   AuthorsState _state = AuthorsState(authors: []);
+  StreamSubscription<List<Category>>? _categoriesSubscription;
 
   AuthorsState get state => _state;
 
@@ -14,8 +18,16 @@ class AuthorsViewModel extends ChangeNotifier {
   }
 
   void _init() async {
-    final authors = await _songsRepository.getAuthors();
-    _state = _state.copyWith(authors: authors);
-    notifyListeners();
+    _categoriesSubscription =
+        _songsRepository.listenAuthorsWithSongs().listen((authors) {
+      _state = _state.copyWith(authors: authors);
+      notifyListeners();
+    });
+  }
+
+  @override
+  void dispose() {
+    _categoriesSubscription?.cancel();
+    super.dispose();
   }
 }

@@ -256,7 +256,9 @@ class $SongTableTable extends SongTable
       additionalChecks:
           GeneratedColumn.checkTextLength(minTextLength: 2, maxTextLength: 64),
       type: DriftSqlType.string,
-      requiredDuringInsert: true);
+      requiredDuringInsert: true,
+      defaultConstraints:
+          GeneratedColumn.constraintIsAlways('REFERENCES category_table (id)'));
   static const VerificationMeta _titleMeta = const VerificationMeta('title');
   @override
   late final GeneratedColumn<String> title = GeneratedColumn<String>(
@@ -708,6 +710,27 @@ typedef $$CategoryTableTableUpdateCompanionBuilder = CategoryTableCompanion
   Value<int> rowid,
 });
 
+final class $$CategoryTableTableReferences extends BaseReferences<_$AppDatabase,
+    $CategoryTableTable, CategoryTableData> {
+  $$CategoryTableTableReferences(
+      super.$_db, super.$_table, super.$_typedResult);
+
+  static MultiTypedResultKey<$SongTableTable, List<SongTableData>>
+      _songTableRefsTable(_$AppDatabase db) => MultiTypedResultKey.fromTable(
+          db.songTable,
+          aliasName:
+              $_aliasNameGenerator(db.categoryTable.id, db.songTable.category));
+
+  $$SongTableTableProcessedTableManager get songTableRefs {
+    final manager = $$SongTableTableTableManager($_db, $_db.songTable)
+        .filter((f) => f.category.id.sqlEquals($_itemColumn<String>('id')!));
+
+    final cache = $_typedResult.readTableOrNull(_songTableRefsTable($_db));
+    return ProcessedTableManager(
+        manager.$state.copyWith(prefetchedData: cache));
+  }
+}
+
 class $$CategoryTableTableFilterComposer
     extends Composer<_$AppDatabase, $CategoryTableTable> {
   $$CategoryTableTableFilterComposer({
@@ -725,6 +748,27 @@ class $$CategoryTableTableFilterComposer
 
   ColumnFilters<int> get type => $composableBuilder(
       column: $table.type, builder: (column) => ColumnFilters(column));
+
+  Expression<bool> songTableRefs(
+      Expression<bool> Function($$SongTableTableFilterComposer f) f) {
+    final $$SongTableTableFilterComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.id,
+        referencedTable: $db.songTable,
+        getReferencedColumn: (t) => t.category,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$SongTableTableFilterComposer(
+              $db: $db,
+              $table: $db.songTable,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return f(composer);
+  }
 }
 
 class $$CategoryTableTableOrderingComposer
@@ -763,6 +807,27 @@ class $$CategoryTableTableAnnotationComposer
 
   GeneratedColumn<int> get type =>
       $composableBuilder(column: $table.type, builder: (column) => column);
+
+  Expression<T> songTableRefs<T extends Object>(
+      Expression<T> Function($$SongTableTableAnnotationComposer a) f) {
+    final $$SongTableTableAnnotationComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.id,
+        referencedTable: $db.songTable,
+        getReferencedColumn: (t) => t.category,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$SongTableTableAnnotationComposer(
+              $db: $db,
+              $table: $db.songTable,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return f(composer);
+  }
 }
 
 class $$CategoryTableTableTableManager extends RootTableManager<
@@ -774,12 +839,9 @@ class $$CategoryTableTableTableManager extends RootTableManager<
     $$CategoryTableTableAnnotationComposer,
     $$CategoryTableTableCreateCompanionBuilder,
     $$CategoryTableTableUpdateCompanionBuilder,
-    (
-      CategoryTableData,
-      BaseReferences<_$AppDatabase, $CategoryTableTable, CategoryTableData>
-    ),
+    (CategoryTableData, $$CategoryTableTableReferences),
     CategoryTableData,
-    PrefetchHooks Function()> {
+    PrefetchHooks Function({bool songTableRefs})> {
   $$CategoryTableTableTableManager(_$AppDatabase db, $CategoryTableTable table)
       : super(TableManagerState(
           db: db,
@@ -815,9 +877,35 @@ class $$CategoryTableTableTableManager extends RootTableManager<
             rowid: rowid,
           ),
           withReferenceMapper: (p0) => p0
-              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .map((e) => (
+                    e.readTable(table),
+                    $$CategoryTableTableReferences(db, table, e)
+                  ))
               .toList(),
-          prefetchHooksCallback: null,
+          prefetchHooksCallback: ({songTableRefs = false}) {
+            return PrefetchHooks(
+              db: db,
+              explicitlyWatchedTables: [if (songTableRefs) db.songTable],
+              addJoins: null,
+              getPrefetchedDataCallback: (items) async {
+                return [
+                  if (songTableRefs)
+                    await $_getPrefetchedData<CategoryTableData,
+                            $CategoryTableTable, SongTableData>(
+                        currentTable: table,
+                        referencedTable: $$CategoryTableTableReferences
+                            ._songTableRefsTable(db),
+                        managerFromTypedResult: (p0) =>
+                            $$CategoryTableTableReferences(db, table, p0)
+                                .songTableRefs,
+                        referencedItemsForCurrentItem: (item,
+                                referencedItems) =>
+                            referencedItems.where((e) => e.category == item.id),
+                        typedResults: items)
+                ];
+              },
+            );
+          },
         ));
 }
 
@@ -830,12 +918,9 @@ typedef $$CategoryTableTableProcessedTableManager = ProcessedTableManager<
     $$CategoryTableTableAnnotationComposer,
     $$CategoryTableTableCreateCompanionBuilder,
     $$CategoryTableTableUpdateCompanionBuilder,
-    (
-      CategoryTableData,
-      BaseReferences<_$AppDatabase, $CategoryTableTable, CategoryTableData>
-    ),
+    (CategoryTableData, $$CategoryTableTableReferences),
     CategoryTableData,
-    PrefetchHooks Function()>;
+    PrefetchHooks Function({bool songTableRefs})>;
 typedef $$SongTableTableCreateCompanionBuilder = SongTableCompanion Function({
   required int id,
   required String category,
@@ -859,6 +944,26 @@ typedef $$SongTableTableUpdateCompanionBuilder = SongTableCompanion Function({
   Value<int> rowid,
 });
 
+final class $$SongTableTableReferences
+    extends BaseReferences<_$AppDatabase, $SongTableTable, SongTableData> {
+  $$SongTableTableReferences(super.$_db, super.$_table, super.$_typedResult);
+
+  static $CategoryTableTable _categoryTable(_$AppDatabase db) =>
+      db.categoryTable.createAlias(
+          $_aliasNameGenerator(db.songTable.category, db.categoryTable.id));
+
+  $$CategoryTableTableProcessedTableManager get category {
+    final $_column = $_itemColumn<String>('category')!;
+
+    final manager = $$CategoryTableTableTableManager($_db, $_db.categoryTable)
+        .filter((f) => f.id.sqlEquals($_column));
+    final item = $_typedResult.readTableOrNull(_categoryTable($_db));
+    if (item == null) return manager;
+    return ProcessedTableManager(
+        manager.$state.copyWith(prefetchedData: [item]));
+  }
+}
+
 class $$SongTableTableFilterComposer
     extends Composer<_$AppDatabase, $SongTableTable> {
   $$SongTableTableFilterComposer({
@@ -870,9 +975,6 @@ class $$SongTableTableFilterComposer
   });
   ColumnFilters<int> get id => $composableBuilder(
       column: $table.id, builder: (column) => ColumnFilters(column));
-
-  ColumnFilters<String> get category => $composableBuilder(
-      column: $table.category, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<String> get title => $composableBuilder(
       column: $table.title, builder: (column) => ColumnFilters(column));
@@ -891,6 +993,26 @@ class $$SongTableTableFilterComposer
 
   ColumnFilters<String> get audioFileName => $composableBuilder(
       column: $table.audioFileName, builder: (column) => ColumnFilters(column));
+
+  $$CategoryTableTableFilterComposer get category {
+    final $$CategoryTableTableFilterComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.category,
+        referencedTable: $db.categoryTable,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$CategoryTableTableFilterComposer(
+              $db: $db,
+              $table: $db.categoryTable,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return composer;
+  }
 }
 
 class $$SongTableTableOrderingComposer
@@ -904,9 +1026,6 @@ class $$SongTableTableOrderingComposer
   });
   ColumnOrderings<int> get id => $composableBuilder(
       column: $table.id, builder: (column) => ColumnOrderings(column));
-
-  ColumnOrderings<String> get category => $composableBuilder(
-      column: $table.category, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<String> get title => $composableBuilder(
       column: $table.title, builder: (column) => ColumnOrderings(column));
@@ -927,6 +1046,26 @@ class $$SongTableTableOrderingComposer
   ColumnOrderings<String> get audioFileName => $composableBuilder(
       column: $table.audioFileName,
       builder: (column) => ColumnOrderings(column));
+
+  $$CategoryTableTableOrderingComposer get category {
+    final $$CategoryTableTableOrderingComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.category,
+        referencedTable: $db.categoryTable,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$CategoryTableTableOrderingComposer(
+              $db: $db,
+              $table: $db.categoryTable,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return composer;
+  }
 }
 
 class $$SongTableTableAnnotationComposer
@@ -940,9 +1079,6 @@ class $$SongTableTableAnnotationComposer
   });
   GeneratedColumn<int> get id =>
       $composableBuilder(column: $table.id, builder: (column) => column);
-
-  GeneratedColumn<String> get category =>
-      $composableBuilder(column: $table.category, builder: (column) => column);
 
   GeneratedColumn<String> get title =>
       $composableBuilder(column: $table.title, builder: (column) => column);
@@ -961,6 +1097,26 @@ class $$SongTableTableAnnotationComposer
 
   GeneratedColumn<String> get audioFileName => $composableBuilder(
       column: $table.audioFileName, builder: (column) => column);
+
+  $$CategoryTableTableAnnotationComposer get category {
+    final $$CategoryTableTableAnnotationComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.category,
+        referencedTable: $db.categoryTable,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$CategoryTableTableAnnotationComposer(
+              $db: $db,
+              $table: $db.categoryTable,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return composer;
+  }
 }
 
 class $$SongTableTableTableManager extends RootTableManager<
@@ -972,12 +1128,9 @@ class $$SongTableTableTableManager extends RootTableManager<
     $$SongTableTableAnnotationComposer,
     $$SongTableTableCreateCompanionBuilder,
     $$SongTableTableUpdateCompanionBuilder,
-    (
-      SongTableData,
-      BaseReferences<_$AppDatabase, $SongTableTable, SongTableData>
-    ),
+    (SongTableData, $$SongTableTableReferences),
     SongTableData,
-    PrefetchHooks Function()> {
+    PrefetchHooks Function({bool category})> {
   $$SongTableTableTableManager(_$AppDatabase db, $SongTableTable table)
       : super(TableManagerState(
           db: db,
@@ -1033,9 +1186,46 @@ class $$SongTableTableTableManager extends RootTableManager<
             rowid: rowid,
           ),
           withReferenceMapper: (p0) => p0
-              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .map((e) => (
+                    e.readTable(table),
+                    $$SongTableTableReferences(db, table, e)
+                  ))
               .toList(),
-          prefetchHooksCallback: null,
+          prefetchHooksCallback: ({category = false}) {
+            return PrefetchHooks(
+              db: db,
+              explicitlyWatchedTables: [],
+              addJoins: <
+                  T extends TableManagerState<
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic>>(state) {
+                if (category) {
+                  state = state.withJoin(
+                    currentTable: table,
+                    currentColumn: table.category,
+                    referencedTable:
+                        $$SongTableTableReferences._categoryTable(db),
+                    referencedColumn:
+                        $$SongTableTableReferences._categoryTable(db).id,
+                  ) as T;
+                }
+
+                return state;
+              },
+              getPrefetchedDataCallback: (items) async {
+                return [];
+              },
+            );
+          },
         ));
 }
 
@@ -1048,12 +1238,9 @@ typedef $$SongTableTableProcessedTableManager = ProcessedTableManager<
     $$SongTableTableAnnotationComposer,
     $$SongTableTableCreateCompanionBuilder,
     $$SongTableTableUpdateCompanionBuilder,
-    (
-      SongTableData,
-      BaseReferences<_$AppDatabase, $SongTableTable, SongTableData>
-    ),
+    (SongTableData, $$SongTableTableReferences),
     SongTableData,
-    PrefetchHooks Function()>;
+    PrefetchHooks Function({bool category})>;
 
 class $AppDatabaseManager {
   final _$AppDatabase _db;

@@ -14,6 +14,7 @@ class Category with _$Category {
   final String title;
   @override
   final List<Song> songs;
+  @override
   final CategoryType? type;
 
   Category(

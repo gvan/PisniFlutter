@@ -1,9 +1,13 @@
-import 'package:flutter/foundation.dart';
+import 'dart:async';
+
+import 'package:flutter/material.dart';
+import 'package:pisni/data/entity/category.dart';
 import 'package:pisni/data/repository/songs/i_songs_repository.dart';
 import 'package:pisni/ui/screens/home/home_state.dart';
 
 class HomeViewModel extends ChangeNotifier {
   final ISongsRepository _songsRepository;
+  StreamSubscription<List<Category>>? _categoriesSubscription;
 
   HomeState _state = HomeState(categories: []);
 
@@ -15,8 +19,16 @@ class HomeViewModel extends ChangeNotifier {
   }
 
   void _init() async {
-    final categories = await _songsRepository.getCategories();
-    _state = _state.copyWith(categories: categories);
-    notifyListeners();
+    _categoriesSubscription =
+        _songsRepository.listenCategoriesWithSongs().listen((categories) {
+      _state = _state.copyWith(categories: categories);
+      notifyListeners();
+    });
+  }
+
+  @override
+  void dispose() {
+    _categoriesSubscription?.cancel();
+    super.dispose();
   }
 }

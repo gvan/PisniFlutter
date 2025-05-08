@@ -29,8 +29,11 @@ class _HomeNavigationState extends State<HomeNavigation> {
         return MaterialPageRoute(builder: (context) {
           switch (settings.name) {
             case '/':
-              return HomeWidget(
-                  viewModel: HomeViewModel(songsRepository: context.read()));
+              return ChangeNotifierProvider(
+                create: (context) =>
+                    HomeViewModel(songsRepository: context.read()),
+                child: HomeWidget(),
+              );
             case '/songs':
               final category = settings.arguments as Category;
               return ChangeNotifierProvider(

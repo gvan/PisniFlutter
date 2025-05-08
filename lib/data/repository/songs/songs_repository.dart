@@ -22,49 +22,42 @@ class SongsRepository implements ISongsRepository {
     if (categories.isEmpty) {
       final categoriesAssets =
           await _songsService.getCategoriesAssets(CategoryType.category);
+      for (final category in categoriesAssets) {
+        final songs = await _songsService.getSongs(category: category.id);
+        if (songs.isEmpty) {
+          final songsAssets = await _songsService.getSongsAssets(category.id);
+          await _songsService.saveSongs(songsAssets);
+        }
+      }
       await _songsService.saveCategories(categoriesAssets);
     }
+
     var authors = await _songsService.getCategories(CategoryType.author);
     if (authors.isEmpty) {
       final authorsAssets =
           await _songsService.getCategoriesAssets(CategoryType.author);
+      for (final category in authorsAssets) {
+        final songs = await _songsService.getSongs(category: category.id);
+        if (songs.isEmpty) {
+          final songsAssets = await _songsService.getSongsAssets(category.id);
+          await _songsService.saveSongs(songsAssets);
+        }
+      }
       await _songsService.saveCategories(authorsAssets);
     }
-
-    categories = await _songsService.getCategories(CategoryType.category);
-    authors = await _songsService.getCategories(CategoryType.author);
-    for (final category in [...categories, ...authors]) {
-      final songs = await _songsService.getSongs(category.id);
-      if (songs.isEmpty) {
-        final songsAssets = await _songsService.getSongsAssets(category.id);
-        await _songsService.saveSongs(songsAssets);
-      }
-    }
   }
 
   @override
-  Future<List<Category>> getCategories() async {
-    final categories = await _songsService.getCategories(CategoryType.category);
-    for (final (index, category) in categories.indexed) {
-      final songs = await _songsService.getSongs(category.id);
-      categories[index] = category.copyWith(songs: songs);
-    }
-    return categories;
-  }
+  Stream<List<Category>> listenCategoriesWithSongs() =>
+      _listenCategoriesWithSongs(CategoryType.category);
 
   @override
-  Future<List<Category>> getAuthors() async {
-    final authors = await _songsService.getCategories(CategoryType.author);
-    for (final (index, category) in authors.indexed) {
-      final songs = await _songsService.getSongs(category.id);
-      authors[index] = category.copyWith(songs: songs);
-    }
-    return authors;
-  }
+  Stream<List<Category>> listenAuthorsWithSongs() =>
+      _listenCategoriesWithSongs(CategoryType.author);
 
   @override
   Future<List<Song>> getSongs(String category) {
-    return _songsService.getSongs(category);
+    return _songsService.getSongs(category: category);
   }
 
   @override
@@ -73,32 +66,6 @@ class SongsRepository implements ISongsRepository {
       return [];
     }
     return await _songsService.searchSongs(text);
-  }
-
-  @override
-  Future<List<Song>> getFavorites() async {
-    final favoriteIds = await _preferencesService.getFavorites();
-    if (favoriteIds.isEmpty) {
-      return [];
-    }
-    final List<Song> favoriteSongs = [];
-    final categories = await getCategories();
-    final authors = await getAuthors();
-    for (final category in categories) {
-      for (final song in category.songs) {
-        if (favoriteIds.contains(song.id.toString())) {
-          favoriteSongs.add(song);
-        }
-      }
-    }
-    for (final author in authors) {
-      for (final song in author.songs) {
-        if (favoriteIds.contains(song.id.toString())) {
-          favoriteSongs.add(song);
-        }
-      }
-    }
-    return favoriteSongs;
   }
 
   @override
@@ -116,5 +83,26 @@ class SongsRepository implements ISongsRepository {
   Future<bool> isFavoriteSong(int songId) async {
     final favoriteSongs = await _preferencesService.getFavorites();
     return favoriteSongs.contains(songId.toString());
+  }
+
+  @override
+  Future<List<Song>> getFavoriteSongs() async {
+    final favoriteIds = await _preferencesService.getFavorites();
+    if (favoriteIds.isEmpty) {
+      return [];
+    }
+    final ids = favoriteIds.map(int.parse).toList();
+    return await _songsService.getSongs(filterIds: ids);
+  }
+
+  Stream<List<Category>> _listenCategoriesWithSongs(CategoryType type) {
+    return _songsService.listenCategories(type).asyncMap((e) async {
+      for (final (i, category) in e.indexed) {
+        final songs =
+            await _songsService.getSongs(category: category.id, limit: 20);
+        e[i] = category.copyWith(songs: songs);
+      }
+      return e;
+    });
   }
 }
