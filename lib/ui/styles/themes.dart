@@ -4,13 +4,15 @@ import 'package:flutter/services.dart';
 class AppTheme {
   static final mainTextLigth = const Color(0xff1D1B20);
   static final secondaryTextLight = const Color(0xff49454F);
+  static final backgroundColorLight = const Color(0xffffffff);
 
-  static final mainTextDark = const Color(0xffffffff);
+  static final mainTextDark = const Color(0xffeeeeee);
   static final secondaryTextDark = const Color(0xffb3b3b3);
+  static final backgroundColorDark = const Color(0xff121212);
 
   static final ThemeData lightTheme = ThemeData.light().copyWith(
-    canvasColor: Colors.white,
-    scaffoldBackgroundColor: Colors.white,
+    canvasColor: backgroundColorLight,
+    scaffoldBackgroundColor: backgroundColorLight,
     textTheme: ThemeData.light().textTheme.copyWith(
           titleLarge: TextStyle(
             color: mainTextLigth,
@@ -34,7 +36,7 @@ class AppTheme {
           ),
         ),
     appBarTheme: AppBarTheme(
-      backgroundColor: Colors.white,
+      backgroundColor: backgroundColorLight,
       iconTheme: IconThemeData(
         color: mainTextLigth,
       ),
@@ -42,18 +44,18 @@ class AppTheme {
         statusBarColor: Colors.transparent,
         statusBarIconBrightness: Brightness.dark,
         statusBarBrightness: Brightness.light,
-        systemNavigationBarColor: Colors.white,
+        systemNavigationBarColor: backgroundColorLight,
         systemNavigationBarIconBrightness: Brightness.dark,
       ),
     ),
     navigationBarTheme: NavigationBarThemeData(
-      backgroundColor: Colors.white,
+      backgroundColor: backgroundColorLight,
     ),
   );
 
   static final ThemeData darkTheme = ThemeData.dark().copyWith(
-    canvasColor: Colors.black,
-    scaffoldBackgroundColor: Colors.black,
+    canvasColor: backgroundColorDark,
+    scaffoldBackgroundColor: backgroundColorDark,
     textTheme: ThemeData.dark().textTheme.copyWith(
           titleLarge: TextStyle(
             color: mainTextDark,
@@ -77,7 +79,7 @@ class AppTheme {
           ),
         ),
     appBarTheme: AppBarTheme(
-      backgroundColor: Colors.black,
+      backgroundColor: backgroundColorDark,
       iconTheme: IconThemeData(
         color: mainTextDark,
       ),
@@ -85,12 +87,12 @@ class AppTheme {
         statusBarColor: Colors.transparent,
         statusBarIconBrightness: Brightness.light,
         statusBarBrightness: Brightness.dark,
-        systemNavigationBarColor: Colors.black,
+        systemNavigationBarColor: backgroundColorDark,
         systemNavigationBarIconBrightness: Brightness.light,
       ),
     ),
     navigationBarTheme: NavigationBarThemeData(
-      backgroundColor: Colors.black,
+      backgroundColor: backgroundColorDark,
     ),
   );
 }
