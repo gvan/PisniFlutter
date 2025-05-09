@@ -25,9 +25,8 @@ class MainApp extends StatelessWidget {
         Provider(
             create: (context) => PreferencesService() as IPreferencesService),
         Provider(
-            create: (context) => SongsRepository(
-                songsService: context.read(),
-                preferencesService: context.read()) as ISongsRepository),
+            create: (context) => SongsRepository(songsService: context.read())
+                as ISongsRepository),
         Provider(
             create: (context) =>
                 SettignsRepository(preferencesService: context.read())

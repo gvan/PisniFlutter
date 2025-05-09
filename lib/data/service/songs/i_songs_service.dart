@@ -15,4 +15,8 @@ abstract class ISongsService {
   Future<List<Song>> searchSongs(String query);
   Future<List<Song>> getSongsAssets(String category);
   Future<void> saveSongs(List<Song> songs);
+
+  Future<void> addFavorite(int id);
+  Future<void> removeFavorite(int id);
+  Future<List<int>> getFavorites();
 }

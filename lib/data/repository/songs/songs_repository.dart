@@ -2,20 +2,15 @@ import 'package:pisni/data/entity/category.dart';
 import 'package:pisni/data/entity/category_type.dart';
 import 'package:pisni/data/entity/song.dart';
 import 'package:pisni/data/repository/songs/i_songs_repository.dart';
-import 'package:pisni/data/service/preferences/i_preferences_service.dart';
 import 'package:pisni/data/service/songs/i_songs_service.dart';
 
 class SongsRepository implements ISongsRepository {
-  SongsRepository(
-      {required ISongsService songsService,
-      required IPreferencesService preferencesService})
-      : _songsService = songsService,
-        _preferencesService = preferencesService {
+  SongsRepository({required ISongsService songsService})
+      : _songsService = songsService {
     initDatabase();
   }
 
   final ISongsService _songsService;
-  final IPreferencesService _preferencesService;
 
   void initDatabase() async {
     var categories = await _songsService.getCategories(CategoryType.category);
@@ -69,30 +64,28 @@ class SongsRepository implements ISongsRepository {
   }
 
   @override
-  Future<void> toggleFavorite(int id) async {
-    final songId = id.toString();
-    final favoriteSongs = await _preferencesService.getFavorites();
+  Future<void> toggleFavorite(int songId) async {
+    final favoriteSongs = await _songsService.getFavorites();
     if (favoriteSongs.contains(songId)) {
-      await _preferencesService.removeFromFavorite(songId);
+      await _songsService.removeFavorite(songId);
     } else {
-      await _preferencesService.addToFavorite(songId);
+      await _songsService.addFavorite(songId);
     }
   }
 
   @override
   Future<bool> isFavoriteSong(int songId) async {
-    final favoriteSongs = await _preferencesService.getFavorites();
-    return favoriteSongs.contains(songId.toString());
+    final favoriteSongs = await _songsService.getFavorites();
+    return favoriteSongs.contains(songId);
   }
 
   @override
   Future<List<Song>> getFavoriteSongs() async {
-    final favoriteIds = await _preferencesService.getFavorites();
+    final favoriteIds = await _songsService.getFavorites();
     if (favoriteIds.isEmpty) {
       return [];
     }
-    final ids = favoriteIds.map(int.parse).toList();
-    return await _songsService.getSongs(filterIds: ids);
+    return await _songsService.getSongs(filterIds: favoriteIds);
   }
 
   Stream<List<Category>> _listenCategoriesWithSongs(CategoryType type) {

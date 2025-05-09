@@ -668,17 +668,161 @@ class SongTableCompanion extends UpdateCompanion<SongTableData> {
   }
 }
 
+class $FavoriteTableTable extends FavoriteTable
+    with TableInfo<$FavoriteTableTable, FavoriteTableData> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $FavoriteTableTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
+      'id', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: false);
+  @override
+  List<GeneratedColumn> get $columns => [id];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'favorite';
+  @override
+  VerificationContext validateIntegrity(Insertable<FavoriteTableData> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  FavoriteTableData map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return FavoriteTableData(
+      id: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
+    );
+  }
+
+  @override
+  $FavoriteTableTable createAlias(String alias) {
+    return $FavoriteTableTable(attachedDatabase, alias);
+  }
+}
+
+class FavoriteTableData extends DataClass
+    implements Insertable<FavoriteTableData> {
+  final int id;
+  const FavoriteTableData({required this.id});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<int>(id);
+    return map;
+  }
+
+  FavoriteTableCompanion toCompanion(bool nullToAbsent) {
+    return FavoriteTableCompanion(
+      id: Value(id),
+    );
+  }
+
+  factory FavoriteTableData.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return FavoriteTableData(
+      id: serializer.fromJson<int>(json['id']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+    };
+  }
+
+  FavoriteTableData copyWith({int? id}) => FavoriteTableData(
+        id: id ?? this.id,
+      );
+  FavoriteTableData copyWithCompanion(FavoriteTableCompanion data) {
+    return FavoriteTableData(
+      id: data.id.present ? data.id.value : this.id,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('FavoriteTableData(')
+          ..write('id: $id')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => id.hashCode;
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is FavoriteTableData && other.id == this.id);
+}
+
+class FavoriteTableCompanion extends UpdateCompanion<FavoriteTableData> {
+  final Value<int> id;
+  const FavoriteTableCompanion({
+    this.id = const Value.absent(),
+  });
+  FavoriteTableCompanion.insert({
+    this.id = const Value.absent(),
+  });
+  static Insertable<FavoriteTableData> custom({
+    Expression<int>? id,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+    });
+  }
+
+  FavoriteTableCompanion copyWith({Value<int>? id}) {
+    return FavoriteTableCompanion(
+      id: id ?? this.id,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('FavoriteTableCompanion(')
+          ..write('id: $id')
+          ..write(')'))
+        .toString();
+  }
+}
+
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
   $AppDatabaseManager get managers => $AppDatabaseManager(this);
   late final $CategoryTableTable categoryTable = $CategoryTableTable(this);
   late final $SongTableTable songTable = $SongTableTable(this);
+  late final $FavoriteTableTable favoriteTable = $FavoriteTableTable(this);
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
   @override
   List<DatabaseSchemaEntity> get allSchemaEntities =>
-      [categoryTable, songTable];
+      [categoryTable, songTable, favoriteTable];
 }
 
 typedef $$CategoryTableTableCreateCompanionBuilder = CategoryTableCompanion
@@ -1221,6 +1365,113 @@ typedef $$SongTableTableProcessedTableManager = ProcessedTableManager<
     (SongTableData, $$SongTableTableReferences),
     SongTableData,
     PrefetchHooks Function({bool category})>;
+typedef $$FavoriteTableTableCreateCompanionBuilder = FavoriteTableCompanion
+    Function({
+  Value<int> id,
+});
+typedef $$FavoriteTableTableUpdateCompanionBuilder = FavoriteTableCompanion
+    Function({
+  Value<int> id,
+});
+
+class $$FavoriteTableTableFilterComposer
+    extends Composer<_$AppDatabase, $FavoriteTableTable> {
+  $$FavoriteTableTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<int> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnFilters(column));
+}
+
+class $$FavoriteTableTableOrderingComposer
+    extends Composer<_$AppDatabase, $FavoriteTableTable> {
+  $$FavoriteTableTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<int> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnOrderings(column));
+}
+
+class $$FavoriteTableTableAnnotationComposer
+    extends Composer<_$AppDatabase, $FavoriteTableTable> {
+  $$FavoriteTableTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<int> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+}
+
+class $$FavoriteTableTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $FavoriteTableTable,
+    FavoriteTableData,
+    $$FavoriteTableTableFilterComposer,
+    $$FavoriteTableTableOrderingComposer,
+    $$FavoriteTableTableAnnotationComposer,
+    $$FavoriteTableTableCreateCompanionBuilder,
+    $$FavoriteTableTableUpdateCompanionBuilder,
+    (
+      FavoriteTableData,
+      BaseReferences<_$AppDatabase, $FavoriteTableTable, FavoriteTableData>
+    ),
+    FavoriteTableData,
+    PrefetchHooks Function()> {
+  $$FavoriteTableTableTableManager(_$AppDatabase db, $FavoriteTableTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$FavoriteTableTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$FavoriteTableTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$FavoriteTableTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback: ({
+            Value<int> id = const Value.absent(),
+          }) =>
+              FavoriteTableCompanion(
+            id: id,
+          ),
+          createCompanionCallback: ({
+            Value<int> id = const Value.absent(),
+          }) =>
+              FavoriteTableCompanion.insert(
+            id: id,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: null,
+        ));
+}
+
+typedef $$FavoriteTableTableProcessedTableManager = ProcessedTableManager<
+    _$AppDatabase,
+    $FavoriteTableTable,
+    FavoriteTableData,
+    $$FavoriteTableTableFilterComposer,
+    $$FavoriteTableTableOrderingComposer,
+    $$FavoriteTableTableAnnotationComposer,
+    $$FavoriteTableTableCreateCompanionBuilder,
+    $$FavoriteTableTableUpdateCompanionBuilder,
+    (
+      FavoriteTableData,
+      BaseReferences<_$AppDatabase, $FavoriteTableTable, FavoriteTableData>
+    ),
+    FavoriteTableData,
+    PrefetchHooks Function()>;
 
 class $AppDatabaseManager {
   final _$AppDatabase _db;
@@ -1229,4 +1480,6 @@ class $AppDatabaseManager {
       $$CategoryTableTableTableManager(_db, _db.categoryTable);
   $$SongTableTableTableManager get songTable =>
       $$SongTableTableTableManager(_db, _db.songTable);
+  $$FavoriteTableTableTableManager get favoriteTable =>
+      $$FavoriteTableTableTableManager(_db, _db.favoriteTable);
 }

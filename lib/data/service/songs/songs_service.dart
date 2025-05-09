@@ -142,4 +142,25 @@ class SongsService implements ISongsService {
       );
     });
   }
+
+  @override
+  Future<void> addFavorite(int id) async {
+    await database
+        .into(database.favoriteTable)
+        .insert(FavoriteTableCompanion.insert(id: Value(id)));
+  }
+
+  @override
+  Future<List<int>> getFavorites() async {
+    return (await database.select(database.favoriteTable).get())
+        .map((e) => e.id)
+        .toList();
+  }
+
+  @override
+  Future<void> removeFavorite(int id) async {
+    await (database.delete(database.favoriteTable)
+          ..where((e) => e.id.equals(id)))
+        .go();
+  }
 }
