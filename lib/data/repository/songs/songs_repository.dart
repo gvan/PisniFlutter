@@ -2,25 +2,30 @@ import 'package:pisni/data/entity/category.dart';
 import 'package:pisni/data/entity/category_type.dart';
 import 'package:pisni/data/entity/song.dart';
 import 'package:pisni/data/repository/songs/i_songs_repository.dart';
+import 'package:pisni/data/service/assets/i_assets_service.dart';
 import 'package:pisni/data/service/songs/i_songs_service.dart';
 
 class SongsRepository implements ISongsRepository {
-  SongsRepository({required ISongsService songsService})
-      : _songsService = songsService {
+  SongsRepository(
+      {required ISongsService songsService,
+      required IAssetsService assetsService})
+      : _songsService = songsService,
+        _assetsService = assetsService {
     initDatabase();
   }
 
   final ISongsService _songsService;
+  final IAssetsService _assetsService;
 
   void initDatabase() async {
     var categories = await _songsService.getCategories(CategoryType.category);
     if (categories.isEmpty) {
       final categoriesAssets =
-          await _songsService.getCategoriesAssets(CategoryType.category);
+          await _assetsService.getCategories(CategoryType.category);
       for (final category in categoriesAssets) {
         final songs = await _songsService.getSongs(category: category.id);
         if (songs.isEmpty) {
-          final songsAssets = await _songsService.getSongsAssets(category.id);
+          final songsAssets = await _assetsService.getSongs(category.id);
           await _songsService.saveSongs(songsAssets);
         }
       }
@@ -30,11 +35,11 @@ class SongsRepository implements ISongsRepository {
     var authors = await _songsService.getCategories(CategoryType.author);
     if (authors.isEmpty) {
       final authorsAssets =
-          await _songsService.getCategoriesAssets(CategoryType.author);
+          await _assetsService.getCategories(CategoryType.author);
       for (final category in authorsAssets) {
         final songs = await _songsService.getSongs(category: category.id);
         if (songs.isEmpty) {
-          final songsAssets = await _songsService.getSongsAssets(category.id);
+          final songsAssets = await _assetsService.getSongs(category.id);
           await _songsService.saveSongs(songsAssets);
         }
       }

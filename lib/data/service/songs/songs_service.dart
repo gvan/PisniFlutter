@@ -1,7 +1,4 @@
-import 'dart:convert';
-
 import 'package:drift/drift.dart';
-import 'package:flutter/services.dart';
 import 'package:pisni/data/db/database.dart';
 import 'package:pisni/data/entity/category.dart';
 import 'package:pisni/data/entity/category_type.dart';
@@ -36,20 +33,6 @@ class SongsService implements ISongsService {
         type: CategoryType.fromValue(e.type),
       );
     }).watch();
-  }
-
-  @override
-  Future<List<Category>> getCategoriesAssets(CategoryType type) async {
-    final fileName = type == CategoryType.category
-        ? 'assets/home.json'
-        : 'assets/authors.json';
-    final data = await rootBundle.loadString(fileName);
-    final json = jsonDecode(data);
-    return List<Category>.from(
-      json.map(
-        (x) => Category.fromJson(x).copyWith(type: type),
-      ),
-    );
   }
 
   @override
@@ -109,17 +92,6 @@ class SongsService implements ISongsService {
             author: e.author,
             audio_file_name: e.audioFileName))
         .toList();
-  }
-
-  @override
-  Future<List<Song>> getSongsAssets(String category) async {
-    final data = await rootBundle.loadString('assets/songs/$category.json');
-    final json = jsonDecode(data);
-    return List<Song>.from(
-      json.map(
-        (x) => Song.fromJson(x).copyWith(category: category),
-      ),
-    );
   }
 
   @override

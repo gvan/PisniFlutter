@@ -3,6 +3,8 @@ import 'package:pisni/data/repository/settings/i_settings_repository.dart';
 import 'package:pisni/data/repository/settings/settings_repository.dart';
 import 'package:pisni/data/repository/songs/i_songs_repository.dart';
 import 'package:pisni/data/repository/songs/songs_repository.dart';
+import 'package:pisni/data/service/assets/assets_service.dart';
+import 'package:pisni/data/service/assets/i_assets_service.dart';
 import 'package:pisni/data/service/preferences/preferences_service.dart';
 import 'package:pisni/data/service/preferences/i_preferences_service.dart';
 import 'package:pisni/data/service/songs/i_songs_service.dart';
@@ -24,9 +26,12 @@ class MainApp extends StatelessWidget {
         Provider(create: (context) => SongsService() as ISongsService),
         Provider(
             create: (context) => PreferencesService() as IPreferencesService),
+        Provider(create: (context) => AssetsService() as IAssetsService),
         Provider(
-            create: (context) => SongsRepository(songsService: context.read())
-                as ISongsRepository),
+            create: (context) => SongsRepository(
+                  songsService: context.read(),
+                  assetsService: context.read(),
+                ) as ISongsRepository),
         Provider(
             create: (context) =>
                 SettignsRepository(preferencesService: context.read())
