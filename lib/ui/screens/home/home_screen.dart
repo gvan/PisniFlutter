@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pisni/data/entity/category.dart';
 import 'package:pisni/ui/common/categories_list.dart';
 import 'package:pisni/ui/common/copyright_reference.dart';
 import 'package:pisni/ui/extensions/localization.dart';
@@ -10,8 +11,9 @@ class HomeWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final categories = context.select(
-      (HomeViewModel viewModel) => viewModel.state.categories,
+    final (bool isLoading, List<Category> categories) = context.select(
+      (HomeViewModel viewModel) =>
+          (viewModel.state.isLoading, viewModel.state.categories),
     );
 
     return Scaffold(
@@ -19,7 +21,10 @@ class HomeWidget extends StatelessWidget {
         title: Text(context.loc.songs),
       ),
       body: CopyrightReference(
-        child: CategoriesList(categories: categories),
+        child: Stack(children: [
+          if (isLoading) Center(child: CircularProgressIndicator()),
+          CategoriesList(categories: categories)
+        ]),
       ),
     );
   }

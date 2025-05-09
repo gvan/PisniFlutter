@@ -7,6 +7,8 @@ part 'authors_state.freezed.dart';
 class AuthorsState with _$AuthorsState {
   @override
   final List<Category> authors;
+  @override
+  final bool isLoading;
 
-  AuthorsState({required this.authors});
+  AuthorsState({required this.authors, required this.isLoading});
 }

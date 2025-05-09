@@ -7,6 +7,8 @@ part 'home_state.freezed.dart';
 class HomeState with _$HomeState {
   @override
   final List<Category> categories;
+  @override
+  final bool isLoading;
 
-  const HomeState({required this.categories});
+  const HomeState({required this.categories, required this.isLoading});
 }

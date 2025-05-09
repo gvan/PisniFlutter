@@ -9,7 +9,7 @@ class HomeViewModel extends ChangeNotifier {
   final ISongsRepository _songsRepository;
   StreamSubscription<List<Category>>? _categoriesSubscription;
 
-  HomeState _state = HomeState(categories: []);
+  HomeState _state = HomeState(categories: [], isLoading: true);
 
   HomeState get state => _state;
 
@@ -21,7 +21,7 @@ class HomeViewModel extends ChangeNotifier {
   void _init() async {
     _categoriesSubscription =
         _songsRepository.listenCategoriesWithSongs().listen((categories) {
-      _state = _state.copyWith(categories: categories);
+      _state = _state.copyWith(categories: categories, isLoading: categories.isEmpty);
       notifyListeners();
     });
   }

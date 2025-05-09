@@ -10,8 +10,9 @@ class AuthorsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final authors = context.select(
-      (AuthorsViewModel viewModel) => viewModel.state.authors,
+    final (isLoading, authors) = context.select(
+      (AuthorsViewModel viewModel) =>
+          (viewModel.state.isLoading, viewModel.state.authors),
     );
 
     return Scaffold(
@@ -19,7 +20,10 @@ class AuthorsScreen extends StatelessWidget {
         title: Text(AppLocalizations.of(context).authors),
       ),
       body: CopyrightReference(
-        child: CategoriesList(categories: authors),
+        child: Stack(children: [
+          if (isLoading) Center(child: CircularProgressIndicator()),
+          CategoriesList(categories: authors)
+        ]),
       ),
     );
   }

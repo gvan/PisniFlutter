@@ -16,6 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$AuthorsState {
   List<Category> get authors;
+  bool get isLoading;
 
   /// Create a copy of AuthorsState
   /// with the given fields replaced by the non-null parameter values.
@@ -30,16 +31,18 @@ mixin _$AuthorsState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is AuthorsState &&
-            const DeepCollectionEquality().equals(other.authors, authors));
+            const DeepCollectionEquality().equals(other.authors, authors) &&
+            (identical(other.isLoading, isLoading) ||
+                other.isLoading == isLoading));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(authors));
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(authors), isLoading);
 
   @override
   String toString() {
-    return 'AuthorsState(authors: $authors)';
+    return 'AuthorsState(authors: $authors, isLoading: $isLoading)';
   }
 }
 
@@ -49,7 +52,7 @@ abstract mixin class $AuthorsStateCopyWith<$Res> {
           AuthorsState value, $Res Function(AuthorsState) _then) =
       _$AuthorsStateCopyWithImpl;
   @useResult
-  $Res call({List<Category> authors});
+  $Res call({List<Category> authors, bool isLoading});
 }
 
 /// @nodoc
@@ -65,12 +68,17 @@ class _$AuthorsStateCopyWithImpl<$Res> implements $AuthorsStateCopyWith<$Res> {
   @override
   $Res call({
     Object? authors = null,
+    Object? isLoading = null,
   }) {
     return _then(AuthorsState(
       authors: null == authors
           ? _self.authors
           : authors // ignore: cast_nullable_to_non_nullable
               as List<Category>,
+      isLoading: null == isLoading
+          ? _self.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }

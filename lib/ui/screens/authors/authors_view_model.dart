@@ -7,7 +7,7 @@ import 'package:pisni/ui/screens/authors/authors_state.dart';
 
 class AuthorsViewModel extends ChangeNotifier {
   final ISongsRepository _songsRepository;
-  AuthorsState _state = AuthorsState(authors: []);
+  AuthorsState _state = AuthorsState(authors: [], isLoading: true);
   StreamSubscription<List<Category>>? _categoriesSubscription;
 
   AuthorsState get state => _state;
@@ -20,7 +20,7 @@ class AuthorsViewModel extends ChangeNotifier {
   void _init() async {
     _categoriesSubscription =
         _songsRepository.listenAuthorsWithSongs().listen((authors) {
-      _state = _state.copyWith(authors: authors);
+      _state = _state.copyWith(authors: authors, isLoading: authors.isEmpty);
       notifyListeners();
     });
   }

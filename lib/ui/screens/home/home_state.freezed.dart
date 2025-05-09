@@ -16,6 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$HomeState {
   List<Category> get categories;
+  bool get isLoading;
 
   /// Create a copy of HomeState
   /// with the given fields replaced by the non-null parameter values.
@@ -30,16 +31,18 @@ mixin _$HomeState {
         (other.runtimeType == runtimeType &&
             other is HomeState &&
             const DeepCollectionEquality()
-                .equals(other.categories, categories));
+                .equals(other.categories, categories) &&
+            (identical(other.isLoading, isLoading) ||
+                other.isLoading == isLoading));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(categories));
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(categories), isLoading);
 
   @override
   String toString() {
-    return 'HomeState(categories: $categories)';
+    return 'HomeState(categories: $categories, isLoading: $isLoading)';
   }
 }
 
@@ -48,7 +51,7 @@ abstract mixin class $HomeStateCopyWith<$Res> {
   factory $HomeStateCopyWith(HomeState value, $Res Function(HomeState) _then) =
       _$HomeStateCopyWithImpl;
   @useResult
-  $Res call({List<Category> categories});
+  $Res call({List<Category> categories, bool isLoading});
 }
 
 /// @nodoc
@@ -64,12 +67,17 @@ class _$HomeStateCopyWithImpl<$Res> implements $HomeStateCopyWith<$Res> {
   @override
   $Res call({
     Object? categories = null,
+    Object? isLoading = null,
   }) {
     return _then(HomeState(
       categories: null == categories
           ? _self.categories
           : categories // ignore: cast_nullable_to_non_nullable
               as List<Category>,
+      isLoading: null == isLoading
+          ? _self.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
