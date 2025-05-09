@@ -11,7 +11,6 @@ import 'package:pisni/data/service/songs/i_songs_service.dart';
 import 'package:pisni/data/service/songs/songs_service.dart';
 import 'package:pisni/l10n/app_localizations.dart';
 import 'package:pisni/ui/core/theme_view_model.dart';
-import 'package:pisni/ui/screens/favorite/favorite_view_model.dart';
 import 'package:pisni/ui/navigation/bottom_navigation.dart';
 import 'package:pisni/ui/styles/themes.dart';
 import 'package:provider/provider.dart';
@@ -36,9 +35,6 @@ class MainApp extends StatelessWidget {
             create: (context) =>
                 SettignsRepository(preferencesService: context.read())
                     as ISettingsRepository),
-        ChangeNotifierProvider(
-            create: (context) =>
-                FavoriteViewModel(songsRepository: context.read())),
         ChangeNotifierProvider(
             create: (context) =>
                 ThemeViewModel(settingsRepository: context.read()))

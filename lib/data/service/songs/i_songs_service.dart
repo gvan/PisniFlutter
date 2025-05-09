@@ -4,7 +4,7 @@ import 'package:pisni/data/entity/song.dart';
 
 abstract class ISongsService {
   Future<List<Category>> getCategories(CategoryType type);
-  Stream<List<Category>> listenCategories(CategoryType type);
+  Stream<List<Category>> streamCategories(CategoryType type);
   Future<void> saveCategories(List<Category> categories);
 
   Future<List<Song>> getSongs({
@@ -18,4 +18,5 @@ abstract class ISongsService {
   Future<void> addFavorite(int id);
   Future<void> removeFavorite(int id);
   Future<List<int>> getFavorites();
+  Stream<List<int>> streamFavorites();
 }

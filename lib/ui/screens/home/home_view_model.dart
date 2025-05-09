@@ -20,7 +20,7 @@ class HomeViewModel extends ChangeNotifier {
 
   void _init() async {
     _categoriesSubscription =
-        _songsRepository.listenCategoriesWithSongs().listen((categories) {
+        _songsRepository.streamCategoriesWithSongs().listen((categories) {
       _state = _state.copyWith(categories: categories, isLoading: categories.isEmpty);
       notifyListeners();
     });

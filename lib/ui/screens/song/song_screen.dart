@@ -5,7 +5,6 @@ import 'package:pisni/data/entity/song.dart';
 import 'package:pisni/ui/common/copyright_reference.dart';
 import 'package:pisni/ui/extensions/localization.dart';
 import 'package:pisni/ui/extensions/styles.dart';
-import 'package:pisni/ui/screens/favorite/favorite_view_model.dart';
 import 'package:pisni/ui/screens/song/song_view_model.dart';
 import 'package:provider/provider.dart';
 
@@ -29,7 +28,6 @@ class _SongScreenState extends State<SongScreen> {
   @override
   Widget build(BuildContext context) {
     final viewModel = context.read<SongViewModel>();
-    final favoriteViewModel = context.read<FavoriteViewModel>();
     final (Song song, bool isFavorite) = context.select(
         (SongViewModel viewModel) =>
             (viewModel.state.song, viewModel.state.isFavorite));
@@ -41,7 +39,6 @@ class _SongScreenState extends State<SongScreen> {
           IconButton(
               onPressed: () async {
                 await viewModel.addToFavorite(song);
-                favoriteViewModel.reloadFavoriteSongs();
               },
               icon: Icon(isFavorite ? Icons.star : Icons.star_border)),
           IconButton(

@@ -48,11 +48,11 @@ class SongsRepository implements ISongsRepository {
   }
 
   @override
-  Stream<List<Category>> listenCategoriesWithSongs() =>
+  Stream<List<Category>> streamCategoriesWithSongs() =>
       _listenCategoriesWithSongs(CategoryType.category);
 
   @override
-  Stream<List<Category>> listenAuthorsWithSongs() =>
+  Stream<List<Category>> streamAuthorsWithSongs() =>
       _listenCategoriesWithSongs(CategoryType.author);
 
   @override
@@ -61,7 +61,7 @@ class SongsRepository implements ISongsRepository {
   }
 
   @override
-  Future<List<Song>> search(String text) async {
+  Future<List<Song>> searchSongs(String text) async {
     if (text.length < 3) {
       return [];
     }
@@ -85,16 +85,14 @@ class SongsRepository implements ISongsRepository {
   }
 
   @override
-  Future<List<Song>> getFavoriteSongs() async {
-    final favoriteIds = await _songsService.getFavorites();
-    if (favoriteIds.isEmpty) {
-      return [];
-    }
-    return await _songsService.getSongs(filterIds: favoriteIds);
+  Stream<List<Song>> streamFavoriteSongs() {
+    return _songsService.streamFavorites().asyncMap((e) async {
+      return await _songsService.getSongs(filterIds: e);
+    });
   }
 
   Stream<List<Category>> _listenCategoriesWithSongs(CategoryType type) {
-    return _songsService.listenCategories(type).asyncMap((e) async {
+    return _songsService.streamCategories(type).asyncMap((e) async {
       for (final (i, category) in e.indexed) {
         final songs =
             await _songsService.getSongs(category: category.id, limit: 20);

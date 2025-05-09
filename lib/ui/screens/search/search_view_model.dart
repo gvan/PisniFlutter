@@ -12,7 +12,7 @@ class SearchViewModel extends ChangeNotifier {
       : _songsRepository = songsRepository;
 
   void search(String input) async {
-    final songs = await _songsRepository.search(input);
+    final songs = await _songsRepository.searchSongs(input);
     _state = _state.copyWith(songs: songs);
     notifyListeners();
   }

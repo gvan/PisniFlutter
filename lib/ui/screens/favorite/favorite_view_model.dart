@@ -1,10 +1,14 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:pisni/data/entity/song.dart';
 import 'package:pisni/data/repository/songs/i_songs_repository.dart';
 import 'package:pisni/ui/screens/favorite/favorite_state.dart';
 
 class FavoriteViewModel extends ChangeNotifier {
   final ISongsRepository _songsRepository;
   FavoriteState _state = FavoriteState(songs: []);
+  StreamSubscription<List<Song>>? _favoriteSubscription;
 
   FavoriteState get state => _state;
 
@@ -14,12 +18,20 @@ class FavoriteViewModel extends ChangeNotifier {
   }
 
   void _init() async {
-    reloadFavoriteSongs();
+    _subscribeFavoriteSongs();
   }
 
-  void reloadFavoriteSongs() async {
-    final songs = await _songsRepository.getFavoriteSongs();
-    _state = _state.copyWith(songs: songs);
-    notifyListeners();
+  @override
+  void dispose() {
+    _favoriteSubscription?.cancel();
+    super.dispose();
+  }
+
+  void _subscribeFavoriteSongs() async {
+    _favoriteSubscription =
+        _songsRepository.streamFavoriteSongs().listen((songs) {
+      _state = _state.copyWith(songs: songs);
+      notifyListeners();
+    });
   }
 }

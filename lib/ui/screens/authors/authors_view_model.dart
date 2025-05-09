@@ -19,7 +19,7 @@ class AuthorsViewModel extends ChangeNotifier {
 
   void _init() async {
     _categoriesSubscription =
-        _songsRepository.listenAuthorsWithSongs().listen((authors) {
+        _songsRepository.streamAuthorsWithSongs().listen((authors) {
       _state = _state.copyWith(authors: authors, isLoading: authors.isEmpty);
       notifyListeners();
     });

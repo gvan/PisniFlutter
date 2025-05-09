@@ -23,16 +23,17 @@ class SongsService implements ISongsService {
   }
 
   @override
-  Stream<List<Category>> listenCategories(CategoryType type) {
+  Stream<List<Category>> streamCategories(CategoryType type) {
     return (database.select(database.categoryTable)
           ..where((table) => table.type.equals(type.type)))
-        .map((e) {
-      return Category(
-        id: e.id,
-        title: e.title,
-        type: CategoryType.fromValue(e.type),
-      );
-    }).watch();
+        .map(
+          (e) => Category(
+            id: e.id,
+            title: e.title,
+            type: CategoryType.fromValue(e.type),
+          ),
+        )
+        .watch();
   }
 
   @override
@@ -124,9 +125,12 @@ class SongsService implements ISongsService {
 
   @override
   Future<List<int>> getFavorites() async {
-    return (await database.select(database.favoriteTable).get())
-        .map((e) => e.id)
-        .toList();
+    return await database.select(database.favoriteTable).map((e) => e.id).get();
+  }
+
+  @override
+  Stream<List<int>> streamFavorites() {
+    return database.select(database.favoriteTable).map((e) => e.id).watch();
   }
 
   @override
