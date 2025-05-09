@@ -6,5 +6,7 @@ class CategoryTable extends Table {
   IntColumn get type => integer()();
 
   @override
+  String? get tableName => 'category';
+  @override
   Set<Column<Object>>? get primaryKey => {id};
 }

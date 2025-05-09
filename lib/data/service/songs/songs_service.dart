@@ -129,7 +129,7 @@ class SongsService implements ISongsService {
         database.songTable,
         songs.map(
           (e) => SongTableCompanion.insert(
-            id: e.id,
+            id: Value(e.id),
             category: e.category ?? '',
             title: e.title,
             titleLower: e.title.toLowerCase(),

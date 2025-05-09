@@ -11,4 +11,9 @@ class SongTable extends Table {
   TextColumn get songTextLower => text().named('text_lower')();
   TextColumn get author => text().nullable()();
   TextColumn get audioFileName => text().nullable()();
+
+  @override
+  String? get tableName => 'song';
+  @override
+  Set<Column<Object>>? get primaryKey => {id};
 }

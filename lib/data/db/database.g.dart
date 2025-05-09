@@ -36,7 +36,7 @@ class $CategoryTableTable extends CategoryTable
   String get aliasedName => _alias ?? actualTableName;
   @override
   String get actualTableName => $name;
-  static const String $name = 'category_table';
+  static const String $name = 'category';
   @override
   VerificationContext validateIntegrity(Insertable<CategoryTableData> instance,
       {bool isInserting = false}) {
@@ -247,7 +247,7 @@ class $SongTableTable extends SongTable
   @override
   late final GeneratedColumn<int> id = GeneratedColumn<int>(
       'id', aliasedName, false,
-      type: DriftSqlType.int, requiredDuringInsert: true);
+      type: DriftSqlType.int, requiredDuringInsert: false);
   static const VerificationMeta _categoryMeta =
       const VerificationMeta('category');
   @override
@@ -258,7 +258,7 @@ class $SongTableTable extends SongTable
       type: DriftSqlType.string,
       requiredDuringInsert: true,
       defaultConstraints:
-          GeneratedColumn.constraintIsAlways('REFERENCES category_table (id)'));
+          GeneratedColumn.constraintIsAlways('REFERENCES category (id)'));
   static const VerificationMeta _titleMeta = const VerificationMeta('title');
   @override
   late final GeneratedColumn<String> title = GeneratedColumn<String>(
@@ -308,7 +308,7 @@ class $SongTableTable extends SongTable
   String get aliasedName => _alias ?? actualTableName;
   @override
   String get actualTableName => $name;
-  static const String $name = 'song_table';
+  static const String $name = 'song';
   @override
   VerificationContext validateIntegrity(Insertable<SongTableData> instance,
       {bool isInserting = false}) {
@@ -316,8 +316,6 @@ class $SongTableTable extends SongTable
     final data = instance.toColumns(true);
     if (data.containsKey('id')) {
       context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
-    } else if (isInserting) {
-      context.missing(_idMeta);
     }
     if (data.containsKey('category')) {
       context.handle(_categoryMeta,
@@ -367,7 +365,7 @@ class $SongTableTable extends SongTable
   }
 
   @override
-  Set<GeneratedColumn> get $primaryKey => const {};
+  Set<GeneratedColumn> get $primaryKey => {id};
   @override
   SongTableData map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
@@ -557,7 +555,6 @@ class SongTableCompanion extends UpdateCompanion<SongTableData> {
   final Value<String> songTextLower;
   final Value<String?> author;
   final Value<String?> audioFileName;
-  final Value<int> rowid;
   const SongTableCompanion({
     this.id = const Value.absent(),
     this.category = const Value.absent(),
@@ -567,10 +564,9 @@ class SongTableCompanion extends UpdateCompanion<SongTableData> {
     this.songTextLower = const Value.absent(),
     this.author = const Value.absent(),
     this.audioFileName = const Value.absent(),
-    this.rowid = const Value.absent(),
   });
   SongTableCompanion.insert({
-    required int id,
+    this.id = const Value.absent(),
     required String category,
     required String title,
     required String titleLower,
@@ -578,9 +574,7 @@ class SongTableCompanion extends UpdateCompanion<SongTableData> {
     required String songTextLower,
     this.author = const Value.absent(),
     this.audioFileName = const Value.absent(),
-    this.rowid = const Value.absent(),
-  })  : id = Value(id),
-        category = Value(category),
+  })  : category = Value(category),
         title = Value(title),
         titleLower = Value(titleLower),
         songText = Value(songText),
@@ -594,7 +588,6 @@ class SongTableCompanion extends UpdateCompanion<SongTableData> {
     Expression<String>? songTextLower,
     Expression<String>? author,
     Expression<String>? audioFileName,
-    Expression<int>? rowid,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -605,7 +598,6 @@ class SongTableCompanion extends UpdateCompanion<SongTableData> {
       if (songTextLower != null) 'text_lower': songTextLower,
       if (author != null) 'author': author,
       if (audioFileName != null) 'audio_file_name': audioFileName,
-      if (rowid != null) 'rowid': rowid,
     });
   }
 
@@ -617,8 +609,7 @@ class SongTableCompanion extends UpdateCompanion<SongTableData> {
       Value<String>? songText,
       Value<String>? songTextLower,
       Value<String?>? author,
-      Value<String?>? audioFileName,
-      Value<int>? rowid}) {
+      Value<String?>? audioFileName}) {
     return SongTableCompanion(
       id: id ?? this.id,
       category: category ?? this.category,
@@ -628,7 +619,6 @@ class SongTableCompanion extends UpdateCompanion<SongTableData> {
       songTextLower: songTextLower ?? this.songTextLower,
       author: author ?? this.author,
       audioFileName: audioFileName ?? this.audioFileName,
-      rowid: rowid ?? this.rowid,
     );
   }
 
@@ -659,9 +649,6 @@ class SongTableCompanion extends UpdateCompanion<SongTableData> {
     if (audioFileName.present) {
       map['audio_file_name'] = Variable<String>(audioFileName.value);
     }
-    if (rowid.present) {
-      map['rowid'] = Variable<int>(rowid.value);
-    }
     return map;
   }
 
@@ -675,8 +662,7 @@ class SongTableCompanion extends UpdateCompanion<SongTableData> {
           ..write('songText: $songText, ')
           ..write('songTextLower: $songTextLower, ')
           ..write('author: $author, ')
-          ..write('audioFileName: $audioFileName, ')
-          ..write('rowid: $rowid')
+          ..write('audioFileName: $audioFileName')
           ..write(')'))
         .toString();
   }
@@ -922,7 +908,7 @@ typedef $$CategoryTableTableProcessedTableManager = ProcessedTableManager<
     CategoryTableData,
     PrefetchHooks Function({bool songTableRefs})>;
 typedef $$SongTableTableCreateCompanionBuilder = SongTableCompanion Function({
-  required int id,
+  Value<int> id,
   required String category,
   required String title,
   required String titleLower,
@@ -930,7 +916,6 @@ typedef $$SongTableTableCreateCompanionBuilder = SongTableCompanion Function({
   required String songTextLower,
   Value<String?> author,
   Value<String?> audioFileName,
-  Value<int> rowid,
 });
 typedef $$SongTableTableUpdateCompanionBuilder = SongTableCompanion Function({
   Value<int> id,
@@ -941,7 +926,6 @@ typedef $$SongTableTableUpdateCompanionBuilder = SongTableCompanion Function({
   Value<String> songTextLower,
   Value<String?> author,
   Value<String?> audioFileName,
-  Value<int> rowid,
 });
 
 final class $$SongTableTableReferences
@@ -1150,7 +1134,6 @@ class $$SongTableTableTableManager extends RootTableManager<
             Value<String> songTextLower = const Value.absent(),
             Value<String?> author = const Value.absent(),
             Value<String?> audioFileName = const Value.absent(),
-            Value<int> rowid = const Value.absent(),
           }) =>
               SongTableCompanion(
             id: id,
@@ -1161,10 +1144,9 @@ class $$SongTableTableTableManager extends RootTableManager<
             songTextLower: songTextLower,
             author: author,
             audioFileName: audioFileName,
-            rowid: rowid,
           ),
           createCompanionCallback: ({
-            required int id,
+            Value<int> id = const Value.absent(),
             required String category,
             required String title,
             required String titleLower,
@@ -1172,7 +1154,6 @@ class $$SongTableTableTableManager extends RootTableManager<
             required String songTextLower,
             Value<String?> author = const Value.absent(),
             Value<String?> audioFileName = const Value.absent(),
-            Value<int> rowid = const Value.absent(),
           }) =>
               SongTableCompanion.insert(
             id: id,
@@ -1183,7 +1164,6 @@ class $$SongTableTableTableManager extends RootTableManager<
             songTextLower: songTextLower,
             author: author,
             audioFileName: audioFileName,
-            rowid: rowid,
           ),
           withReferenceMapper: (p0) => p0
               .map((e) => (
