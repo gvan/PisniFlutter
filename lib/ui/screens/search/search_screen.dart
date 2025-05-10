@@ -24,12 +24,12 @@ class _SearchScreenState extends State<SearchScreen> {
         title: Text(context.loc.search),
       ),
       body: CopyrightReference(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              TextField(
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(24, 16, 24, 8),
+              child: TextField(
                 decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     hintText: context.loc.songTitleOrLyrics),
@@ -37,11 +37,11 @@ class _SearchScreenState extends State<SearchScreen> {
                   viewModel.search(text);
                 },
               ),
-              Expanded(
-                child: SongsList(songs: songs),
-              )
-            ],
-          ),
+            ),
+            Expanded(
+              child: SongsList(songs: songs),
+            )
+          ],
         ),
       ),
     );
