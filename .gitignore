@@ -87,6 +87,7 @@ unlinked_spec.ds
 *.jks
 local.properties
 **/.cxx/
+google-services.json
 
 # iOS/XCode related
 **/ios/**/*.mode1v3
