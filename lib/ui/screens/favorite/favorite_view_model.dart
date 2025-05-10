@@ -7,7 +7,7 @@ import 'package:pisni/ui/screens/favorite/favorite_state.dart';
 
 class FavoriteViewModel extends ChangeNotifier {
   final ISongsRepository _songsRepository;
-  FavoriteState _state = FavoriteState(songs: []);
+  FavoriteState _state = FavoriteState(songs: [], isLoading: true);
   StreamSubscription<List<Song>>? _favoriteSubscription;
 
   FavoriteState get state => _state;
@@ -30,7 +30,7 @@ class FavoriteViewModel extends ChangeNotifier {
   void _subscribeFavoriteSongs() async {
     _favoriteSubscription =
         _songsRepository.streamFavoriteSongs().listen((songs) {
-      _state = _state.copyWith(songs: songs);
+      _state = _state.copyWith(songs: songs, isLoading: false);
       notifyListeners();
     });
   }

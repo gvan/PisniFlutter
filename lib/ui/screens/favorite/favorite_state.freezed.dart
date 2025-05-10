@@ -16,6 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$FavoriteState {
   List<Song> get songs;
+  bool get isLoading;
 
   /// Create a copy of FavoriteState
   /// with the given fields replaced by the non-null parameter values.
@@ -30,16 +31,18 @@ mixin _$FavoriteState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is FavoriteState &&
-            const DeepCollectionEquality().equals(other.songs, songs));
+            const DeepCollectionEquality().equals(other.songs, songs) &&
+            (identical(other.isLoading, isLoading) ||
+                other.isLoading == isLoading));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(songs));
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(songs), isLoading);
 
   @override
   String toString() {
-    return 'FavoriteState(songs: $songs)';
+    return 'FavoriteState(songs: $songs, isLoading: $isLoading)';
   }
 }
 
@@ -49,7 +52,7 @@ abstract mixin class $FavoriteStateCopyWith<$Res> {
           FavoriteState value, $Res Function(FavoriteState) _then) =
       _$FavoriteStateCopyWithImpl;
   @useResult
-  $Res call({List<Song> songs});
+  $Res call({List<Song> songs, bool isLoading});
 }
 
 /// @nodoc
@@ -66,12 +69,17 @@ class _$FavoriteStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? songs = null,
+    Object? isLoading = null,
   }) {
     return _then(FavoriteState(
       songs: null == songs
           ? _self.songs
           : songs // ignore: cast_nullable_to_non_nullable
               as List<Song>,
+      isLoading: null == isLoading
+          ? _self.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }

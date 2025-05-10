@@ -17,5 +17,6 @@
         }
     },
     "author": "Author",
-    "source": "Source"
+    "source": "Source",
+    "no_favorite_songs": "No favorite songs"
 }

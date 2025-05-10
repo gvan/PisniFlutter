@@ -54,4 +54,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get source => 'Source';
+
+  @override
+  String get no_favorite_songs => 'No favorite songs';
 }

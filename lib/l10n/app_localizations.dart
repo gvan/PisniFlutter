@@ -166,6 +166,12 @@ abstract class AppLocalizations {
   /// In uk, this message translates to:
   /// **'Джерело'**
   String get source;
+
+  /// No description provided for @no_favorite_songs.
+  ///
+  /// In uk, this message translates to:
+  /// **'Немає обраних пісень'**
+  String get no_favorite_songs;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

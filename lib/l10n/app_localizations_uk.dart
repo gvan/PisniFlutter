@@ -54,4 +54,7 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get source => 'Джерело';
+
+  @override
+  String get no_favorite_songs => 'Немає обраних пісень';
 }

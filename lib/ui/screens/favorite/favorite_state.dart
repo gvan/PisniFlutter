@@ -7,6 +7,8 @@ part 'favorite_state.freezed.dart';
 class FavoriteState with _$FavoriteState {
   @override
   final List<Song> songs;
+  @override
+  final bool isLoading;
 
-  FavoriteState({required this.songs});
+  FavoriteState({required this.songs, required this.isLoading});
 }
