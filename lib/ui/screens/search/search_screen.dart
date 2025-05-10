@@ -25,7 +25,7 @@ class _SearchScreenState extends State<SearchScreen> {
       ),
       body: CopyrightReference(
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [

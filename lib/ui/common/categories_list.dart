@@ -21,7 +21,7 @@ class CategoriesList extends StatelessWidget {
               Navigator.pushNamed(context, '/songs', arguments: category);
             },
             child: Padding(
-              padding: EdgeInsets.fromLTRB(16, 8, 16, 0),
+              padding: EdgeInsets.fromLTRB(24, 8, 24, 0),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,

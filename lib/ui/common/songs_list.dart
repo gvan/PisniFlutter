@@ -19,7 +19,7 @@ class SongsList extends StatelessWidget {
                 Navigator.of(context).pushNamed('/song', arguments: song);
               },
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                padding: EdgeInsets.symmetric(horizontal: 24, vertical: 8),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [

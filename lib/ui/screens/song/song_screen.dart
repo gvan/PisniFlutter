@@ -51,7 +51,7 @@ class _SongScreenState extends State<SongScreen> {
       body: CopyrightReference(
         child: SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.all(16),
+            padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
             child: SizedBox(
               width: MediaQuery.sizeOf(context).width,
               child: Column(
