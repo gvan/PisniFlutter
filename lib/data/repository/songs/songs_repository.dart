@@ -2,20 +2,20 @@ import 'package:pisni/data/entity/category.dart';
 import 'package:pisni/data/entity/category_type.dart';
 import 'package:pisni/data/entity/song.dart';
 import 'package:pisni/data/repository/songs/i_songs_repository.dart';
-import 'package:pisni/data/service/assets/i_assets_service.dart';
-import 'package:pisni/data/service/songs/i_songs_service.dart';
+import 'package:pisni/data/data_source/assets/assets_data_source.dart';
+import 'package:pisni/data/data_source/songs/songs_data_source.dart';
 
 class SongsRepository implements ISongsRepository {
   SongsRepository(
-      {required ISongsService songsService,
-      required IAssetsService assetsService})
+      {required SongsDataSource songsService,
+      required AssetsDataSource assetsService})
       : _songsService = songsService,
         _assetsService = assetsService {
     initDatabase();
   }
 
-  final ISongsService _songsService;
-  final IAssetsService _assetsService;
+  final SongsDataSource _songsService;
+  final AssetsDataSource _assetsService;
 
   void initDatabase() async {
     var categories = await _songsService.getCategories(CategoryType.category);

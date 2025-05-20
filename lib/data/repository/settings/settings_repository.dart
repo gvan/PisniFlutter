@@ -1,9 +1,9 @@
 import 'package:pisni/data/entity/settings.dart';
 import 'package:pisni/data/repository/settings/i_settings_repository.dart';
-import 'package:pisni/data/service/preferences/i_preferences_service.dart';
+import 'package:pisni/data/data_source/preferences/preferences_data_source.dart';
 
 class SettignsRepository extends ISettingsRepository {
-  final IPreferencesService preferencesService;
+  final PreferencesDataSource preferencesService;
 
   SettignsRepository({required this.preferencesService});
 
