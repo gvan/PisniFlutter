@@ -30,4 +30,6 @@ class SongModel with _$SongModel {
 
   factory SongModel.fromJson(Map<String, dynamic> json) =>
       _$SongModelFromJson(json);
+
+  Map<String, dynamic> toJson() => _$SongModelToJson(this);
 }
