@@ -75,7 +75,7 @@ class SongsDataSourceImpl implements SongsDataSource {
               title: e.title,
               text: e.songText,
               author: e.author,
-              audio_file_name: e.audioFileName,
+              audioFileName: e.audioFileName,
             ))
         .toList();
   }
@@ -91,7 +91,7 @@ class SongsDataSourceImpl implements SongsDataSource {
             title: e.title,
             text: e.songText,
             author: e.author,
-            audio_file_name: e.audioFileName))
+            audioFileName: e.audioFileName))
         .toList();
   }
 
@@ -109,7 +109,7 @@ class SongsDataSourceImpl implements SongsDataSource {
             songText: e.text,
             songTextLower: e.text.toLowerCase(),
             author: Value.absentIfNull(e.author),
-            audioFileName: Value.absentIfNull(e.audio_file_name),
+            audioFileName: Value.absentIfNull(e.audioFileName),
           ),
         ),
       );

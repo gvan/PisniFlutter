@@ -15,7 +15,8 @@ class SongModel with _$SongModel {
   @override
   final String? author;
   @override
-  final String? audio_file_name;
+  @JsonKey(name: 'audio_file_name')
+  final String? audioFileName;
   @override
   final String? category;
 
@@ -24,7 +25,7 @@ class SongModel with _$SongModel {
       required this.title,
       required this.text,
       required this.author,
-      required this.audio_file_name,
+      required this.audioFileName,
       this.category});
 
   factory SongModel.fromJson(Map<String, dynamic> json) =>

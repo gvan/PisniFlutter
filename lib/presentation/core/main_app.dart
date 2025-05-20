@@ -11,8 +11,8 @@ import 'package:pisni/data/data_source/songs/songs_data_source.dart';
 import 'package:pisni/data/data_source/songs/songs_data_source_impl.dart';
 import 'package:pisni/l10n/app_localizations.dart';
 import 'package:pisni/presentation/core/theme_view_model.dart';
-import 'package:pisni/presentation/navigation/bottom_navigation.dart';
-import 'package:pisni/presentation/styles/themes.dart';
+import 'package:pisni/presentation/core/navigation/bottom_navigation.dart';
+import 'package:pisni/presentation/core/styles/themes.dart';
 import 'package:provider/provider.dart';
 
 class MainApp extends StatelessWidget {

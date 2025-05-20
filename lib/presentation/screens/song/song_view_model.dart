@@ -8,7 +8,7 @@ class SongViewModel extends ChangeNotifier {
   final ISongsRepository songsRepository;
 
   SongState _state = SongState(
-      song: SongModel(id: 0, title: '', text: '', author: '', audio_file_name: ''),
+      song: SongModel(id: 0, title: '', text: '', author: '', audioFileName: ''),
       isFavorite: false);
 
   SongViewModel({required this.songsRepository});

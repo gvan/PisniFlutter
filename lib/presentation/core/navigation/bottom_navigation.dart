@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:pisni/presentation/extensions/localization.dart';
-import 'package:pisni/presentation/navigation/authors_navigation.dart';
-import 'package:pisni/presentation/navigation/other_navigation.dart';
-import 'package:pisni/presentation/navigation/home_navigation.dart';
-import 'package:pisni/presentation/navigation/search_navigation.dart';
+import 'package:pisni/presentation/core/navigation/authors_navigation.dart';
+import 'package:pisni/presentation/core/navigation/other_navigation.dart';
+import 'package:pisni/presentation/core/navigation/home_navigation.dart';
+import 'package:pisni/presentation/core/navigation/search_navigation.dart';
 
 class BottomNavigation extends StatefulWidget {
   const BottomNavigation({super.key});

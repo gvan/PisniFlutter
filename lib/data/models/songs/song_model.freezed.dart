@@ -19,7 +19,7 @@ mixin _$SongModel {
   String get title;
   String get text;
   String? get author;
-  String? get audio_file_name;
+  String? get audioFileName;
   String? get category;
 
   /// Create a copy of SongModel
@@ -38,8 +38,8 @@ mixin _$SongModel {
             (identical(other.title, title) || other.title == title) &&
             (identical(other.text, text) || other.text == text) &&
             (identical(other.author, author) || other.author == author) &&
-            (identical(other.audio_file_name, audio_file_name) ||
-                other.audio_file_name == audio_file_name) &&
+            (identical(other.audioFileName, audioFileName) ||
+                other.audioFileName == audioFileName) &&
             (identical(other.category, category) ||
                 other.category == category));
   }
@@ -47,11 +47,11 @@ mixin _$SongModel {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-      runtimeType, id, title, text, author, audio_file_name, category);
+      runtimeType, id, title, text, author, audioFileName, category);
 
   @override
   String toString() {
-    return 'SongModel(id: $id, title: $title, text: $text, author: $author, audio_file_name: $audio_file_name, category: $category)';
+    return 'SongModel(id: $id, title: $title, text: $text, author: $author, audio_file_name: $audioFileName, category: $category)';
   }
 }
 
@@ -105,8 +105,8 @@ class _$SongModelCopyWithImpl<$Res> implements $SongModelCopyWith<$Res> {
           ? _self.author
           : author // ignore: cast_nullable_to_non_nullable
               as String?,
-      audio_file_name: freezed == audio_file_name
-          ? _self.audio_file_name
+      audioFileName: freezed == audio_file_name
+          ? _self.audioFileName
           : audio_file_name // ignore: cast_nullable_to_non_nullable
               as String?,
       category: freezed == category
