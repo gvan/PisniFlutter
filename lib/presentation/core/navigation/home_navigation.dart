@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pisni/data/models/songs/category_model.dart';
-import 'package:pisni/data/models/songs/song_model.dart';
+import 'package:pisni/presentation/entities/songs/category_entity.dart';
+import 'package:pisni/presentation/entities/songs/song_entity.dart';
 import 'package:pisni/presentation/screens/home/home_view_model.dart';
 import 'package:pisni/presentation/screens/home/home_screen.dart';
 import 'package:pisni/presentation/screens/song/song_screen.dart';
@@ -35,14 +35,14 @@ class _HomeNavigationState extends State<HomeNavigation> {
                 child: HomeWidget(),
               );
             case '/songs':
-              final category = settings.arguments as CategoryModel;
+              final category = settings.arguments as CategoryEntity;
               return ChangeNotifierProvider(
                 create: (context) => SongsViewModel(
                     songsRepository: context.read(), category: category),
                 child: SongsScreen(category: category),
               );
             case '/song':
-              final song = settings.arguments as SongModel;
+              final song = settings.arguments as SongEntity;
               return ChangeNotifierProvider(
                 create: (context) =>
                     SongViewModel(songsRepository: context.read()),

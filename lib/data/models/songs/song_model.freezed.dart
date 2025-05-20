@@ -51,7 +51,7 @@ mixin _$SongModel {
 
   @override
   String toString() {
-    return 'SongModel(id: $id, title: $title, text: $text, author: $author, audio_file_name: $audioFileName, category: $category)';
+    return 'SongModel(id: $id, title: $title, text: $text, author: $author, audioFileName: $audioFileName, category: $category)';
   }
 }
 
@@ -65,7 +65,7 @@ abstract mixin class $SongModelCopyWith<$Res> {
       String title,
       String text,
       String? author,
-      String? audio_file_name,
+      String? audioFileName,
       String? category});
 }
 
@@ -85,7 +85,7 @@ class _$SongModelCopyWithImpl<$Res> implements $SongModelCopyWith<$Res> {
     Object? title = null,
     Object? text = null,
     Object? author = freezed,
-    Object? audio_file_name = freezed,
+    Object? audioFileName = freezed,
     Object? category = freezed,
   }) {
     return _then(SongModel(
@@ -105,9 +105,9 @@ class _$SongModelCopyWithImpl<$Res> implements $SongModelCopyWith<$Res> {
           ? _self.author
           : author // ignore: cast_nullable_to_non_nullable
               as String?,
-      audioFileName: freezed == audio_file_name
+      audioFileName: freezed == audioFileName
           ? _self.audioFileName
-          : audio_file_name // ignore: cast_nullable_to_non_nullable
+          : audioFileName // ignore: cast_nullable_to_non_nullable
               as String?,
       category: freezed == category
           ? _self.category

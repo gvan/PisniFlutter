@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$HomeState {
-  List<CategoryModel> get categories;
+  List<CategoryEntity> get categories;
   bool get isLoading;
 
   /// Create a copy of HomeState
@@ -51,7 +51,7 @@ abstract mixin class $HomeStateCopyWith<$Res> {
   factory $HomeStateCopyWith(HomeState value, $Res Function(HomeState) _then) =
       _$HomeStateCopyWithImpl;
   @useResult
-  $Res call({List<CategoryModel> categories, bool isLoading});
+  $Res call({List<CategoryEntity> categories, bool isLoading});
 }
 
 /// @nodoc
@@ -73,7 +73,7 @@ class _$HomeStateCopyWithImpl<$Res> implements $HomeStateCopyWith<$Res> {
       categories: null == categories
           ? _self.categories
           : categories // ignore: cast_nullable_to_non_nullable
-              as List<CategoryModel>,
+              as List<CategoryEntity>,
       isLoading: null == isLoading
           ? _self.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable

@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$SearchState {
-  List<SongModel> get songs;
+  List<SongEntity> get songs;
 
   /// Create a copy of SearchState
   /// with the given fields replaced by the non-null parameter values.
@@ -48,7 +48,7 @@ abstract mixin class $SearchStateCopyWith<$Res> {
           SearchState value, $Res Function(SearchState) _then) =
       _$SearchStateCopyWithImpl;
   @useResult
-  $Res call({List<SongModel> songs});
+  $Res call({List<SongEntity> songs});
 }
 
 /// @nodoc
@@ -69,7 +69,7 @@ class _$SearchStateCopyWithImpl<$Res> implements $SearchStateCopyWith<$Res> {
       songs: null == songs
           ? _self.songs
           : songs // ignore: cast_nullable_to_non_nullable
-              as List<SongModel>,
+              as List<SongEntity>,
     ));
   }
 }

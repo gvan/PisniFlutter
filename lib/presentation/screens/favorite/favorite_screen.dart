@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:pisni/data/models/songs/song_model.dart';
 import 'package:pisni/presentation/common/copyright_reference.dart';
 import 'package:pisni/presentation/common/songs_list.dart';
+import 'package:pisni/presentation/entities/songs/song_entity.dart';
 import 'package:pisni/presentation/extensions/localization.dart';
 import 'package:pisni/presentation/extensions/styles.dart';
 import 'package:pisni/presentation/screens/favorite/favorite_view_model.dart';
@@ -21,7 +21,7 @@ class FavoriteScreen extends StatefulWidget {
 class FavoriteScreenState extends State<FavoriteScreen> {
   @override
   Widget build(BuildContext context) {
-    final (bool isLoading, List<SongModel> songs) = context.select(
+    final (bool isLoading, List<SongEntity> songs) = context.select(
       (FavoriteViewModel viewModel) =>
           (viewModel.state.isLoading, viewModel.state.songs),
     );

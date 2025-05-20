@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pisni/data/models/songs/song_model.dart';
+import 'package:pisni/presentation/entities/songs/song_entity.dart';
 import 'package:pisni/presentation/screens/search/search_screen.dart';
 import 'package:pisni/presentation/screens/search/search_view_model.dart';
 import 'package:pisni/presentation/screens/song/song_screen.dart';
@@ -32,7 +32,7 @@ class _SearchNavigationState extends State<SearchNavigation> {
                 child: SearchScreen(),
               );
             case '/song':
-              final song = settings.arguments as SongModel;
+              final song = settings.arguments as SongEntity;
               return ChangeNotifierProvider(
                 create: (context) =>
                     SongViewModel(songsRepository: context.read()),

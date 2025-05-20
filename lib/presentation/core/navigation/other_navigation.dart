@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pisni/data/models/songs/song_model.dart';
+import 'package:pisni/presentation/entities/songs/song_entity.dart';
 import 'package:pisni/presentation/screens/favorite/favorite_screen.dart';
 import 'package:pisni/presentation/screens/favorite/favorite_view_model.dart';
 import 'package:pisni/presentation/screens/other/other_screen.dart';
@@ -36,7 +36,7 @@ class _OtherNavigationState extends State<OtherNavigation> {
                       FavoriteViewModel(songsRepository: context.read()),
                   child: FavoriteScreen());
             case '/song':
-              final song = settings.arguments as SongModel;
+              final song = settings.arguments as SongEntity;
               return ChangeNotifierProvider(
                 create: (context) =>
                     SongViewModel(songsRepository: context.read()),

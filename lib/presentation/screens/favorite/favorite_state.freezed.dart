@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$FavoriteState {
-  List<SongModel> get songs;
+  List<SongEntity> get songs;
   bool get isLoading;
 
   /// Create a copy of FavoriteState
@@ -52,7 +52,7 @@ abstract mixin class $FavoriteStateCopyWith<$Res> {
           FavoriteState value, $Res Function(FavoriteState) _then) =
       _$FavoriteStateCopyWithImpl;
   @useResult
-  $Res call({List<SongModel> songs, bool isLoading});
+  $Res call({List<SongEntity> songs, bool isLoading});
 }
 
 /// @nodoc
@@ -75,7 +75,7 @@ class _$FavoriteStateCopyWithImpl<$Res>
       songs: null == songs
           ? _self.songs
           : songs // ignore: cast_nullable_to_non_nullable
-              as List<SongModel>,
+              as List<SongEntity>,
       isLoading: null == isLoading
           ? _self.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
