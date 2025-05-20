@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:pisni/data/entity/song.dart';
+import 'package:pisni/data/models/songs/song_model.dart';
 import 'package:pisni/presentation/common/copyright_reference.dart';
 import 'package:pisni/presentation/extensions/localization.dart';
 import 'package:pisni/presentation/extensions/styles.dart';
@@ -9,7 +9,7 @@ import 'package:pisni/presentation/screens/song/song_view_model.dart';
 import 'package:provider/provider.dart';
 
 class SongScreen extends StatefulWidget {
-  final Song song;
+  final SongModel song;
 
   const SongScreen({super.key, required this.song});
 
@@ -28,7 +28,7 @@ class _SongScreenState extends State<SongScreen> {
   @override
   Widget build(BuildContext context) {
     final viewModel = context.read<SongViewModel>();
-    final (Song song, bool isFavorite) = context.select(
+    final (SongModel song, bool isFavorite) = context.select(
         (SongViewModel viewModel) =>
             (viewModel.state.song, viewModel.state.isFavorite));
 

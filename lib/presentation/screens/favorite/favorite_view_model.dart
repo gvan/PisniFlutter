@@ -1,14 +1,14 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:pisni/data/entity/song.dart';
+import 'package:pisni/data/models/songs/song_model.dart';
 import 'package:pisni/data/repository/songs/i_songs_repository.dart';
 import 'package:pisni/presentation/screens/favorite/favorite_state.dart';
 
 class FavoriteViewModel extends ChangeNotifier {
   final ISongsRepository _songsRepository;
   FavoriteState _state = FavoriteState(songs: [], isLoading: true);
-  StreamSubscription<List<Song>>? _favoriteSubscription;
+  StreamSubscription<List<SongModel>>? _favoriteSubscription;
 
   FavoriteState get state => _state;
 

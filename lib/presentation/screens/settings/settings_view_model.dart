@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pisni/data/entity/settings.dart';
+import 'package:pisni/data/models/settings/settings_model.dart';
 import 'package:pisni/data/repository/settings/i_settings_repository.dart';
 import 'package:pisni/presentation/screens/settings/settings_state.dart';
 

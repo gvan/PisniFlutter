@@ -1,6 +1,6 @@
-import 'package:pisni/data/entity/settings.dart';
+import 'package:pisni/data/models/settings/settings_model.dart';
 
 abstract class PreferencesDataSource {
-  Future<void> saveSettings(Settings settings);
-  Future<Settings> getSettings();
+  Future<void> saveSettings(SettingsModel settings);
+  Future<SettingsModel> getSettings();
 }

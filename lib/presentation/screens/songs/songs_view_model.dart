@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pisni/data/entity/category.dart';
+import 'package:pisni/data/models/songs/category_model.dart';
 import 'package:pisni/data/repository/songs/i_songs_repository.dart';
 import 'package:pisni/presentation/screens/songs/songs_state.dart';
 
@@ -10,7 +10,7 @@ class SongsViewModel extends ChangeNotifier {
   SongsState get state => _state;
 
   SongsViewModel(
-      {required ISongsRepository songsRepository, required Category category})
+      {required ISongsRepository songsRepository, required CategoryModel category})
       : _songsRepository = songsRepository {
     loadSongs(category.id);
   }

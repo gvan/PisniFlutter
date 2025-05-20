@@ -1,13 +1,13 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:pisni/data/entity/category.dart';
+import 'package:pisni/data/models/songs/category_model.dart';
 import 'package:pisni/data/repository/songs/i_songs_repository.dart';
 import 'package:pisni/presentation/screens/home/home_state.dart';
 
 class HomeViewModel extends ChangeNotifier {
   final ISongsRepository _songsRepository;
-  StreamSubscription<List<Category>>? _categoriesSubscription;
+  StreamSubscription<List<CategoryModel>>? _categoriesSubscription;
 
   HomeState _state = HomeState(categories: [], isLoading: true);
 

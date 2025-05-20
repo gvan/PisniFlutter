@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$SongsState {
-  List<Song> get songs;
+  List<SongModel> get songs;
   bool get isLoading;
 
   /// Create a copy of SongsState
@@ -51,7 +51,7 @@ abstract mixin class $SongsStateCopyWith<$Res> {
           SongsState value, $Res Function(SongsState) _then) =
       _$SongsStateCopyWithImpl;
   @useResult
-  $Res call({List<Song> songs, bool isLoading});
+  $Res call({List<SongModel> songs, bool isLoading});
 }
 
 /// @nodoc
@@ -73,7 +73,7 @@ class _$SongsStateCopyWithImpl<$Res> implements $SongsStateCopyWith<$Res> {
       songs: null == songs
           ? _self.songs
           : songs // ignore: cast_nullable_to_non_nullable
-              as List<Song>,
+              as List<SongModel>,
       isLoading: null == isLoading
           ? _self.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:pisni/data/entity/category.dart';
-import 'package:pisni/data/entity/song.dart';
+import 'package:pisni/data/models/songs/category_model.dart';
+import 'package:pisni/data/models/songs/song_model.dart';
 import 'package:pisni/presentation/extensions/styles.dart';
 import 'package:vector_graphics/vector_graphics.dart';
 
 class CategoriesList extends StatelessWidget {
-  final List<Category> categories;
+  final List<CategoryModel> categories;
 
   const CategoriesList({super.key, required this.categories});
 
@@ -65,7 +65,7 @@ class CategoriesList extends StatelessWidget {
 }
 
 class HorizontalSongsList extends StatelessWidget {
-  final List<Song> songs;
+  final List<SongModel> songs;
 
   const HorizontalSongsList({super.key, required this.songs});
 

@@ -1,14 +1,14 @@
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'settings.freezed.dart';
+part 'settings_model.freezed.dart';
 
 @freezed
-class Settings with _$Settings {
+class SettingsModel with _$SettingsModel {
   @override
   final AppThemeMode themeMode;
 
-  Settings({required this.themeMode});
+  SettingsModel({required this.themeMode});
 }
 
 enum AppThemeMode {

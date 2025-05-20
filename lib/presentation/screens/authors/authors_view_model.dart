@@ -1,14 +1,14 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:pisni/data/entity/category.dart';
+import 'package:pisni/data/models/songs/category_model.dart';
 import 'package:pisni/data/repository/songs/i_songs_repository.dart';
 import 'package:pisni/presentation/screens/authors/authors_state.dart';
 
 class AuthorsViewModel extends ChangeNotifier {
   final ISongsRepository _songsRepository;
   AuthorsState _state = AuthorsState(authors: [], isLoading: true);
-  StreamSubscription<List<Category>>? _categoriesSubscription;
+  StreamSubscription<List<CategoryModel>>? _categoriesSubscription;
 
   AuthorsState get state => _state;
 

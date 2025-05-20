@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pisni/data/entity/settings.dart';
+import 'package:pisni/data/models/settings/settings_model.dart';
 
 extension FlutterThemeMode on AppThemeMode {
   ThemeMode toFlutter() {

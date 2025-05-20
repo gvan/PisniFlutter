@@ -1,14 +1,14 @@
-import 'package:pisni/data/entity/category.dart';
-import 'package:pisni/data/entity/song.dart';
+import 'package:pisni/data/models/songs/category_model.dart';
+import 'package:pisni/data/models/songs/song_model.dart';
 
 abstract class ISongsRepository {
-  Stream<List<Category>> streamCategoriesWithSongs();
-  Stream<List<Category>> streamAuthorsWithSongs();
+  Stream<List<CategoryModel>> streamCategoriesWithSongs();
+  Stream<List<CategoryModel>> streamAuthorsWithSongs();
 
-  Future<List<Song>> getSongs(String category);
-  Future<List<Song>> searchSongs(String text);
+  Future<List<SongModel>> getSongs(String category);
+  Future<List<SongModel>> searchSongs(String text);
 
   Future<bool> isFavoriteSong(int songId);
   Future<void> toggleFavorite(int songId);
-  Stream<List<Song>> streamFavoriteSongs();
+  Stream<List<SongModel>> streamFavoriteSongs();
 }

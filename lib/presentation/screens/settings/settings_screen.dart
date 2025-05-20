@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pisni/data/entity/settings.dart';
+import 'package:pisni/data/models/settings/settings_model.dart';
 import 'package:pisni/presentation/core/theme_view_model.dart';
 import 'package:pisni/presentation/extensions/localization.dart';
 import 'package:pisni/presentation/extensions/styles.dart';

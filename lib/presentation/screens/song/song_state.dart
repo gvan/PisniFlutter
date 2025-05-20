@@ -1,12 +1,12 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:pisni/data/entity/song.dart';
+import 'package:pisni/data/models/songs/song_model.dart';
 
 part 'song_state.freezed.dart';
 
 @freezed
 class SongState with _$SongState {
   @override
-  final Song song;
+  final SongModel song;
   @override
   final bool isFavorite;
 

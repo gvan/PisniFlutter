@@ -1,6 +1,6 @@
-import 'package:pisni/data/entity/settings.dart';
+import 'package:pisni/data/models/settings/settings_model.dart';
 
 abstract class ISettingsRepository {
-  Future<Settings> getSettings();
-  void saveSettings(Settings settings);
+  Future<SettingsModel> getSettings();
+  void saveSettings(SettingsModel settings);
 }

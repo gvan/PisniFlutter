@@ -1,11 +1,11 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'song.g.dart';
-part 'song.freezed.dart';
+part 'song_model.g.dart';
+part 'song_model.freezed.dart';
 
 @freezed
 @JsonSerializable()
-class Song with _$Song {
+class SongModel with _$SongModel {
   @override
   final int id;
   @override
@@ -19,7 +19,7 @@ class Song with _$Song {
   @override
   final String? category;
 
-  Song(
+  SongModel(
       {required this.id,
       required this.title,
       required this.text,
@@ -27,5 +27,6 @@ class Song with _$Song {
       required this.audio_file_name,
       this.category});
 
-  factory Song.fromJson(Map<String, dynamic> json) => _$SongFromJson(json);
+  factory SongModel.fromJson(Map<String, dynamic> json) =>
+      _$SongModelFromJson(json);
 }

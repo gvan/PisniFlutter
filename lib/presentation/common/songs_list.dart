@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:pisni/data/entity/song.dart';
+import 'package:pisni/data/models/songs/song_model.dart';
 import 'package:pisni/presentation/extensions/styles.dart';
 
 class SongsList extends StatelessWidget {
-  final List<Song> songs;
+  final List<SongModel> songs;
 
   const SongsList({super.key, required this.songs});
 

@@ -1,12 +1,12 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:pisni/data/entity/category.dart' show Category;
+import 'package:pisni/data/models/songs/category_model.dart' show CategoryModel;
 
 part 'authors_state.freezed.dart';
 
 @freezed
 class AuthorsState with _$AuthorsState {
   @override
-  final List<Category> authors;
+  final List<CategoryModel> authors;
   @override
   final bool isLoading;
 

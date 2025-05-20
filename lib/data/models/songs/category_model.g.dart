@@ -1,22 +1,24 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'category.dart';
+part of 'category_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-Category _$CategoryFromJson(Map<String, dynamic> json) => Category(
+CategoryModel _$CategoryModelFromJson(Map<String, dynamic> json) =>
+    CategoryModel(
       id: json['id'] as String,
       title: json['title'] as String,
       songs: (json['songs'] as List<dynamic>?)
-              ?.map((e) => Song.fromJson(e as Map<String, dynamic>))
+              ?.map((e) => SongModel.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],
       type: $enumDecodeNullable(_$CategoryTypeEnumMap, json['type']),
     );
 
-Map<String, dynamic> _$CategoryToJson(Category instance) => <String, dynamic>{
+Map<String, dynamic> _$CategoryModelToJson(CategoryModel instance) =>
+    <String, dynamic>{
       'id': instance.id,
       'title': instance.title,
       'songs': instance.songs,

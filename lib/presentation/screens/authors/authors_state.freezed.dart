@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$AuthorsState {
-  List<Category> get authors;
+  List<CategoryModel> get authors;
   bool get isLoading;
 
   /// Create a copy of AuthorsState
@@ -52,7 +52,7 @@ abstract mixin class $AuthorsStateCopyWith<$Res> {
           AuthorsState value, $Res Function(AuthorsState) _then) =
       _$AuthorsStateCopyWithImpl;
   @useResult
-  $Res call({List<Category> authors, bool isLoading});
+  $Res call({List<CategoryModel> authors, bool isLoading});
 }
 
 /// @nodoc
@@ -74,7 +74,7 @@ class _$AuthorsStateCopyWithImpl<$Res> implements $AuthorsStateCopyWith<$Res> {
       authors: null == authors
           ? _self.authors
           : authors // ignore: cast_nullable_to_non_nullable
-              as List<Category>,
+              as List<CategoryModel>,
       isLoading: null == isLoading
           ? _self.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable

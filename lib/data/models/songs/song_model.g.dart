@@ -1,12 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'song.dart';
+part of 'song_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-Song _$SongFromJson(Map<String, dynamic> json) => Song(
+SongModel _$SongModelFromJson(Map<String, dynamic> json) => SongModel(
       id: (json['id'] as num).toInt(),
       title: json['title'] as String,
       text: json['text'] as String,
@@ -15,7 +15,7 @@ Song _$SongFromJson(Map<String, dynamic> json) => Song(
       category: json['category'] as String?,
     );
 
-Map<String, dynamic> _$SongToJson(Song instance) => <String, dynamic>{
+Map<String, dynamic> _$SongModelToJson(SongModel instance) => <String, dynamic>{
       'id': instance.id,
       'title': instance.title,
       'text': instance.text,

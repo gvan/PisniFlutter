@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$SettingsState {
-  Settings? get settings;
+  SettingsModel? get settings;
 
   /// Create a copy of SettingsState
   /// with the given fields replaced by the non-null parameter values.
@@ -49,7 +49,7 @@ abstract mixin class $SettingsStateCopyWith<$Res> {
           SettingsState value, $Res Function(SettingsState) _then) =
       _$SettingsStateCopyWithImpl;
   @useResult
-  $Res call({Settings? settings});
+  $Res call({SettingsModel? settings});
 }
 
 /// @nodoc
@@ -71,7 +71,7 @@ class _$SettingsStateCopyWithImpl<$Res>
       settings: freezed == settings
           ? _self.settings
           : settings // ignore: cast_nullable_to_non_nullable
-              as Settings?,
+              as SettingsModel?,
     ));
   }
 }

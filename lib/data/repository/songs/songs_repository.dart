@@ -1,6 +1,6 @@
-import 'package:pisni/data/entity/category.dart';
-import 'package:pisni/data/entity/category_type.dart';
-import 'package:pisni/data/entity/song.dart';
+import 'package:pisni/data/models/songs/category_model.dart';
+import 'package:pisni/data/models/songs/category_type.dart';
+import 'package:pisni/data/models/songs/song_model.dart';
 import 'package:pisni/data/repository/songs/i_songs_repository.dart';
 import 'package:pisni/data/data_source/assets/assets_data_source.dart';
 import 'package:pisni/data/data_source/songs/songs_data_source.dart';
@@ -48,20 +48,20 @@ class SongsRepository implements ISongsRepository {
   }
 
   @override
-  Stream<List<Category>> streamCategoriesWithSongs() =>
+  Stream<List<CategoryModel>> streamCategoriesWithSongs() =>
       _listenCategoriesWithSongs(CategoryType.category);
 
   @override
-  Stream<List<Category>> streamAuthorsWithSongs() =>
+  Stream<List<CategoryModel>> streamAuthorsWithSongs() =>
       _listenCategoriesWithSongs(CategoryType.author);
 
   @override
-  Future<List<Song>> getSongs(String category) {
+  Future<List<SongModel>> getSongs(String category) {
     return _songsService.getSongs(category: category);
   }
 
   @override
-  Future<List<Song>> searchSongs(String text) async {
+  Future<List<SongModel>> searchSongs(String text) async {
     if (text.length < 3) {
       return [];
     }
@@ -85,13 +85,13 @@ class SongsRepository implements ISongsRepository {
   }
 
   @override
-  Stream<List<Song>> streamFavoriteSongs() {
+  Stream<List<SongModel>> streamFavoriteSongs() {
     return _songsService.streamFavorites().asyncMap((e) async {
       return await _songsService.getSongs(filterIds: e);
     });
   }
 
-  Stream<List<Category>> _listenCategoriesWithSongs(CategoryType type) {
+  Stream<List<CategoryModel>> _listenCategoriesWithSongs(CategoryType type) {
     return _songsService.streamCategories(type).asyncMap((e) async {
       for (final (i, category) in e.indexed) {
         final songs =

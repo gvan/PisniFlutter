@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pisni/data/entity/category.dart';
-import 'package:pisni/data/entity/song.dart';
+import 'package:pisni/data/models/songs/category_model.dart';
+import 'package:pisni/data/models/songs/song_model.dart';
 import 'package:pisni/presentation/screens/authors/authors_view_model.dart';
 import 'package:pisni/presentation/screens/authors/authors_screen.dart';
 import 'package:pisni/presentation/screens/song/song_screen.dart';
@@ -32,14 +32,14 @@ class _AuthorsNavigationState extends State<AuthorsNavigation> {
                   child: AuthorsScreen(),
                 );
               case '/songs':
-                final category = settings.arguments as Category;
+                final category = settings.arguments as CategoryModel;
                 return ChangeNotifierProvider(
                   create: (context) => SongsViewModel(
                       songsRepository: context.read(), category: category),
                   child: SongsScreen(category: category),
                 );
               case '/song':
-                final song = settings.arguments as Song;
+                final song = settings.arguments as SongModel;
                 return ChangeNotifierProvider(
                   create: (context) =>
                       SongViewModel(songsRepository: context.read()),

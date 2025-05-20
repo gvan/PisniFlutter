@@ -1,19 +1,19 @@
 import 'package:drift/drift.dart';
 import 'package:pisni/data/db/database.dart';
-import 'package:pisni/data/entity/category.dart';
-import 'package:pisni/data/entity/category_type.dart';
-import 'package:pisni/data/entity/song.dart';
+import 'package:pisni/data/models/songs/category_model.dart';
+import 'package:pisni/data/models/songs/category_type.dart';
+import 'package:pisni/data/models/songs/song_model.dart';
 import 'package:pisni/data/data_source/songs/songs_data_source.dart';
 
 class SongsDataSourceImpl implements SongsDataSource {
   final database = AppDatabase();
 
   @override
-  Future<List<Category>> getCategories(CategoryType type) async {
+  Future<List<CategoryModel>> getCategories(CategoryType type) async {
     return await (database.select(database.categoryTable)
           ..where((table) => table.type.equals(type.type)))
         .map(
-          (e) => Category(
+          (e) => CategoryModel(
             id: e.id,
             title: e.title,
             type: CategoryType.fromValue(e.type),
@@ -23,11 +23,11 @@ class SongsDataSourceImpl implements SongsDataSource {
   }
 
   @override
-  Stream<List<Category>> streamCategories(CategoryType type) {
+  Stream<List<CategoryModel>> streamCategories(CategoryType type) {
     return (database.select(database.categoryTable)
           ..where((table) => table.type.equals(type.type)))
         .map(
-          (e) => Category(
+          (e) => CategoryModel(
             id: e.id,
             title: e.title,
             type: CategoryType.fromValue(e.type),
@@ -37,7 +37,7 @@ class SongsDataSourceImpl implements SongsDataSource {
   }
 
   @override
-  Future<void> saveCategories(List<Category> categories) async {
+  Future<void> saveCategories(List<CategoryModel> categories) async {
     await database.batch((batch) {
       batch.insertAll(
         database.categoryTable,
@@ -53,7 +53,7 @@ class SongsDataSourceImpl implements SongsDataSource {
   }
 
   @override
-  Future<List<Song>> getSongs({
+  Future<List<SongModel>> getSongs({
     String? category,
     List<int>? filterIds,
     int? limit,
@@ -70,7 +70,7 @@ class SongsDataSourceImpl implements SongsDataSource {
     }
     final songs = await songsQuery.get();
     return songs
-        .map((e) => Song(
+        .map((e) => SongModel(
               id: e.id,
               title: e.title,
               text: e.songText,
@@ -81,12 +81,12 @@ class SongsDataSourceImpl implements SongsDataSource {
   }
 
   @override
-  Future<List<Song>> searchSongs(String query) async {
+  Future<List<SongModel>> searchSongs(String query) async {
     final songs = await (database.select(database.songTable)
           ..where((e) => e.titleLower.contains(query.toLowerCase())))
         .get();
     return songs
-        .map((e) => Song(
+        .map((e) => SongModel(
             id: e.id,
             title: e.title,
             text: e.songText,
@@ -96,7 +96,7 @@ class SongsDataSourceImpl implements SongsDataSource {
   }
 
   @override
-  Future<void> saveSongs(List<Song> songs) async {
+  Future<void> saveSongs(List<SongModel> songs) async {
     await database.batch((batch) {
       batch.insertAll(
         database.songTable,
