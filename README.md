@@ -1,9 +1,10 @@
 # Pisni
 
-Application is written with Flutter framework. 
+Application is written with the Flutter framework.
 
-State management and dependency injection are done using Provider package. Data are stored in database and drift package provides access to the data. Data layer consists of data sources and repositories. Data sources provide CRUD access to assets, shared preferences and database. Repositories merge data from different data sources together. 
+State management and dependency injection are done using the Provider package. Data is stored in a database. The drift package provides access to the database. Data layer consists of data sources and repositories. Data sources provide CRUD access to assets, shared preferences and databases. Repositories merge data from different data sources together.
 
-There are no use cases because of straighforward business logic. 
+There are no use cases because of straightforward business logic.
 
-Presentation layer consists of ViewModels and Widgets. ViewModels contain business logic, update states and notify Widgets about state changes using ChangeNotifier technic.
+Presentation layer consists of ViewModels and Widgets. ViewModels contain business logic, update states and notify Widgets about state changes using ChangeNotifier technique.
+
