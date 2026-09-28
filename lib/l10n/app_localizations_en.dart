@@ -37,15 +37,12 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String themeMode(String mode) {
-    String _temp0 = intl.Intl.selectLogic(
-      mode,
-      {
-        'light': 'Light',
-        'dark': 'Dark',
-        'system': 'System',
-        'other': '',
-      },
-    );
+    String _temp0 = intl.Intl.selectLogic(mode, {
+      'light': 'Light',
+      'dark': 'Dark',
+      'system': 'System',
+      'other': '',
+    });
     return '$_temp0';
   }
 
