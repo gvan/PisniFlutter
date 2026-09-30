@@ -1,11 +1,11 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pisni/data/models/settings/settings_model.dart';
-import 'package:pisni/data/repository/settings/i_settings_repository.dart';
+import 'package:pisni/data/repository/settings/settings_repository.dart';
 import 'package:pisni/presentation/entities/settings/settings_entity.dart';
 import 'package:pisni/presentation/screens/settings/settings_state.dart';
 
 class SettingsCubit extends Cubit<SettingsState> {
-  final ISettingsRepository _settingsRepository;
+  final SettingsRepository _settingsRepository;
 
   SettingsCubit({required this._settingsRepository})
     : super(SettingsState(settings: null)) {

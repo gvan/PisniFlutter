@@ -1,10 +1,10 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pisni/data/repository/songs/i_songs_repository.dart';
+import 'package:pisni/data/repository/songs/songs_repository.dart';
 import 'package:pisni/presentation/entities/songs/song_entity.dart';
 import 'package:pisni/presentation/screens/search/search_state.dart';
 
 class SearchCubit extends Cubit<SearchState> {
-  final ISongsRepository _songsRepository;
+  final SongsRepository _songsRepository;
 
   SearchCubit({required this._songsRepository}) : super(SearchState(songs: []));
 

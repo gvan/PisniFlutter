@@ -1,11 +1,11 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pisni/data/repository/songs/i_songs_repository.dart';
+import 'package:pisni/data/repository/songs/songs_repository.dart';
 import 'package:pisni/presentation/entities/songs/song_entity.dart';
 import 'package:pisni/presentation/screens/song/song_state.dart';
 import 'package:share_plus/share_plus.dart';
 
 class SongCubit extends Cubit<SongState> {
-  final ISongsRepository songsRepository;
+  final SongsRepository songsRepository;
 
   SongCubit({required this.songsRepository})
     : super(

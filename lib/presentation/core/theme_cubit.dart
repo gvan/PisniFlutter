@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pisni/data/repository/settings/i_settings_repository.dart';
+import 'package:pisni/data/repository/settings/settings_repository.dart';
 import 'package:pisni/presentation/extensions/styles.dart';
 
 class ThemeCubit extends Cubit<ThemeMode?> {
-  final ISettingsRepository _settingsRepository;
+  final SettingsRepository _settingsRepository;
 
   ThemeCubit({required this._settingsRepository}) : super(null) {
     loadTheme();

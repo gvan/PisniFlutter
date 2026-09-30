@@ -5,10 +5,10 @@ import 'package:pisni/data/data_source/preferences/preferences_data_source.dart'
 import 'package:pisni/data/data_source/preferences/preferences_data_source_impl.dart';
 import 'package:pisni/data/data_source/songs/songs_data_source.dart';
 import 'package:pisni/data/data_source/songs/songs_data_source_impl.dart';
-import 'package:pisni/data/repository/settings/i_settings_repository.dart';
 import 'package:pisni/data/repository/settings/settings_repository.dart';
-import 'package:pisni/data/repository/songs/i_songs_repository.dart';
+import 'package:pisni/data/repository/settings/settings_repository_impl.dart';
 import 'package:pisni/data/repository/songs/songs_repository.dart';
+import 'package:pisni/data/repository/songs/songs_repository_impl.dart';
 
 final GetIt sl = GetIt.instance;
 
@@ -22,12 +22,12 @@ class ServiceLocator {
       () => PreferencesDataSourceImpl(),
     );
 
-    sl.registerLazySingleton<ISongsRepository>(
-      () => SongsRepository(songsService: sl(), assetsService: sl()),
+    sl.registerLazySingleton<SongsRepository>(
+      () => SongsRepositoryImpl(songsService: sl(), assetsService: sl()),
     );
 
-    sl.registerLazySingleton<ISettingsRepository>(
-      () => SettignsRepository(preferencesService: sl()),
+    sl.registerLazySingleton<SettingsRepository>(
+      () => SettingsRepositoryImpl(preferencesService: sl()),
     );
   }
 }
