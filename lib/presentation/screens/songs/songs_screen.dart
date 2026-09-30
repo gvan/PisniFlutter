@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pisni/presentation/common/copyright_reference.dart';
 import 'package:pisni/presentation/common/songs_list.dart';
 import 'package:pisni/presentation/entities/songs/category_entity.dart';
-import 'package:pisni/presentation/entities/songs/song_entity.dart';
-import 'package:pisni/presentation/screens/songs/songs_view_model.dart';
-import 'package:provider/provider.dart';
+import 'package:pisni/presentation/screens/songs/songs_state.dart';
+import 'package:pisni/presentation/screens/songs/songs_cubit.dart';
 
 class SongsScreen extends StatefulWidget {
   final CategoryEntity category;
@@ -18,26 +18,25 @@ class SongsScreen extends StatefulWidget {
 class _SongsScreenState extends State<SongsScreen> {
   @override
   Widget build(BuildContext context) {
-    final (List<SongEntity> songs, bool isLoaidng) =
-        context.select((SongsViewModel viewModel) {
-      return (viewModel.state.songs, viewModel.state.isLoading);
-    });
-
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.category.title),
-      ),
-      body: CopyrightReference(
-          child: Stack(
-        children: [
-          if (isLoaidng)
-            Align(
-              alignment: Alignment.center,
-              child: CircularProgressIndicator(),
+    return BlocConsumer<SongsCubit, SongsState>(
+      listener: (context, state) {},
+      builder: (context, state) {
+        return Scaffold(
+          appBar: AppBar(title: Text(widget.category.title)),
+          body: CopyrightReference(
+            child: Stack(
+              children: [
+                if (state.isLoading)
+                  Align(
+                    alignment: Alignment.center,
+                    child: CircularProgressIndicator(),
+                  ),
+                SongsList(songs: state.songs),
+              ],
             ),
-          SongsList(songs: songs)
-        ],
-      )),
+          ),
+        );
+      },
     );
   }
 }
