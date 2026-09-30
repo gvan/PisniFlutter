@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pisni/di/service_locator.dart';
 import 'package:pisni/presentation/entities/songs/category_entity.dart';
 import 'package:pisni/presentation/entities/songs/song_entity.dart';
-import 'package:pisni/presentation/screens/authors/authors_view_model.dart';
+import 'package:pisni/presentation/screens/authors/authors_cubit.dart';
 import 'package:pisni/presentation/screens/authors/authors_screen.dart';
 import 'package:pisni/presentation/screens/song/song_screen.dart';
 import 'package:pisni/presentation/screens/song/song_view_model.dart';
@@ -29,9 +29,8 @@ class _AuthorsNavigationState extends State<AuthorsNavigation> {
           builder: (context) {
             switch (settings.name) {
               case '/':
-                return ChangeNotifierProvider(
-                  create: (context) =>
-                      AuthorsViewModel(songsRepository: context.read()),
+                return BlocProvider(
+                  create: (context) => AuthorsCubit(songsRepository: sl()),
                   child: AuthorsScreen(),
                 );
               case '/songs':

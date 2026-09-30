@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pisni/presentation/common/copyright_reference.dart';
 import 'package:pisni/presentation/common/songs_list.dart';
-import 'package:pisni/presentation/entities/songs/song_entity.dart';
 import 'package:pisni/presentation/extensions/localization.dart';
 import 'package:pisni/presentation/extensions/styles.dart';
-import 'package:pisni/presentation/screens/favorite/favorite_view_model.dart';
-import 'package:provider/provider.dart';
+import 'package:pisni/presentation/screens/favorite/favorite_state.dart';
+import 'package:pisni/presentation/screens/favorite/favorite_cubit.dart';
 
 class FavoriteScreen extends StatefulWidget {
   const FavoriteScreen({super.key});
@@ -21,19 +21,18 @@ class FavoriteScreen extends StatefulWidget {
 class FavoriteScreenState extends State<FavoriteScreen> {
   @override
   Widget build(BuildContext context) {
-    final (bool isLoading, List<SongEntity> songs) = context.select(
-      (FavoriteViewModel viewModel) =>
-          (viewModel.state.isLoading, viewModel.state.songs),
-    );
     return Scaffold(
-        appBar: AppBar(
-          title: Text(context.loc.favorite),
-        ),
-        body: isLoading
-            ? const Center(child: CircularProgressIndicator())
-            : songs.isEmpty
-                ? const _NoFavorites()
-                : CopyrightReference(child: SongsList(songs: songs)));
+      appBar: AppBar(title: Text(context.loc.favorite)),
+      body: BlocBuilder<FavoriteCubit, FavoriteState>(
+        builder: (context, state) {
+          return state.isLoading
+              ? const Center(child: CircularProgressIndicator())
+              : state.songs.isEmpty
+              ? const _NoFavorites()
+              : CopyrightReference(child: SongsList(songs: state.songs));
+        },
+      ),
+    );
   }
 }
 
@@ -46,17 +45,14 @@ class _NoFavorites extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(
-            Icons.star_border,
-            size: 36,
-          ),
+          Icon(Icons.star_border, size: 36),
           Padding(
             padding: const EdgeInsets.only(top: 16.0),
             child: Text(
               context.loc.no_favorite_songs,
               style: context.textStyles.bodyMedium,
             ),
-          )
+          ),
         ],
       ),
     );

@@ -1,20 +1,17 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pisni/data/models/songs/song_model.dart';
 import 'package:pisni/data/repository/songs/i_songs_repository.dart';
 import 'package:pisni/presentation/entities/songs/song_entity.dart';
 import 'package:pisni/presentation/screens/favorite/favorite_state.dart';
 
-class FavoriteViewModel extends ChangeNotifier {
+class FavoriteCubit extends Cubit<FavoriteState> {
   final ISongsRepository _songsRepository;
-  FavoriteState _state = FavoriteState(songs: [], isLoading: true);
   StreamSubscription<List<SongModel>>? _favoriteSubscription;
 
-  FavoriteState get state => _state;
-
-  FavoriteViewModel({required ISongsRepository songsRepository})
-      : _songsRepository = songsRepository {
+  FavoriteCubit({required this._songsRepository})
+    : super(FavoriteState(songs: [], isLoading: true)) {
     _init();
   }
 
@@ -23,16 +20,16 @@ class FavoriteViewModel extends ChangeNotifier {
   }
 
   @override
-  void dispose() {
+  Future<void> close() {
     _favoriteSubscription?.cancel();
-    super.dispose();
+    return super.close();
   }
 
   void _subscribeFavoriteSongs() async {
-    _favoriteSubscription =
-        _songsRepository.streamFavoriteSongs().listen((songs) {
-      _state = _state.copyWith(songs: songs.toEntities(), isLoading: false);
-      notifyListeners();
+    _favoriteSubscription = _songsRepository.streamFavoriteSongs().listen((
+      songs,
+    ) {
+      emit(state.copyWith(songs: songs.toEntities(), isLoading: false));
     });
   }
 }

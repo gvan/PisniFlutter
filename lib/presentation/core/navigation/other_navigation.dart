@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pisni/di/service_locator.dart';
 import 'package:pisni/presentation/entities/songs/song_entity.dart';
 import 'package:pisni/presentation/screens/favorite/favorite_screen.dart';
-import 'package:pisni/presentation/screens/favorite/favorite_view_model.dart';
+import 'package:pisni/presentation/screens/favorite/favorite_cubit.dart';
 import 'package:pisni/presentation/screens/other/other_screen.dart';
 import 'package:pisni/presentation/screens/settings/settings_screen.dart';
 import 'package:pisni/presentation/screens/settings/settings_view_model.dart';
@@ -26,31 +28,33 @@ class _OtherNavigationState extends State<OtherNavigation> {
     return Navigator(
       key: widget.navigatorKey,
       onGenerateRoute: (settings) {
-        return MaterialPageRoute(builder: (context) {
-          switch (settings.name) {
-            case '/':
-              return OtherScreen();
-            case '/favorite':
-              return ChangeNotifierProvider(
+        return MaterialPageRoute(
+          builder: (context) {
+            switch (settings.name) {
+              case '/':
+                return OtherScreen();
+              case '/favorite':
+                return BlocProvider(
+                  create: (context) => FavoriteCubit(songsRepository: sl()),
+                  child: FavoriteScreen(),
+                );
+              case '/song':
+                final song = settings.arguments as SongEntity;
+                return ChangeNotifierProvider(
                   create: (context) =>
-                      FavoriteViewModel(songsRepository: context.read()),
-                  child: FavoriteScreen());
-            case '/song':
-              final song = settings.arguments as SongEntity;
-              return ChangeNotifierProvider(
-                create: (context) =>
-                    SongViewModel(songsRepository: context.read()),
-                child: SongScreen(song: song),
-              );
-            case '/settings':
-              return ChangeNotifierProvider(
-                create: (context) =>
-                    SettingsViewModel(settingsRepository: context.read()),
-                child: SettingsScreen(),
-              );
-          }
-          return const SizedBox.shrink();
-        });
+                      SongViewModel(songsRepository: context.read()),
+                  child: SongScreen(song: song),
+                );
+              case '/settings':
+                return ChangeNotifierProvider(
+                  create: (context) =>
+                      SettingsViewModel(settingsRepository: context.read()),
+                  child: SettingsScreen(),
+                );
+            }
+            return const SizedBox.shrink();
+          },
+        );
       },
     );
   }
