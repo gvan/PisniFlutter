@@ -3,13 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pisni/di/service_locator.dart';
 import 'package:pisni/presentation/entities/songs/category_entity.dart';
 import 'package:pisni/presentation/entities/songs/song_entity.dart';
-import 'package:pisni/presentation/screens/home/home_view_model.dart';
+import 'package:pisni/presentation/screens/home/home_cubit.dart';
 import 'package:pisni/presentation/screens/home/home_screen.dart';
 import 'package:pisni/presentation/screens/song/song_screen.dart';
-import 'package:pisni/presentation/screens/song/song_view_model.dart';
+import 'package:pisni/presentation/screens/song/song_cubit.dart';
 import 'package:pisni/presentation/screens/songs/songs_screen.dart';
 import 'package:pisni/presentation/screens/songs/songs_cubit.dart';
-import 'package:provider/provider.dart';
 
 class HomeNavigation extends StatefulWidget {
   final Key navigatorKey;
@@ -32,24 +31,23 @@ class _HomeNavigationState extends State<HomeNavigation> {
           builder: (context) {
             switch (settings.name) {
               case '/':
-                return ChangeNotifierProvider(
-                  create: (context) => HomeViewModel(songsRepository: sl()),
+                return BlocProvider(
+                  create: (context) => HomeCubit(songsRepository: sl()),
                   child: HomeWidget(),
                 );
               case '/songs':
                 final category = settings.arguments as CategoryEntity;
                 return BlocProvider(
                   create: (context) => SongsCubit(
-                    songsRepository: context.read(),
+                    songsRepository: sl(),
                     category: category,
                   ),
                   child: SongsScreen(category: category),
                 );
               case '/song':
                 final song = settings.arguments as SongEntity;
-                return ChangeNotifierProvider(
-                  create: (context) =>
-                      SongViewModel(songsRepository: context.read()),
+                return BlocProvider(
+                  create: (context) => SongCubit(songsRepository: sl()),
                   child: SongScreen(song: song),
                 );
             }

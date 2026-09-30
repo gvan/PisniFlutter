@@ -6,10 +6,9 @@ import 'package:pisni/presentation/screens/favorite/favorite_screen.dart';
 import 'package:pisni/presentation/screens/favorite/favorite_cubit.dart';
 import 'package:pisni/presentation/screens/other/other_screen.dart';
 import 'package:pisni/presentation/screens/settings/settings_screen.dart';
-import 'package:pisni/presentation/screens/settings/settings_view_model.dart';
+import 'package:pisni/presentation/screens/settings/settings_cubit.dart';
 import 'package:pisni/presentation/screens/song/song_screen.dart';
-import 'package:pisni/presentation/screens/song/song_view_model.dart';
-import 'package:provider/provider.dart';
+import 'package:pisni/presentation/screens/song/song_cubit.dart';
 
 class OtherNavigation extends StatefulWidget {
   final Key navigatorKey;
@@ -40,15 +39,13 @@ class _OtherNavigationState extends State<OtherNavigation> {
                 );
               case '/song':
                 final song = settings.arguments as SongEntity;
-                return ChangeNotifierProvider(
-                  create: (context) =>
-                      SongViewModel(songsRepository: context.read()),
+                return BlocProvider(
+                  create: (context) => SongCubit(songsRepository: sl()),
                   child: SongScreen(song: song),
                 );
               case '/settings':
-                return ChangeNotifierProvider(
-                  create: (context) =>
-                      SettingsViewModel(settingsRepository: context.read()),
+                return BlocProvider(
+                  create: (context) => SettingsCubit(settingsRepository: sl()),
                   child: SettingsScreen(),
                 );
             }

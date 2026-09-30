@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:pisni/data/models/settings/settings_model.dart';
-import 'package:pisni/presentation/core/theme_view_model.dart';
+import 'package:pisni/presentation/core/theme_cubit.dart';
 import 'package:pisni/presentation/extensions/localization.dart';
 import 'package:pisni/presentation/extensions/styles.dart';
-import 'package:pisni/presentation/screens/settings/settings_view_model.dart';
+import 'package:pisni/presentation/screens/settings/settings_cubit.dart';
 import 'package:provider/provider.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -11,16 +11,12 @@ class SettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final settings = context.select((SettingsViewModel viewModel) {
+    final settings = context.select((SettingsCubit viewModel) {
       return viewModel.state.settings;
     });
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          context.loc.settings,
-        ),
-      ),
+      appBar: AppBar(title: Text(context.loc.settings)),
       body: settings != null ? _SettingsContent() : CircularProgressIndicator(),
     );
   }
@@ -29,9 +25,9 @@ class SettingsScreen extends StatelessWidget {
 class _SettingsContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final viewModel = context.read<SettingsViewModel>();
-    final themeViewModel = context.read<ThemeViewModel>();
-    final AppThemeMode theme = context.select((SettingsViewModel viewModel) {
+    final settingsCubit = context.read<SettingsCubit>();
+    final themeViewModel = context.read<ThemeCubit>();
+    final AppThemeMode theme = context.select((SettingsCubit viewModel) {
       return viewModel.state.settings!.themeMode;
     });
 
@@ -62,14 +58,14 @@ class _SettingsContent extends StatelessWidget {
                       )
                       .toList(),
                   onChanged: (mode) {
-                    viewModel.changeThemeMode(mode!);
+                    settingsCubit.changeThemeMode(mode!);
                     themeViewModel.loadTheme();
                   },
                 ),
               ),
             ],
           ),
-        )
+        ),
       ],
     );
   }

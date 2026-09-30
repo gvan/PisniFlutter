@@ -1,32 +1,36 @@
-import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pisni/data/repository/songs/i_songs_repository.dart';
 import 'package:pisni/presentation/entities/songs/song_entity.dart';
 import 'package:pisni/presentation/screens/song/song_state.dart';
 import 'package:share_plus/share_plus.dart';
 
-class SongViewModel extends ChangeNotifier {
+class SongCubit extends Cubit<SongState> {
   final ISongsRepository songsRepository;
 
-  SongState _state = SongState(
-      song:
-          SongEntity(id: 0, title: '', text: '', author: '', audioFileName: '', category: ''),
-      isFavorite: false);
-
-  SongViewModel({required this.songsRepository});
-
-  SongState get state => _state;
+  SongCubit({required this.songsRepository})
+    : super(
+        SongState(
+          song: SongEntity(
+            id: 0,
+            title: '',
+            text: '',
+            author: '',
+            audioFileName: '',
+            category: '',
+          ),
+          isFavorite: false,
+        ),
+      );
 
   void setSong(SongEntity song) async {
     final isFavorite = await songsRepository.isFavoriteSong(song.id);
-    _state = _state.copyWith(song: song, isFavorite: isFavorite);
-    notifyListeners();
+    emit(state.copyWith(song: song, isFavorite: isFavorite));
   }
 
   Future<void> addToFavorite(SongEntity song) async {
     await songsRepository.toggleFavorite(song.id);
     final isFavorite = await songsRepository.isFavoriteSong(song.id);
-    _state = _state.copyWith(isFavorite: isFavorite);
-    notifyListeners();
+    emit(state.copyWith(isFavorite: isFavorite));
   }
 
   void shareSong(SongEntity song) {
@@ -39,10 +43,7 @@ class SongViewModel extends ChangeNotifier {
     }
     text.write(song.text);
     SharePlus.instance.share(
-      ShareParams(
-        title: song.title,
-        text: text.toString(),
-      ),
+      ShareParams(title: song.title, text: text.toString()),
     );
   }
 }

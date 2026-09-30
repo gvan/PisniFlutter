@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pisni/di/service_locator.dart';
 import 'package:pisni/presentation/entities/songs/song_entity.dart';
 import 'package:pisni/presentation/screens/search/search_screen.dart';
-import 'package:pisni/presentation/screens/search/search_view_model.dart';
+import 'package:pisni/presentation/screens/search/search_cubit.dart';
 import 'package:pisni/presentation/screens/song/song_screen.dart';
-import 'package:pisni/presentation/screens/song/song_view_model.dart';
-import 'package:provider/provider.dart';
+import 'package:pisni/presentation/screens/song/song_cubit.dart';
 
 class SearchNavigation extends StatefulWidget {
   final Key navigatorKey;
@@ -23,24 +24,24 @@ class _SearchNavigationState extends State<SearchNavigation> {
     return Navigator(
       key: widget.navigatorKey,
       onGenerateRoute: (settings) {
-        return MaterialPageRoute(builder: (context) {
-          switch (settings.name) {
-            case '/':
-              return ChangeNotifierProvider(
-                create: (context) =>
-                    SearchViewModel(songsRepository: context.read()),
-                child: SearchScreen(),
-              );
-            case '/song':
-              final song = settings.arguments as SongEntity;
-              return ChangeNotifierProvider(
-                create: (context) =>
-                    SongViewModel(songsRepository: context.read()),
-                child: SongScreen(song: song),
-              );
-          }
-          return const SizedBox.shrink();
-        });
+        return MaterialPageRoute(
+          builder: (context) {
+            switch (settings.name) {
+              case '/':
+                return BlocProvider(
+                  create: (context) => SearchCubit(songsRepository: sl()),
+                  child: SearchScreen(),
+                );
+              case '/song':
+                final song = settings.arguments as SongEntity;
+                return BlocProvider(
+                  create: (context) => SongCubit(songsRepository: sl()),
+                  child: SongScreen(song: song),
+                );
+            }
+            return const SizedBox.shrink();
+          },
+        );
       },
     );
   }

@@ -6,10 +6,9 @@ import 'package:pisni/presentation/entities/songs/song_entity.dart';
 import 'package:pisni/presentation/screens/authors/authors_cubit.dart';
 import 'package:pisni/presentation/screens/authors/authors_screen.dart';
 import 'package:pisni/presentation/screens/song/song_screen.dart';
-import 'package:pisni/presentation/screens/song/song_view_model.dart';
+import 'package:pisni/presentation/screens/song/song_cubit.dart';
 import 'package:pisni/presentation/screens/songs/songs_screen.dart';
 import 'package:pisni/presentation/screens/songs/songs_cubit.dart';
-import 'package:provider/provider.dart';
 
 class AuthorsNavigation extends StatefulWidget {
   final Key navigatorKey;
@@ -42,9 +41,8 @@ class _AuthorsNavigationState extends State<AuthorsNavigation> {
                 );
               case '/song':
                 final song = settings.arguments as SongEntity;
-                return ChangeNotifierProvider(
-                  create: (context) =>
-                      SongViewModel(songsRepository: context.read()),
+                return BlocProvider(
+                  create: (context) => SongCubit(songsRepository: sl()),
                   child: SongScreen(song: song),
                 );
             }

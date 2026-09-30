@@ -6,11 +6,7 @@ import 'package:pisni/data/data_source/assets/assets_data_source.dart';
 import 'package:pisni/data/data_source/songs/songs_data_source.dart';
 
 class SongsRepository implements ISongsRepository {
-  SongsRepository(
-      {required SongsDataSource songsService,
-      required AssetsDataSource assetsService})
-      : _songsService = songsService,
-        _assetsService = assetsService {
+  SongsRepository({required this._songsService, required this._assetsService}) {
     initDatabase();
   }
 
@@ -20,8 +16,9 @@ class SongsRepository implements ISongsRepository {
   void initDatabase() async {
     var categories = await _songsService.getCategories(CategoryType.category);
     if (categories.isEmpty) {
-      final categoriesAssets =
-          await _assetsService.getCategories(CategoryType.category);
+      final categoriesAssets = await _assetsService.getCategories(
+        CategoryType.category,
+      );
       for (final category in categoriesAssets) {
         final songs = await _songsService.getSongs(category: category.id);
         if (songs.isEmpty) {
@@ -34,8 +31,9 @@ class SongsRepository implements ISongsRepository {
 
     var authors = await _songsService.getCategories(CategoryType.author);
     if (authors.isEmpty) {
-      final authorsAssets =
-          await _assetsService.getCategories(CategoryType.author);
+      final authorsAssets = await _assetsService.getCategories(
+        CategoryType.author,
+      );
       for (final category in authorsAssets) {
         final songs = await _songsService.getSongs(category: category.id);
         if (songs.isEmpty) {
@@ -94,8 +92,10 @@ class SongsRepository implements ISongsRepository {
   Stream<List<CategoryModel>> _listenCategoriesWithSongs(CategoryType type) {
     return _songsService.streamCategories(type).asyncMap((e) async {
       for (final (i, category) in e.indexed) {
-        final songs =
-            await _songsService.getSongs(category: category.id, limit: 20);
+        final songs = await _songsService.getSongs(
+          category: category.id,
+          limit: 20,
+        );
         e[i] = category.copyWith(songs: songs);
       }
       return e;

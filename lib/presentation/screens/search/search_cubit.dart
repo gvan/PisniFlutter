@@ -1,20 +1,15 @@
-import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pisni/data/repository/songs/i_songs_repository.dart';
 import 'package:pisni/presentation/entities/songs/song_entity.dart';
 import 'package:pisni/presentation/screens/search/search_state.dart';
 
-class SearchViewModel extends ChangeNotifier {
+class SearchCubit extends Cubit<SearchState> {
   final ISongsRepository _songsRepository;
-  SearchState _state = SearchState(songs: []);
 
-  SearchState get state => _state;
-
-  SearchViewModel({required ISongsRepository songsRepository})
-      : _songsRepository = songsRepository;
+  SearchCubit({required this._songsRepository}) : super(SearchState(songs: []));
 
   void search(String input) async {
     final songs = await _songsRepository.searchSongs(input);
-    _state = _state.copyWith(songs: songs.toEntities());
-    notifyListeners();
+    emit(state.copyWith(songs: songs.toEntities()));
   }
 }

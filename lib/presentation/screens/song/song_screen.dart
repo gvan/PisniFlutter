@@ -5,7 +5,7 @@ import 'package:pisni/presentation/common/copyright_reference.dart';
 import 'package:pisni/presentation/entities/songs/song_entity.dart';
 import 'package:pisni/presentation/extensions/localization.dart';
 import 'package:pisni/presentation/extensions/styles.dart';
-import 'package:pisni/presentation/screens/song/song_view_model.dart';
+import 'package:pisni/presentation/screens/song/song_cubit.dart';
 import 'package:provider/provider.dart';
 
 class SongScreen extends StatefulWidget {
@@ -21,15 +21,15 @@ class _SongScreenState extends State<SongScreen> {
   @override
   void initState() {
     super.initState();
-    final viewModel = context.read<SongViewModel>();
+    final viewModel = context.read<SongCubit>();
     viewModel.setSong(widget.song);
   }
 
   @override
   Widget build(BuildContext context) {
-    final viewModel = context.read<SongViewModel>();
+    final viewModel = context.read<SongCubit>();
     final (SongEntity song, bool isFavorite) = context.select(
-        (SongViewModel viewModel) =>
+        (SongCubit viewModel) =>
             (viewModel.state.song, viewModel.state.isFavorite));
 
     return Scaffold(

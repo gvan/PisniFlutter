@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pisni/presentation/common/copyright_reference.dart';
 import 'package:pisni/presentation/common/songs_list.dart';
 import 'package:pisni/presentation/extensions/localization.dart';
-import 'package:pisni/presentation/screens/search/search_view_model.dart';
-import 'package:provider/provider.dart';
+import 'package:pisni/presentation/screens/search/search_state.dart';
+import 'package:pisni/presentation/screens/search/search_cubit.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
@@ -15,33 +16,28 @@ class SearchScreen extends StatefulWidget {
 class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
-    final viewModel = context.read<SearchViewModel>();
-    final songs = context.select((SearchViewModel viewModel) {
-      return viewModel.state.songs;
-    });
     return Scaffold(
-      appBar: AppBar(
-        title: Text(context.loc.search),
-      ),
-      body: CopyrightReference(
-        child: Column(
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(24, 16, 24, 8),
-              child: TextField(
-                decoration: InputDecoration(
+      appBar: AppBar(title: Text(context.loc.search)),
+      body: BlocBuilder<SearchCubit, SearchState>(
+        builder: (context, state) => CopyrightReference(
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Padding(
+                padding: const EdgeInsets.fromLTRB(24, 16, 24, 8),
+                child: TextField(
+                  decoration: InputDecoration(
                     border: OutlineInputBorder(),
-                    hintText: context.loc.songTitleOrLyrics),
-                onChanged: (text) {
-                  viewModel.search(text);
-                },
+                    hintText: context.loc.songTitleOrLyrics,
+                  ),
+                  onChanged: (text) {
+                    context.read<SearchCubit>().search(text);
+                  },
+                ),
               ),
-            ),
-            Expanded(
-              child: SongsList(songs: songs),
-            )
-          ],
+              Expanded(child: SongsList(songs: state.songs)),
+            ],
+          ),
         ),
       ),
     );
