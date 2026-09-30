@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pisni/di/service_locator.dart';
 import 'package:pisni/presentation/entities/songs/category_entity.dart';
 import 'package:pisni/presentation/entities/songs/song_entity.dart';
 import 'package:pisni/presentation/screens/home/home_view_model.dart';
@@ -32,8 +33,7 @@ class _HomeNavigationState extends State<HomeNavigation> {
             switch (settings.name) {
               case '/':
                 return ChangeNotifierProvider(
-                  create: (context) =>
-                      HomeViewModel(songsRepository: context.read()),
+                  create: (context) => HomeViewModel(songsRepository: sl()),
                   child: HomeWidget(),
                 );
               case '/songs':

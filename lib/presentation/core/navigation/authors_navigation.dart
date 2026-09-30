@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pisni/di/service_locator.dart';
 import 'package:pisni/presentation/entities/songs/category_entity.dart';
 import 'package:pisni/presentation/entities/songs/song_entity.dart';
 import 'package:pisni/presentation/screens/authors/authors_view_model.dart';
@@ -36,10 +37,8 @@ class _AuthorsNavigationState extends State<AuthorsNavigation> {
               case '/songs':
                 final category = settings.arguments as CategoryEntity;
                 return BlocProvider(
-                  create: (context) => SongsCubit(
-                    songsRepository: context.read(),
-                    category: category,
-                  ),
+                  create: (context) =>
+                      SongsCubit(songsRepository: sl(), category: category),
                   child: SongsScreen(category: category),
                 );
               case '/song':
