@@ -48,7 +48,6 @@ The app follows **Clean Architecture** and is split into **feature modules**. Ea
 │     │                                  │
 │     ▼                                  │
 │   Repository (interface)               │
-│   Entity                               │
 │                                        │
 └────┬───────────────────────────────────┘
      ▲ implements
