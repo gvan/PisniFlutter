@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pisni/di/service_locator.dart';
 import 'package:pisni/domain/entities/songs/song_entity.dart';
-import 'package:pisni/presentation/screens/favorite/favorite_screen.dart';
-import 'package:pisni/presentation/screens/favorite/favorite_cubit.dart';
+import 'package:pisni/presentation/screens/favorite/screen/favorite_screen.dart';
+import 'package:pisni/presentation/screens/favorite/cubit/favorite_cubit.dart';
 import 'package:pisni/presentation/screens/other/other_screen.dart';
-import 'package:pisni/presentation/screens/settings/settings_screen.dart';
-import 'package:pisni/presentation/screens/settings/settings_cubit.dart';
-import 'package:pisni/presentation/screens/song/song_screen.dart';
-import 'package:pisni/presentation/screens/song/song_cubit.dart';
+import 'package:pisni/presentation/screens/settings/screen/settings_screen.dart';
+import 'package:pisni/presentation/screens/settings/cubit/settings_cubit.dart';
+import 'package:pisni/presentation/screens/song/screen/song_screen.dart';
+import 'package:pisni/presentation/screens/song/cubit/song_cubit.dart';
 
 class OtherNavigation extends StatefulWidget {
   final Key navigatorKey;

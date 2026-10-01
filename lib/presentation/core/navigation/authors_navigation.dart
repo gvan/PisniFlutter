@@ -3,12 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pisni/di/service_locator.dart';
 import 'package:pisni/domain/entities/songs/category_entity.dart';
 import 'package:pisni/domain/entities/songs/song_entity.dart';
-import 'package:pisni/presentation/screens/authors/authors_cubit.dart';
-import 'package:pisni/presentation/screens/authors/authors_screen.dart';
-import 'package:pisni/presentation/screens/song/song_screen.dart';
-import 'package:pisni/presentation/screens/song/song_cubit.dart';
-import 'package:pisni/presentation/screens/songs/songs_screen.dart';
-import 'package:pisni/presentation/screens/songs/songs_cubit.dart';
+import 'package:pisni/presentation/screens/authors/cubit/authors_cubit.dart';
+import 'package:pisni/presentation/screens/authors/screen/authors_screen.dart';
+import 'package:pisni/presentation/screens/song/screen/song_screen.dart';
+import 'package:pisni/presentation/screens/song/cubit/song_cubit.dart';
+import 'package:pisni/presentation/screens/songs/screen/songs_screen.dart';
+import 'package:pisni/presentation/screens/songs/cubit/songs_cubit.dart';
 
 class AuthorsNavigation extends StatefulWidget {
   final Key navigatorKey;

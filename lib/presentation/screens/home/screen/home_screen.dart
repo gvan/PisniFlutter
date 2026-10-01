@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pisni/presentation/common/categories_list.dart';
 import 'package:pisni/presentation/common/copyright_reference.dart';
 import 'package:pisni/presentation/extensions/localization.dart';
-import 'package:pisni/presentation/screens/home/home_state.dart';
-import 'package:pisni/presentation/screens/home/home_cubit.dart';
+import 'package:pisni/presentation/screens/home/cubit/home_state.dart';
+import 'package:pisni/presentation/screens/home/cubit/home_cubit.dart';
 
 class HomeWidget extends StatelessWidget {
   const HomeWidget({super.key});

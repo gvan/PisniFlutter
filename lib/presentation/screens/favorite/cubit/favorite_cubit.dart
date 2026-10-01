@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pisni/data/models/songs/song_model.dart';
 import 'package:pisni/domain/entities/songs/song_entity.dart';
 import 'package:pisni/domain/usecase/songs/watch_favorite_songs_use_case.dart';
-import 'package:pisni/presentation/screens/favorite/favorite_state.dart';
+import 'package:pisni/presentation/screens/favorite/cubit/favorite_state.dart';
 
 class FavoriteCubit extends Cubit<FavoriteState> {
   final WatchFavoriteSongsUseCase _watchFavoriteSongsUseCase;

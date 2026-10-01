@@ -3,7 +3,7 @@ import 'package:pisni/data/models/settings/settings_model.dart';
 import 'package:pisni/domain/entities/settings/settings_entity.dart';
 import 'package:pisni/domain/usecase/settings/get_settings_use_case.dart';
 import 'package:pisni/domain/usecase/settings/save_settings_use_case.dart';
-import 'package:pisni/presentation/screens/settings/settings_state.dart';
+import 'package:pisni/presentation/screens/settings/cubit/settings_state.dart';
 
 class SettingsCubit extends Cubit<SettingsState> {
   final GetSettingsUseCase _getSettingsUseCase;

@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pisni/data/models/songs/category_model.dart';
 import 'package:pisni/domain/entities/songs/category_entity.dart';
 import 'package:pisni/domain/usecase/songs/watch_authors_with_songs_use_case.dart';
-import 'package:pisni/presentation/screens/authors/authors_state.dart';
+import 'package:pisni/presentation/screens/authors/cubit/authors_state.dart';
 
 class AuthorsCubit extends Cubit<AuthorsState> {
   final WatchAuthorsWithSongsUseCase _watchAuthorsWithSongsUseCase;

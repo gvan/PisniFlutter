@@ -2,7 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pisni/domain/entities/songs/category_entity.dart';
 import 'package:pisni/domain/entities/songs/song_entity.dart';
 import 'package:pisni/domain/usecase/songs/get_songs_use_case.dart';
-import 'package:pisni/presentation/screens/songs/songs_state.dart';
+import 'package:pisni/presentation/screens/songs/cubit/songs_state.dart';
 
 class SongsCubit extends Cubit<SongsState> {
   final GetSongsUseCase _getSongsUseCase;

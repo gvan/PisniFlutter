@@ -2,7 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pisni/domain/entities/songs/song_entity.dart';
 import 'package:pisni/domain/usecase/songs/favorite_song_use_case.dart';
 import 'package:pisni/domain/usecase/songs/toggle_favorite_song_use_case.dart';
-import 'package:pisni/presentation/screens/song/song_state.dart';
+import 'package:pisni/presentation/screens/song/cubit/song_state.dart';
 import 'package:share_plus/share_plus.dart';
 
 class SongCubit extends Cubit<SongState> {

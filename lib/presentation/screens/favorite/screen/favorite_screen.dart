@@ -4,8 +4,8 @@ import 'package:pisni/presentation/common/copyright_reference.dart';
 import 'package:pisni/presentation/common/songs_list.dart';
 import 'package:pisni/presentation/extensions/localization.dart';
 import 'package:pisni/presentation/extensions/styles.dart';
-import 'package:pisni/presentation/screens/favorite/favorite_state.dart';
-import 'package:pisni/presentation/screens/favorite/favorite_cubit.dart';
+import 'package:pisni/presentation/screens/favorite/cubit/favorite_state.dart';
+import 'package:pisni/presentation/screens/favorite/cubit/favorite_cubit.dart';
 
 class FavoriteScreen extends StatefulWidget {
   const FavoriteScreen({super.key});

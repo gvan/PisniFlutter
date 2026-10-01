@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pisni/presentation/common/copyright_reference.dart';
 import 'package:pisni/presentation/common/songs_list.dart';
 import 'package:pisni/presentation/extensions/localization.dart';
-import 'package:pisni/presentation/screens/search/search_state.dart';
-import 'package:pisni/presentation/screens/search/search_cubit.dart';
+import 'package:pisni/presentation/screens/search/cubit/search_state.dart';
+import 'package:pisni/presentation/screens/search/cubit/search_cubit.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});

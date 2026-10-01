@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pisni/l10n/app_localizations.dart';
 import 'package:pisni/presentation/common/copyright_reference.dart';
-import 'package:pisni/presentation/screens/authors/authors_state.dart';
-import 'package:pisni/presentation/screens/authors/authors_cubit.dart';
+import 'package:pisni/presentation/screens/authors/cubit/authors_state.dart';
+import 'package:pisni/presentation/screens/authors/cubit/authors_cubit.dart';
 import 'package:pisni/presentation/common/categories_list.dart';
 
 class AuthorsScreen extends StatelessWidget {

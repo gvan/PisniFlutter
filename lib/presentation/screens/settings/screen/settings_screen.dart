@@ -4,8 +4,8 @@ import 'package:pisni/data/models/settings/settings_model.dart';
 import 'package:pisni/presentation/core/theme_cubit.dart';
 import 'package:pisni/presentation/extensions/localization.dart';
 import 'package:pisni/presentation/extensions/styles.dart';
-import 'package:pisni/presentation/screens/settings/settings_cubit.dart';
-import 'package:pisni/presentation/screens/settings/settings_state.dart';
+import 'package:pisni/presentation/screens/settings/cubit/settings_cubit.dart';
+import 'package:pisni/presentation/screens/settings/cubit/settings_state.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});

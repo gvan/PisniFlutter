@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pisni/presentation/common/copyright_reference.dart';
 import 'package:pisni/presentation/common/songs_list.dart';
 import 'package:pisni/domain/entities/songs/category_entity.dart';
-import 'package:pisni/presentation/screens/songs/songs_state.dart';
-import 'package:pisni/presentation/screens/songs/songs_cubit.dart';
+import 'package:pisni/presentation/screens/songs/cubit/songs_state.dart';
+import 'package:pisni/presentation/screens/songs/cubit/songs_cubit.dart';
 
 class SongsScreen extends StatefulWidget {
   final CategoryEntity category;

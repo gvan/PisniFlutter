@@ -6,8 +6,8 @@ import 'package:pisni/presentation/common/copyright_reference.dart';
 import 'package:pisni/domain/entities/songs/song_entity.dart';
 import 'package:pisni/presentation/extensions/localization.dart';
 import 'package:pisni/presentation/extensions/styles.dart';
-import 'package:pisni/presentation/screens/song/song_cubit.dart';
-import 'package:pisni/presentation/screens/song/song_state.dart';
+import 'package:pisni/presentation/screens/song/cubit/song_cubit.dart';
+import 'package:pisni/presentation/screens/song/cubit/song_state.dart';
 
 class SongScreen extends StatefulWidget {
   final SongEntity song;
