@@ -39,7 +39,7 @@ class _HomeNavigationState extends State<HomeNavigation> {
                 final category = settings.arguments as CategoryEntity;
                 return BlocProvider(
                   create: (context) =>
-                      SongsCubit(songsRepository: sl(), category: category),
+                      SongsCubit(getSongsUseCase: sl(), category: category),
                   child: SongsScreen(category: category),
                 );
               case '/song':

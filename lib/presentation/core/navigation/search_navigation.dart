@@ -29,7 +29,7 @@ class _SearchNavigationState extends State<SearchNavigation> {
             switch (settings.name) {
               case '/':
                 return BlocProvider(
-                  create: (context) => SearchCubit(songsRepository: sl()),
+                  create: (context) => SearchCubit(findSongUseCase: sl()),
                   child: SearchScreen(),
                 );
               case '/song':

@@ -48,7 +48,10 @@ class _OtherNavigationState extends State<OtherNavigation> {
                 );
               case '/settings':
                 return BlocProvider(
-                  create: (context) => SettingsCubit(settingsRepository: sl()),
+                  create: (context) => SettingsCubit(
+                    getSettingsUseCase: sl(),
+                    saveSettingsUseCase: sl(),
+                  ),
                   child: SettingsScreen(),
                 );
             }
