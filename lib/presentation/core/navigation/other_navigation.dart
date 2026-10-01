@@ -34,7 +34,8 @@ class _OtherNavigationState extends State<OtherNavigation> {
                 return OtherScreen();
               case '/favorite':
                 return BlocProvider(
-                  create: (context) => FavoriteCubit(songsRepository: sl()),
+                  create: (context) =>
+                      FavoriteCubit(watchFavoriteSongsUseCase: sl()),
                   child: FavoriteScreen(),
                 );
               case '/song':

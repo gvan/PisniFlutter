@@ -32,7 +32,8 @@ class _HomeNavigationState extends State<HomeNavigation> {
             switch (settings.name) {
               case '/':
                 return BlocProvider(
-                  create: (context) => HomeCubit(songsRepository: sl()),
+                  create: (context) =>
+                      HomeCubit(watchCategoriesWithSongsUseCase: sl()),
                   child: HomeWidget(),
                 );
               case '/songs':

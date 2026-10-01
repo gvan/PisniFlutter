@@ -14,6 +14,9 @@ import 'package:pisni/domain/usecase/settings/save_settings_use_case.dart';
 import 'package:pisni/domain/usecase/songs/favorite_song_use_case.dart';
 import 'package:pisni/domain/usecase/songs/find_song_use_case.dart';
 import 'package:pisni/domain/usecase/songs/toggle_favorite_song_use_case.dart';
+import 'package:pisni/domain/usecase/songs/watch_authors_with_songs_use_case.dart';
+import 'package:pisni/domain/usecase/songs/watch_categories_with_songs_use_case.dart';
+import 'package:pisni/domain/usecase/songs/watch_favorite_songs_use_case.dart';
 
 final GetIt sl = GetIt.instance;
 
@@ -53,6 +56,18 @@ class ServiceLocator {
 
     sl.registerLazySingleton<FindSongUseCase>(
       () => FindSongUseCase(songsRepository: sl()),
+    );
+
+    sl.registerLazySingleton<WatchCategoriesWithSongsUseCase>(
+      () => WatchCategoriesWithSongsUseCase(songsRepository: sl()),
+    );
+
+    sl.registerLazySingleton<WatchAuthorsWithSongsUseCase>(
+      () => WatchAuthorsWithSongsUseCase(songsRepository: sl()),
+    );
+
+    sl.registerLazySingleton<WatchFavoriteSongsUseCase>(
+      () => WatchFavoriteSongsUseCase(songsRepository: sl()),
     );
   }
 }

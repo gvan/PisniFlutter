@@ -2,23 +2,22 @@ import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pisni/data/models/songs/category_model.dart';
-import 'package:pisni/domain/repository/songs/songs_repository.dart';
 import 'package:pisni/domain/entities/songs/category_entity.dart';
+import 'package:pisni/domain/usecase/songs/watch_authors_with_songs_use_case.dart';
 import 'package:pisni/presentation/screens/authors/authors_state.dart';
 
 class AuthorsCubit extends Cubit<AuthorsState> {
-  final SongsRepository _songsRepository;
+  final WatchAuthorsWithSongsUseCase _watchAuthorsWithSongsUseCase;
+
   StreamSubscription<List<CategoryModel>>? _categoriesSubscription;
 
-  AuthorsCubit({required this._songsRepository})
+  AuthorsCubit({required this._watchAuthorsWithSongsUseCase})
     : super(AuthorsState(authors: [], isLoading: true)) {
     _init();
   }
 
   void _init() async {
-    _categoriesSubscription = _songsRepository.streamAuthorsWithSongs().listen((
-      authors,
-    ) {
+    _categoriesSubscription = _watchAuthorsWithSongsUseCase().listen((authors) {
       final authorsEntities = authors.toEntities();
       emit(
         state.copyWith(

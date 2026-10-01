@@ -29,7 +29,8 @@ class _AuthorsNavigationState extends State<AuthorsNavigation> {
             switch (settings.name) {
               case '/':
                 return BlocProvider(
-                  create: (context) => AuthorsCubit(songsRepository: sl()),
+                  create: (context) =>
+                      AuthorsCubit(watchAuthorsWithSongsUseCase: sl()),
                   child: AuthorsScreen(),
                 );
               case '/songs':
