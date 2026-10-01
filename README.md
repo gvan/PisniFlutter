@@ -31,13 +31,42 @@ All song content ships with the app as JSON assets. On first launch it's importe
 The app follows **Clean Architecture** and is split into **feature modules**. Each feature has three layers, and dependencies point inward: presentation → domain ← data.
 
 ```
-Presentation   Screen ◀── BlocBuilder ── Cubit (emits freezed State)
-                                           │ calls
-Domain                                   UseCase ──▶ Repository (interface)
-                                                           ▲ implements
-Data                                             RepositoryImpl ──▶ DataSource ──▶ DataSourceImpl
-                                                                                      │
-                                                     Drift (SQLite) · JSON assets · SharedPreferences
+┌────── PRESENTATION ────────────────────┐
+│                                        │
+│   Screen (Widget)                      │
+│     │          ▲                       │
+│     │ calls    │ rebuilds via          │
+│     │          │ BlocBuilder           │
+│     ▼          │                       │
+│   Cubit ──▶ State                      │
+│                                        │
+└────┬───────────────────────────────────┘
+     │ calls
+┌────▼─ DOMAIN ──────────────────────────┐
+│                                        │
+│   UseCase                              │
+│     │                                  │
+│     ▼                                  │
+│   Repository (interface)               │
+│   Entity                               │
+│                                        │
+└────┬───────────────────────────────────┘
+     ▲ implements
+┌────┴─ DATA ────────────────────────────┐
+│                                        │
+│   RepositoryImpl                       │
+│     │                                  │
+│     ▼                                  │
+│   DataSource (interface)               │
+│     │                                  │
+│     ▼                                  │
+│   DataSourceImpl                       │
+│   Model                                │
+│                                        │
+└────┬───────────────────────────────────┘
+     │ reads / writes
+     ▼
+   Drift · JSON assets · SharedPreferences
 ```
 
 ### Data layer
