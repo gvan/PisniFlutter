@@ -47,6 +47,7 @@ The app follows **Clean Architecture** and is split into **feature modules**. Ea
 │   UseCase                              │
 │     │                                  │
 │     ▼                                  │
+│   Entity                               │
 │   Repository (interface)               │
 │                                        │
 └────┬───────────────────────────────────┘
