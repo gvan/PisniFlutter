@@ -6,7 +6,7 @@ import 'package:pisni/core/presentation/main_app.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  ServiceLocator().init();
+  initServiceLocator();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(const MainApp());
 }

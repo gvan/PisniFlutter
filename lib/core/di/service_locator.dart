@@ -4,9 +4,7 @@ import 'package:pisni/features/songs/di/songs_service_locator.dart';
 
 final GetIt sl = GetIt.instance;
 
-class ServiceLocator {
-  void init() {
+  void initServiceLocator() {
     SettingsServiceLocator(sl: sl).init();
     SongsServiceLocator(sl: sl).init();
   }
-}
