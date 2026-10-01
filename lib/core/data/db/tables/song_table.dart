@@ -1,5 +1,5 @@
 import 'package:drift/drift.dart';
-import 'package:pisni/features/songs/data/db/tables/category_table.dart';
+import 'package:pisni/core/data/db/tables/category_table.dart';
 
 class SongTable extends Table {
   IntColumn get id => integer()();

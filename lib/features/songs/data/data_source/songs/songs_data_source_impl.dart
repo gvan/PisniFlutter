@@ -1,5 +1,5 @@
 import 'package:drift/drift.dart';
-import 'package:pisni/features/songs/data/db/database.dart';
+import 'package:pisni/core/data/db/database.dart';
 import 'package:pisni/features/songs/data/models/category_model.dart';
 import 'package:pisni/features/songs/data/models/category_type.dart';
 import 'package:pisni/features/songs/data/models/song_model.dart';

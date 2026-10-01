@@ -1,10 +1,10 @@
 import 'package:drift/drift.dart';
 import 'package:drift_flutter/drift_flutter.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:pisni/features/songs/data/db/database.steps.dart';
-import 'package:pisni/features/songs/data/db/tables/category_table.dart';
-import 'package:pisni/features/songs/data/db/tables/favorite_table.dart';
-import 'package:pisni/features/songs/data/db/tables/song_table.dart';
+import 'package:pisni/core/data/db/database.steps.dart';
+import 'package:pisni/core/data/db/tables/category_table.dart';
+import 'package:pisni/core/data/db/tables/favorite_table.dart';
+import 'package:pisni/core/data/db/tables/song_table.dart';
 
 part 'database.g.dart';
 

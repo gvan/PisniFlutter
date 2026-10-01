@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pisni/di/service_locator.dart';
+import 'package:pisni/core/di/service_locator.dart';
 import 'package:pisni/features/songs/domain/entities/song_entity.dart';
 import 'package:pisni/features/songs/presentation/favorite/screen/favorite_screen.dart';
 import 'package:pisni/features/songs/presentation/favorite/cubit/favorite_cubit.dart';

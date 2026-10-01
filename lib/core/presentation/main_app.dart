@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pisni/di/service_locator.dart';
+import 'package:pisni/core/di/service_locator.dart';
 import 'package:pisni/l10n/app_localizations.dart';
 import 'package:pisni/core/presentation/theme_cubit.dart';
 import 'package:pisni/core/presentation/navigation/bottom_navigation.dart';
