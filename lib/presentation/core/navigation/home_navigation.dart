@@ -38,16 +38,17 @@ class _HomeNavigationState extends State<HomeNavigation> {
               case '/songs':
                 final category = settings.arguments as CategoryEntity;
                 return BlocProvider(
-                  create: (context) => SongsCubit(
-                    songsRepository: sl(),
-                    category: category,
-                  ),
+                  create: (context) =>
+                      SongsCubit(songsRepository: sl(), category: category),
                   child: SongsScreen(category: category),
                 );
               case '/song':
                 final song = settings.arguments as SongEntity;
                 return BlocProvider(
-                  create: (context) => SongCubit(songsRepository: sl()),
+                  create: (context) => SongCubit(
+                    favoriteSongUseCase: sl(),
+                    toggleFavoriteSongUseCase: sl(),
+                  ),
                   child: SongScreen(song: song),
                 );
             }

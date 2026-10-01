@@ -42,7 +42,10 @@ class _AuthorsNavigationState extends State<AuthorsNavigation> {
               case '/song':
                 final song = settings.arguments as SongEntity;
                 return BlocProvider(
-                  create: (context) => SongCubit(songsRepository: sl()),
+                  create: (context) => SongCubit(
+                    favoriteSongUseCase: sl(),
+                    toggleFavoriteSongUseCase: sl(),
+                  ),
                   child: SongScreen(song: song),
                 );
             }

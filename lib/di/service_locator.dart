@@ -9,6 +9,8 @@ import 'package:pisni/domain/repository/settings/settings_repository.dart';
 import 'package:pisni/data/repository/settings/settings_repository_impl.dart';
 import 'package:pisni/domain/repository/songs/songs_repository.dart';
 import 'package:pisni/data/repository/songs/songs_repository_impl.dart';
+import 'package:pisni/domain/usecase/songs/favorite_song_use_case.dart';
+import 'package:pisni/domain/usecase/songs/toggle_favorite_song_use_case.dart';
 
 final GetIt sl = GetIt.instance;
 
@@ -28,6 +30,14 @@ class ServiceLocator {
 
     sl.registerLazySingleton<SettingsRepository>(
       () => SettingsRepositoryImpl(preferencesService: sl()),
+    );
+
+    sl.registerLazySingleton<FavoriteSongUseCase>(
+      () => FavoriteSongUseCase(songsRepository: sl()),
+    );
+
+    sl.registerLazySingleton<ToggleFavoriteSongUseCase>(
+      () => ToggleFavoriteSongUseCase(songsRepository: sl()),
     );
   }
 }
