@@ -1,7 +1,7 @@
 import 'package:pisni/data/models/songs/category_model.dart';
 import 'package:pisni/data/models/songs/category_type.dart';
 import 'package:pisni/data/models/songs/song_model.dart';
-import 'package:pisni/data/repository/songs/songs_repository.dart';
+import 'package:pisni/domain/repository/songs/songs_repository.dart';
 import 'package:pisni/data/data_source/assets/assets_data_source.dart';
 import 'package:pisni/data/data_source/songs/songs_data_source.dart';
 

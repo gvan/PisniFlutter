@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pisni/presentation/entities/songs/song_entity.dart';
+import 'package:pisni/domain/entities/songs/song_entity.dart';
 import 'package:pisni/presentation/extensions/styles.dart';
 
 class SongsList extends StatelessWidget {

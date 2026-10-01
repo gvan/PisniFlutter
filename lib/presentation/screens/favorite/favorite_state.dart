@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:pisni/presentation/entities/songs/song_entity.dart';
+import 'package:pisni/domain/entities/songs/song_entity.dart';
 
 part 'favorite_state.freezed.dart';
 

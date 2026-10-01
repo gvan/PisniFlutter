@@ -1,5 +1,5 @@
 import 'package:pisni/data/models/songs/category_model.dart';
-import 'package:pisni/presentation/entities/songs/song_entity.dart';
+import 'package:pisni/domain/entities/songs/song_entity.dart';
 
 class CategoryEntity {
   final String id;

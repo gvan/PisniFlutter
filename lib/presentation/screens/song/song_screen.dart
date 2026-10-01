@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:pisni/presentation/common/copyright_reference.dart';
-import 'package:pisni/presentation/entities/songs/song_entity.dart';
+import 'package:pisni/domain/entities/songs/song_entity.dart';
 import 'package:pisni/presentation/extensions/localization.dart';
 import 'package:pisni/presentation/extensions/styles.dart';
 import 'package:pisni/presentation/screens/song/song_cubit.dart';

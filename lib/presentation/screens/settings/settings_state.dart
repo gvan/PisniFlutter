@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:pisni/presentation/entities/settings/settings_entity.dart';
+import 'package:pisni/domain/entities/settings/settings_entity.dart';
 
 part 'settings_state.freezed.dart';
 

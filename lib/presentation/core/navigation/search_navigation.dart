@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pisni/di/service_locator.dart';
-import 'package:pisni/presentation/entities/songs/song_entity.dart';
+import 'package:pisni/domain/entities/songs/song_entity.dart';
 import 'package:pisni/presentation/screens/search/search_screen.dart';
 import 'package:pisni/presentation/screens/search/search_cubit.dart';
 import 'package:pisni/presentation/screens/song/song_screen.dart';

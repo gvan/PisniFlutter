@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:pisni/presentation/entities/songs/category_entity.dart';
-import 'package:pisni/presentation/entities/songs/song_entity.dart';
+import 'package:pisni/domain/entities/songs/category_entity.dart';
+import 'package:pisni/domain/entities/songs/song_entity.dart';
 import 'package:pisni/presentation/extensions/styles.dart';
 import 'package:vector_graphics/vector_graphics.dart';
 
